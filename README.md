@@ -1,2 +1,2 @@
-# assignment3
-iOSDev Aut 2024
+# Assignment 3
+https://github.com/harrisVandenbergUTS/assignment3
