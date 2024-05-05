@@ -13,10 +13,12 @@ class HomeViewModel: ObservableObject {
     let db = Firestore.firestore()
     var flashcard = Deck()
     @Published var deckNames: [String] = []
+    var authModel: AuthenticationModel
     
     let userId = "USER-ID-GOES-HERE"
     
-    init() {
+    init(authModel: AuthenticationModel) {
+        self.authModel = authModel
 //        flashcard.add(front: "test1", back: "test2")
 //        flashcard.add(front: "aaa", back: "bbb")
 //        flashcard.add(front: "111", back: "222")

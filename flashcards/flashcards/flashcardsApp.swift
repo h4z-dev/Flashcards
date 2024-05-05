@@ -7,7 +7,10 @@
 
 import SwiftUI
 import FirebaseCore
+import FirebaseAuth
+import GoogleSignIn
 import FirebaseFirestore
+
 
 class AppDelegate: NSObject, UIApplicationDelegate {
 
@@ -20,6 +23,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     return true
 
   }
+    
+  func application(_ app: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+      return GIDSignIn.sharedInstance.handle(url)
+  }
 
 }
 
@@ -31,7 +40,7 @@ struct flashcardsApp: App {
     @StateObject private var authenticationModel = AuthenticationModel()
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            ContentView(authenticationModel: authenticationModel)
         }
     }
 }
