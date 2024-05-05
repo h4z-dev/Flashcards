@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		162BE1812BE72591009E31BD /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162BE1802BE72591009E31BD /* HomeViewModel.swift */; };
 		162BE1852BE74433009E31BD /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162BE1842BE74433009E31BD /* Deck.swift */; };
+		634DFAAB2BE7A2CA00BE375C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 634DFAAA2BE7A2CA00BE375C /* GoogleService-Info.plist */; };
 		6353F2CD2BE721D2005B3573 /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353F2CC2BE721D2005B3573 /* AuthenticationModel.swift */; };
 		6353F2D02BE724C3005B3573 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6353F2CF2BE724C3005B3573 /* FirebaseFirestoreSwift */; };
 		6353F2D22BE7252A005B3573 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353F2D12BE7252A005B3573 /* User.swift */; };
@@ -19,7 +20,6 @@
 		6353F2DD2BE743E5005B3573 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 6353F2DC2BE743E5005B3573 /* GoogleSignIn */; };
 		6353F2DF2BE743E5005B3573 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6353F2DE2BE743E5005B3573 /* GoogleSignInSwift */; };
 		6353F2E72BE755EA005B3573 /* LoginErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353F2E62BE755EA005B3573 /* LoginErrors.swift */; };
-		6353F2E92BE75BC0005B3573 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6353F2E82BE75BC0005B3573 /* GoogleService-Info.plist */; };
 		6353F2EB2BE75E2D005B3573 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353F2EA2BE75E2C005B3573 /* ContentViewModel.swift */; };
 		6353F2ED2BE76003005B3573 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353F2EC2BE76003005B3573 /* LoginViewModel.swift */; };
 		63E8F84E2BDF4B9B008A57C4 /* flashcardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */; };
@@ -34,6 +34,7 @@
 /* Begin PBXFileReference section */
 		162BE1802BE72591009E31BD /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		162BE1842BE74433009E31BD /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		634DFAAA2BE7A2CA00BE375C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6353F2CC2BE721D2005B3573 /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		6353F2D12BE7252A005B3573 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6353F2D52BE72741005B3573 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -41,7 +42,6 @@
 		6353F2D92BE72B8E005B3573 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		6353F2E02BE745D7005B3573 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6353F2E62BE755EA005B3573 /* LoginErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginErrors.swift; sourceTree = "<group>"; };
-		6353F2E82BE75BC0005B3573 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "flashcards/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6353F2EA2BE75E2C005B3573 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		6353F2EC2BE76003005B3573 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		63E8F84A2BDF4B9B008A57C4 /* flashcards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flashcards.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,7 +118,7 @@
 		63E8F8412BDF4B9B008A57C4 = {
 			isa = PBXGroup;
 			children = (
-				6353F2E82BE75BC0005B3573 /* GoogleService-Info.plist */,
+				634DFAAA2BE7A2CA00BE375C /* GoogleService-Info.plist */,
 				63E8F84C2BDF4B9B008A57C4 /* flashcards */,
 				63E8F84B2BDF4B9B008A57C4 /* Products */,
 				6353F2CE2BE724C3005B3573 /* Frameworks */,
@@ -228,7 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63E8F8552BDF4B9C008A57C4 /* Preview Assets.xcassets in Resources */,
-				6353F2E92BE75BC0005B3573 /* GoogleService-Info.plist in Resources */,
+				634DFAAB2BE7A2CA00BE375C /* GoogleService-Info.plist in Resources */,
 				63E8F8522BDF4B9C008A57C4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,7 +386,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"flashcards/Preview Content\"";
-				DEVELOPMENT_TEAM = TX5RQDAQF5;
+				DEVELOPMENT_TEAM = SDQMXNT4CF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = flashcards/Info.plist;
@@ -400,7 +400,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards1;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -418,7 +418,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"flashcards/Preview Content\"";
-				DEVELOPMENT_TEAM = TX5RQDAQF5;
+				DEVELOPMENT_TEAM = SDQMXNT4CF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = flashcards/Info.plist;
@@ -432,7 +432,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards1;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
