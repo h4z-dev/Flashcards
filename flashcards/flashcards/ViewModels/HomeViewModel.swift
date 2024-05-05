@@ -54,7 +54,7 @@ class HomeViewModel: ObservableObject {
                 print("No data found in deck \(deckId)")
             }
         } catch {
-            print("Error retrieving deck: \(error)")
+            print("Error getting deck: \(error)")
         }
     }
     
