@@ -8,33 +8,31 @@
 import SwiftUI
 
 struct LoginView: View {
+    
     @State private var email = ""
     @State private var password = ""
     @State private var err = ""
         
-    @StateObject var viewModel: ContentViewModel
-    
-    init(authenticationModel: AuthenticationModel) {
-        _viewModel = StateObject(wrappedValue: ContentViewModel(authModel: authenticationModel))
-    }
-    
+//    @StateObject var viewModel: ContentViewModel
+    @EnvironmentObject var authModel: AuthenticationModel
+
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        NavigationStack{
+        NavigationStack {
             VStack{
-                // image
+                // Image
                 Image(systemName: "list.clipboard")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 100, height: 100)
                     .padding(.vertical, 32)
-                //google sign in
+                // Google sign in
                 Text("Login")
                         Button{
                             Task {
                                 do {
-                                    try await viewModel.authModel.googleOauth()
+                                    try await authModel.googleOauth()
                                 } catch let e {
                                     print(e)
                                     err = e.localizedDescription
@@ -76,11 +74,11 @@ struct LoginView: View {
                 Button{
                     Task{
                         do{
-                            try await  viewModel.authModel.signIn(withEmail: email, password: password)
+                            try await  authModel.signIn(withEmail: email, password: password)
                         }
                         catch{
                         }
-                        if(viewModel.authModel.userSession != nil){
+                        if(authModel.userSession != nil){
                             dismiss()
                         }
                     }
@@ -129,5 +127,5 @@ extension LoginView: AuthenticationFormProtocol{
 }
 
 #Preview {
-    LoginView(authenticationModel: AuthenticationModel())
+    LoginView()
 }

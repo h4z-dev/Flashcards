@@ -10,13 +10,12 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject var viewModel: HomeViewModel
-    
-    init(authenticationModel: AuthenticationModel) {
-        _viewModel = StateObject(wrappedValue: HomeViewModel(authModel: authenticationModel))
-    }
-    
+    @EnvironmentObject var authModel: AuthenticationModel
     @Environment(\.dismiss) var dismiss
 
+    init() {
+        _viewModel = StateObject(wrappedValue: HomeViewModel())
+    }
     
     var body: some View {
         VStack {
@@ -67,5 +66,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(authenticationModel: AuthenticationModel())
+    HomeView()
 }
