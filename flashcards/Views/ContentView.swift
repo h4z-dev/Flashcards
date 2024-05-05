@@ -20,10 +20,10 @@ struct ContentView: View {
         Group {
             if viewModel.authModel.userSession != nil {
                 HomeView(authenticationModel: viewModel.authModel)
-            } else{
-                //loginScreen
+            } else {
+                // loginScreen
                 LoginView(authenticationModel: viewModel.authModel).onOpenURL { url in
-                    //Handle Google Oauth URL
+                    // Handle Google Oauth URL
                     GIDSignIn.sharedInstance.handle(url)
                 }
             }
