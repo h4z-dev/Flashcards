@@ -36,9 +36,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct flashcardsApp: App {
     //firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject private var authenticationModel = AuthenticationModel()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(authenticationModel: authenticationModel)
         }
     }
 }

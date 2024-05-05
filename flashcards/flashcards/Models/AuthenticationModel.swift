@@ -32,6 +32,49 @@ class AuthenticationModel: ObservableObject{
         }
     }
     
+    
+// MARK: - Google Sign In
+    
+    func googleOauth() async throws {
+            // google sign in
+            guard let clientID = FirebaseApp.app()?.options.clientID else {
+                fatalError("no firbase clientID found")
+            }
+
+            // Create Google Sign In configuration object.
+            let config = GIDConfiguration(clientID: clientID)
+            GIDSignIn.sharedInstance.configuration = config
+            
+            //get rootView
+            let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            guard let rootViewController = scene?.windows.first?.rootViewController
+            else {
+                fatalError("There is no root view controller!")
+            }
+            
+            //google sign in authentication response
+            let result = try await GIDSignIn.sharedInstance.signIn(
+                withPresenting: rootViewController
+            )
+            let user = result.user
+            guard let idToken = user.idToken?.tokenString else {
+                throw LoginErrors.GoogleAuthFail
+            }
+            
+            //Firebase auth
+            let credential = GoogleAuthProvider.credential(
+                withIDToken: idToken, accessToken: user.accessToken.tokenString
+            )
+            try await Auth.auth().signIn(with: credential)
+        }
+        
+        func logout() async throws {
+            GIDSignIn.sharedInstance.signOut()
+            try Auth.auth().signOut()
+        }
+    
+// MARK: - Email Sign In
+    
     func signIn(withEmail email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
@@ -41,7 +84,6 @@ class AuthenticationModel: ObservableObject{
             print("DEBUG: unable to login user with error: \(error.localizedDescription)")
         }
     }
-
     
     func createUser(withEmail email: String, password: String, fullname: String) async throws{
         do{
@@ -58,6 +100,7 @@ class AuthenticationModel: ObservableObject{
     
     func signOut(){
         do{
+            GIDSignIn.sharedInstance.signOut()
             try Auth.auth().signOut()   //signs out on firebase
             self.userSession = nil      //signs out and wipes user data
             self.currrentUser = nil     //wipes out current user data model
