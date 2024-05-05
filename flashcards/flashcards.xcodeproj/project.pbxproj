@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6353F2C32BE7169A005B3573 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6353F2C22BE7169A005B3573 /* GoogleService-Info.plist */; };
 		63E8F84E2BDF4B9B008A57C4 /* flashcardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */; };
 		63E8F8502BDF4B9B008A57C4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8F84F2BDF4B9B008A57C4 /* ContentView.swift */; };
 		63E8F8522BDF4B9C008A57C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E8F8512BDF4B9C008A57C4 /* Assets.xcassets */; };
@@ -14,16 +15,15 @@
 		63E8F85D2BE0FF9A008A57C4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 63E8F85C2BE0FF9A008A57C4 /* FirebaseAnalytics */; };
 		63E8F85F2BE0FF9A008A57C4 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63E8F85E2BE0FF9A008A57C4 /* FirebaseAnalyticsSwift */; };
 		63E8F8612BE0FF9A008A57C4 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 63E8F8602BE0FF9A008A57C4 /* FirebaseAppCheck */; };
-		63E8F8632BE102D6008A57C4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63E8F8622BE102D6008A57C4 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6353F2C22BE7169A005B3573 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../bubblepopJacob/bubblepopApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63E8F84A2BDF4B9B008A57C4 /* flashcards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flashcards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashcardsApp.swift; sourceTree = "<group>"; };
 		63E8F84F2BDF4B9B008A57C4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		63E8F8512BDF4B9C008A57C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63E8F8542BDF4B9C008A57C4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		63E8F8622BE102D6008A57C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +40,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6353F2BE2BE7161D005B3573 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				63E8F84F2BDF4B9B008A57C4 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6353F2C02BE7163A005B3573 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		6353F2C12BE71645005B3573 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		63E8F8412BDF4B9B008A57C4 = {
 			isa = PBXGroup;
 			children = (
@@ -59,9 +81,11 @@
 		63E8F84C2BDF4B9B008A57C4 /* flashcards */ = {
 			isa = PBXGroup;
 			children = (
-				63E8F8622BE102D6008A57C4 /* GoogleService-Info.plist */,
+				6353F2C12BE71645005B3573 /* Models */,
+				6353F2C02BE7163A005B3573 /* ViewModels */,
+				6353F2BE2BE7161D005B3573 /* Views */,
 				63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */,
-				63E8F84F2BDF4B9B008A57C4 /* ContentView.swift */,
+				6353F2C22BE7169A005B3573 /* GoogleService-Info.plist */,
 				63E8F8512BDF4B9C008A57C4 /* Assets.xcassets */,
 				63E8F8532BDF4B9C008A57C4 /* Preview Content */,
 			);
@@ -144,7 +168,7 @@
 			files = (
 				63E8F8552BDF4B9C008A57C4 /* Preview Assets.xcassets in Resources */,
 				63E8F8522BDF4B9C008A57C4 /* Assets.xcassets in Resources */,
-				63E8F8632BE102D6008A57C4 /* GoogleService-Info.plist in Resources */,
+				6353F2C32BE7169A005B3573 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
