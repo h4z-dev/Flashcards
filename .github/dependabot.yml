@@ -6,9 +6,9 @@
 # Created by Harris Vandenberg
 #  Updated 05/05/2024
 
-version: 1
+version: 2
 updates:
-  - package-ecosystem: "Swift" # See documentation for possible values
+  - package-ecosystem: "swift" # See documentation for possible values
     directory: "/flashcards.xcodeproj/project.xcworkspace/xcshareddata/swiftpm" # Location of package manifests
     schedule:
       interval: "weekly"
