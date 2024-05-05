@@ -10,19 +10,16 @@ import GoogleSignIn
 
 struct ContentView: View {
     
-    @StateObject var viewModel: ContentViewModel
-    
-    init(authenticationModel: AuthenticationModel) {
-        _viewModel = StateObject(wrappedValue: ContentViewModel(authModel: authenticationModel))
-    }
-    
+//    @StateObject var viewModel: ContentViewModel
+    @EnvironmentObject var authModel: AuthenticationModel
+
     var body: some View {
         Group {
-            if viewModel.authModel.userSession != nil {
-                HomeView(authenticationModel: viewModel.authModel)
+            if authModel.userSession != nil {
+                HomeView()
             } else{
                 //loginScreen
-                LoginView(authenticationModel: viewModel.authModel).onOpenURL { url in
+                LoginView().onOpenURL { url in
                     //Handle Google Oauth URL
                     GIDSignIn.sharedInstance.handle(url)
                 }
@@ -32,5 +29,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(authenticationModel: AuthenticationModel())
+    ContentView()
 }
