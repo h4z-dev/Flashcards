@@ -10,12 +10,9 @@ import GoogleSignIn
 
 struct ContentView: View {
     
-    @StateObject var viewModel: ContentViewModel
-    
-    init(authenticationModel: AuthenticationModel) {
-        _viewModel = StateObject(wrappedValue: ContentViewModel(authModel: authenticationModel))
-    }
-    
+//    @StateObject var viewModel: ContentViewModel
+    @EnvironmentObject var authModel: AuthenticationModel
+
     var body: some View {
         Group {
             if viewModel.authModel.userSession != nil {
@@ -32,5 +29,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(authenticationModel: AuthenticationModel())
+    ContentView()
 }

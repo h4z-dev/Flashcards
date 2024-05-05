@@ -8,16 +8,14 @@
 import SwiftUI
 
 struct LoginView: View {
+    
     @State private var email = ""
     @State private var password = ""
     @State private var err = ""
         
-    @StateObject var viewModel: ContentViewModel
-    
-    init(authenticationModel: AuthenticationModel) {
-        _viewModel = StateObject(wrappedValue: ContentViewModel(authModel: authenticationModel))
-    }
-    
+//    @StateObject var viewModel: ContentViewModel
+    @EnvironmentObject var authModel: AuthenticationModel
+
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -35,7 +33,7 @@ struct LoginView: View {
                     .scaledToFill()
                     .frame(width: 100, height: 100)
                     .padding(.vertical, 32)
-                
+
                 // Google sign in
                 Button {
                     Task {
@@ -138,5 +136,5 @@ extension LoginView: AuthenticationFormProtocol {
 }
 
 #Preview {
-    LoginView(authenticationModel: AuthenticationModel())
+    LoginView()
 }

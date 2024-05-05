@@ -8,9 +8,4 @@
 import Foundation
 
 class ContentViewModel : ObservableObject {
-    var authModel: AuthenticationModel
-    
-    init(authModel: AuthenticationModel) {
-        self.authModel = authModel
-    }
 }
