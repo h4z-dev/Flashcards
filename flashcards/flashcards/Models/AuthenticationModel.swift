@@ -12,6 +12,8 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import GoogleSignIn
+import GoogleSignInSwift
 
 protocol AuthenticationFormProtocol{
     var formIsValid: Bool {get}
@@ -39,6 +41,8 @@ class AuthenticationModel: ObservableObject{
             print("DEBUG: unable to login user with error: \(error.localizedDescription)")
         }
     }
+
+    
     func createUser(withEmail email: String, password: String, fullname: String) async throws{
         do{
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
@@ -51,6 +55,7 @@ class AuthenticationModel: ObservableObject{
             print("DEBUG: ERROR TO create user with error \(error.localizedDescription)")
         }
     }
+    
     func signOut(){
         do{
             try Auth.auth().signOut()   //signs out on firebase
@@ -61,12 +66,15 @@ class AuthenticationModel: ObservableObject{
             print ("DEBUG: Failed to sign out with error \(error.localizedDescription)")
         }
     }
+    
     func deleteAccount(){
         
     }
+    
     func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
+        guard let snapshot = try? await Firestore.firestore().collection("test_Authentication_users").document(uid).getDocument() else { return }
+       // guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
         self.currrentUser = try? snapshot.data(as: User.self)
         print("DEBUG: CURRENT USER IS \(String(describing: self.currrentUser ?? nil))")
     }
