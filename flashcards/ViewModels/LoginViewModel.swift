@@ -8,9 +8,4 @@
 import Foundation
 
 class LoginViewModel: ObservableObject {
-    var authModel: AuthenticationModel
-    
-    init(authModel: AuthenticationModel) {
-        self.authModel = authModel
-    }
 }
