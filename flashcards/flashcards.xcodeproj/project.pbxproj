@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6353F2C32BE7169A005B3573 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6353F2C22BE7169A005B3573 /* GoogleService-Info.plist */; };
+		6353F2C52BE71A25005B3573 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6353F2C42BE71A25005B3573 /* GoogleService-Info.plist */; };
+		6353F2C72BE71A40005B3573 /* viewModel.md in Resources */ = {isa = PBXBuildFile; fileRef = 6353F2C62BE71A40005B3573 /* viewModel.md */; };
+		6353F2C92BE71A4F005B3573 /* models.md in Resources */ = {isa = PBXBuildFile; fileRef = 6353F2C82BE71A4F005B3573 /* models.md */; };
 		63E8F84E2BDF4B9B008A57C4 /* flashcardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */; };
 		63E8F8502BDF4B9B008A57C4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8F84F2BDF4B9B008A57C4 /* ContentView.swift */; };
 		63E8F8522BDF4B9C008A57C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E8F8512BDF4B9C008A57C4 /* Assets.xcassets */; };
@@ -18,7 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6353F2C22BE7169A005B3573 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../bubblepopJacob/bubblepopApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6353F2C42BE71A25005B3573 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6353F2C62BE71A40005B3573 /* viewModel.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = viewModel.md; sourceTree = "<group>"; };
+		6353F2C82BE71A4F005B3573 /* models.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = models.md; sourceTree = "<group>"; };
 		63E8F84A2BDF4B9B008A57C4 /* flashcards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flashcards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashcardsApp.swift; sourceTree = "<group>"; };
 		63E8F84F2BDF4B9B008A57C4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +55,7 @@
 		6353F2C02BE7163A005B3573 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				6353F2C62BE71A40005B3573 /* viewModel.md */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -58,6 +63,7 @@
 		6353F2C12BE71645005B3573 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6353F2C82BE71A4F005B3573 /* models.md */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -85,8 +91,8 @@
 				6353F2C02BE7163A005B3573 /* ViewModels */,
 				6353F2BE2BE7161D005B3573 /* Views */,
 				63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */,
-				6353F2C22BE7169A005B3573 /* GoogleService-Info.plist */,
 				63E8F8512BDF4B9C008A57C4 /* Assets.xcassets */,
+				6353F2C42BE71A25005B3573 /* GoogleService-Info.plist */,
 				63E8F8532BDF4B9C008A57C4 /* Preview Content */,
 			);
 			path = flashcards;
@@ -167,8 +173,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				63E8F8552BDF4B9C008A57C4 /* Preview Assets.xcassets in Resources */,
+				6353F2C92BE71A4F005B3573 /* models.md in Resources */,
 				63E8F8522BDF4B9C008A57C4 /* Assets.xcassets in Resources */,
-				6353F2C32BE7169A005B3573 /* GoogleService-Info.plist in Resources */,
+				6353F2C52BE71A25005B3573 /* GoogleService-Info.plist in Resources */,
+				6353F2C72BE71A40005B3573 /* viewModel.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
