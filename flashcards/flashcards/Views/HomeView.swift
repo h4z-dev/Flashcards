@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject var viewModel = HomeViewModel()
+    @StateObject private var authenticationModel = AuthenticationModel()
     
     var body: some View {
         VStack {

@@ -18,7 +18,7 @@ protocol AuthenticationFormProtocol{
 }
 
 @MainActor
-class AuthenticationModel: ObservableObject{
+class AuthenticationModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var currrentUser: User?
     
@@ -39,7 +39,7 @@ class AuthenticationModel: ObservableObject{
             print("DEBUG: unable to login user with error: \(error.localizedDescription)")
         }
     }
-    func createUser(withEmail email: String, password: String, fullname: String) async throws{
+    func createUser(withEmail email: String, password: String, fullname: String) async throws {
         do{
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
