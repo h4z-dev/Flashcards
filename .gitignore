@@ -88,3 +88,7 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 .DS_Store
 iOSInjectionProject/
+/flashcards/flashcards.xcodeproj
+flashcards/.DS_Store
+flashcards/flashcards/GoogleService-Info.plist
+flashcards/flashcards.xcodeproj/project.pbxproj
