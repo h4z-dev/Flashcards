@@ -21,66 +21,75 @@ struct LoginView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        NavigationStack{
-            VStack{
-                // image
+        NavigationStack {
+            VStack(spacing: 20) {
+                // Title
+                Text("Flashcards")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundStyle(LinearGradient(colors: [.accentColor, .secondAccent], startPoint: .leading, endPoint: .trailing))
+                
+                // Icon
                 Image(systemName: "list.clipboard")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 100, height: 100)
                     .padding(.vertical, 32)
-                //google sign in
-                Text("Login")
-                        Button{
-                            Task {
-                                do {
-                                    try await viewModel.authModel.googleOauth()
-                                } catch let e {
-                                    print(e)
-                                    err = e.localizedDescription
-                                }
-                            }
-                        }label: {
-                            HStack {
-                                Image(systemName: "person.badge.key.fill")
-                                Text("Sign in with Google")
-                            }.padding(8)
-                        }.buttonStyle(.borderedProminent)
-                        
-                        Text(err).foregroundColor(.red).font(.caption)
                 
-                // form fields
-                VStack(spacing: 24){
-                    //email input
-                    Text("Email Address")
+                // Google sign in
+                Button {
+                    Task {
+                        do {
+                            try await viewModel.authModel.googleOauth()
+                        } catch let e {
+                            print(e)
+                            err = e.localizedDescription
+                        }
+                    }
+                } label: {
+                    HStack {
+                        Image(systemName: "person.badge.key.fill")
+                        Text("Sign in with Google")
+                    } .padding(8)
+                } .buttonStyle(.borderedProminent)
+                
+                Text(err).foregroundColor(.red).font(.caption)
+
+                // Form fields
+                VStack(alignment: .leading) {
+                    // Email input
+                    Label("Email Address", systemImage: "envelope.fill")
                         .foregroundStyle(Color(.darkGray))
                         .fontWeight(.semibold)
                         .font(.footnote)
                     TextField("name@example.com", text: $email)
                         .font(.system(size: 14))
+                        .textFieldStyle(.roundedBorder)
                     
-                    //password input
-                    Text("Password")
+                    // Password input
+                    Label("Password", systemImage: "lock.fill")
                         .foregroundStyle(Color(.darkGray))
                         .fontWeight(.semibold)
+                        .padding(.top, 20)
                         .font(.footnote)
-                    TextField("Password", text: $password)
+                    SecureField("Password", text: $password)
                         .font(.system(size: 14))
+                        .textFieldStyle(.roundedBorder)
                 }
                 .padding(.horizontal)
                 .padding(.top, 12)
                 //TODO:
-                //forgot passsword
+                // Forgot passsword
                 
-                // sign in buttons
-                Button{
-                    Task{
-                        do{
+                // Sign in buttons
+                Button {
+                    Task {
+                        do {
                             try await  viewModel.authModel.signIn(withEmail: email, password: password)
+                        } catch {
+                            
                         }
-                        catch{
-                        }
-                        if(viewModel.authModel.userSession != nil){
+                        if (viewModel.authModel.userSession != nil) {
                             dismiss()
                         }
                     }
@@ -101,7 +110,7 @@ struct LoginView: View {
                 .padding(.top, 24)
                 Spacer()
                 
-                // sign up button
+                // Sign up button
                 NavigationLink {
                     SignUpView()
                         .navigationBarBackButtonHidden(true)
@@ -118,8 +127,8 @@ struct LoginView: View {
     }
 }
 
-//ensures details are filled out and basic form correction
-extension LoginView: AuthenticationFormProtocol{
+// Ensures details are filled out and basic form correction
+extension LoginView: AuthenticationFormProtocol {
     var formIsValid: Bool {
         return !email.isEmpty
         && email.contains("@")
