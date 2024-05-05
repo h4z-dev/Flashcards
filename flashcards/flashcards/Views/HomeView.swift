@@ -25,7 +25,7 @@ struct HomeView: View {
             HStack {
                 Spacer()
                 Button {
-                    // Action
+                    viewModel.addButtonPressed()
                 } label: {
                     Image(systemName: "plus")
                         .font(.title.weight(.semibold))

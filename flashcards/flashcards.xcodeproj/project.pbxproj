@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		162BE1812BE72591009E31BD /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162BE1802BE72591009E31BD /* HomeViewModel.swift */; };
+		162BE1852BE74433009E31BD /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162BE1842BE74433009E31BD /* Deck.swift */; };
 		6353F2C52BE71A25005B3573 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6353F2C42BE71A25005B3573 /* GoogleService-Info.plist */; };
 		6353F2C72BE71A40005B3573 /* viewModel.md in Resources */ = {isa = PBXBuildFile; fileRef = 6353F2C62BE71A40005B3573 /* viewModel.md */; };
 		6353F2C92BE71A4F005B3573 /* models.md in Resources */ = {isa = PBXBuildFile; fileRef = 6353F2C82BE71A4F005B3573 /* models.md */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		162BE1802BE72591009E31BD /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		162BE1842BE74433009E31BD /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		6353F2C42BE71A25005B3573 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6353F2C62BE71A40005B3573 /* viewModel.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = viewModel.md; sourceTree = "<group>"; };
 		6353F2C82BE71A4F005B3573 /* models.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = models.md; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				6353F2C82BE71A4F005B3573 /* models.md */,
 				6353F2CC2BE721D2005B3573 /* AuthenticationModel.swift */,
 				6353F2D12BE7252A005B3573 /* User.swift */,
+				162BE1842BE74433009E31BD /* Deck.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 			files = (
 				6353F2CB2BE72190005B3573 /* LoginView.swift in Sources */,
 				63E8F8502BDF4B9B008A57C4 /* HomeView.swift in Sources */,
+				162BE1852BE74433009E31BD /* Deck.swift in Sources */,
 				6353F2D62BE72741005B3573 /* ContentView.swift in Sources */,
 				162BE1812BE72591009E31BD /* HomeViewModel.swift in Sources */,
 				63E8F84E2BDF4B9B008A57C4 /* flashcardsApp.swift in Sources */,
@@ -357,7 +361,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"flashcards/Preview Content\"";
-				DEVELOPMENT_TEAM = SDQMXNT4CF;
+				DEVELOPMENT_TEAM = TX5RQDAQF5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -370,7 +374,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -388,7 +392,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"flashcards/Preview Content\"";
-				DEVELOPMENT_TEAM = SDQMXNT4CF;
+				DEVELOPMENT_TEAM = TX5RQDAQF5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -401,7 +405,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
