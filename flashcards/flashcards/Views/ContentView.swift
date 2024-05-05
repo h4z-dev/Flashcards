@@ -6,24 +6,31 @@
 //
 
 import SwiftUI
-
-import SwiftUI
+import GoogleSignIn
 
 struct ContentView: View {
-    @EnvironmentObject var viewModel: AuthenticationModel
+    
+    @StateObject var viewModel: ContentViewModel
+    
+    init(authenticationModel: AuthenticationModel) {
+        _viewModel = StateObject(wrappedValue: ContentViewModel(authModel: authenticationModel))
+    }
     
     var body: some View {
         Group {
-            if viewModel.userSession != nil {
-                HomeView();
+            if viewModel.authModel.userSession != nil {
+                HomeView(authenticationModel: viewModel.authModel)
             } else{
-                LoginView()
                 //loginScreen
+                LoginView(authenticationModel: viewModel.authModel).onOpenURL { url in
+                    //Handle Google Oauth URL
+                    GIDSignIn.sharedInstance.handle(url)
+                }
             }
         }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(authenticationModel: AuthenticationModel())
 }

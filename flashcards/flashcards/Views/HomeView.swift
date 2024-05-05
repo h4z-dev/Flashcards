@@ -9,7 +9,14 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject var viewModel = HomeViewModel()
+    @StateObject var viewModel: HomeViewModel
+    
+    init(authenticationModel: AuthenticationModel) {
+        _viewModel = StateObject(wrappedValue: HomeViewModel(authModel: authenticationModel))
+    }
+    
+    @Environment(\.dismiss) var dismiss
+
     
     var body: some View {
         VStack {
@@ -19,6 +26,14 @@ struct HomeView: View {
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundStyle(LinearGradient(colors: [.accentColor, .secondAccent], startPoint: .leading, endPoint: .trailing))
                 Spacer()
+                Button{
+                    Task{
+                        try await AuthenticationModel().logout()
+                        dismiss()
+                    }
+                } label: {
+                    Text("LOGOUT")
+                }
             }
             .padding()
             Spacer()
@@ -41,5 +56,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView(authenticationModel: AuthenticationModel())
 }
