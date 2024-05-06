@@ -91,22 +91,22 @@ struct LoginView: View {
                 .padding(.top, 24)
                 
                 // Google sign in
-                Button {
-                    Task {
-                        do {
-                            try await authModel.googleOauth()
-                        } catch let e {
-                            print(e)
-                            err = e.localizedDescription
-                        }
-                    }
-                } label: {
-                    Image("iosNeutralGoogleSignIn")
-                        .resizable()
-                        .padding(.top, 12)
-                        .padding(.horizontal)
-//                    Text("Sign in with Google")
-                }
+//                Button {
+//                    Task {
+//                        do {
+//                            try await authModel.googleOauth()
+//                        } catch let e {
+//                            print(e)
+//                            err = e.localizedDescription
+//                        }
+//                    }
+//                } label: {
+//                    Image("iosNeutralGoogleSignIn")
+//                        .resizable()
+//                        .padding(.top, 12)
+//                        .padding(.horizontal)
+////                    Text("Sign in with Google")
+//                }
                 
                 GoogleSignInButton() {
                     Task {
@@ -115,6 +115,9 @@ struct LoginView: View {
                         } catch let e {
                             print(e)
                             err = e.localizedDescription
+                        }
+                        if (authModel.userSession != nil) {
+                            dismiss()
                         }
                     }
                 }
