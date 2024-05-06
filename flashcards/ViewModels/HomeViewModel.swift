@@ -33,7 +33,7 @@ class HomeViewModel: ObservableObject {
     
     func addCards() async {
         do {
-            try await db.collection("users").document(userId).collection("decks").document("0").setData(flashcard.toArray())
+            try await db.collection("users").document(userId).collection("decks").document("0").setData(flashcard.toDict())
         } catch {
             print("Error adding document: \(error)")
         }

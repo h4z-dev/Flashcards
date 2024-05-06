@@ -22,7 +22,7 @@ struct Deck {
         return out
     }
     
-    func toArray() -> [String : String] {
+    func toDict() -> [String : String] {
         var dict: [String : String] = [:]
         for card in contents {
             if card.count == 2 {
