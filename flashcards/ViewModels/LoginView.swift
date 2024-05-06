@@ -16,7 +16,6 @@ struct LoginView: View {
     @State private var err = ""
     //    @StateObject var viewModel: ContentViewModel
     @EnvironmentObject var authModel: AuthenticationModel
-    
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -70,7 +69,7 @@ struct LoginView: View {
                         } catch {
                             
                         }
-                        if (authModel.userSession != nil) {
+                        if (authModel.isAuthenticated()) {
                             dismiss()
                         }
                     }
