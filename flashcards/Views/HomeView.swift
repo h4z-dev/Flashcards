@@ -25,10 +25,14 @@ struct HomeView: View {
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundStyle(LinearGradient(colors: [.accentColor, .secondAccent], startPoint: .leading, endPoint: .trailing))
                 Spacer()
-                Button{
-                    Task{
-                        try await AuthenticationModel().logout()
-                        dismiss()
+                Button {
+                    Task {
+                        do {
+                            try await AuthenticationModel().logout()
+                            // Go to ContentView() and close this view
+                        } catch {
+                            
+                        }
                     }
                 } label: {
                     Text("LOGOUT")
@@ -36,7 +40,6 @@ struct HomeView: View {
             }
             .padding()
             
-            // Do this for every deck and get the deck name as the label text
             ScrollView {
                 ForEach(viewModel.deckNames, id: \.self) { deckName in
                     GroupBox (label: Text(deckName)) {

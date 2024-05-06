@@ -14,8 +14,9 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import GoogleSignIn
 import GoogleSignInSwift
+import FirebaseCore
 
-protocol AuthenticationFormProtocol{
+protocol AuthenticationFormProtocol {
     var formIsValid: Bool {get}
 }
 
@@ -119,5 +120,9 @@ class AuthenticationModel: ObservableObject {
        // guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
         self.currrentUser = try? snapshot.data(as: User.self)
         print("DEBUG: CURRENT USER IS \(String(describing: self.currrentUser ?? nil))")
+    }
+    
+    func isAuthenticated() -> Bool {
+        return self.userSession != nil
     }
 }
