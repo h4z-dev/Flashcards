@@ -63,7 +63,7 @@ class AuthenticationModel: ObservableObject {
                 throw LoginErrors.GoogleAuthFail
             }
             
-            //Firebase auth
+            // Firebase auth
             let credential = GoogleAuthProvider.credential(
                 withIDToken: idToken, accessToken: user.accessToken.tokenString
             )
@@ -102,7 +102,7 @@ class AuthenticationModel: ObservableObject {
         }
     }
     
-    func signOut(){
+    func signOut() {
         do{
             GIDSignIn.sharedInstance.signOut()
             try Auth.auth().signOut()   //signs out on firebase
@@ -113,7 +113,7 @@ class AuthenticationModel: ObservableObject {
             print ("DEBUG: Failed to sign out with error \(error.localizedDescription)")
         }
         print("user should be signed out:")
-        if( self.userSession != nil){
+        if (self.userSession != nil){
             print("User is still signed in: \(String(describing: self.currrentUser ?? nil))")
         }
     }
