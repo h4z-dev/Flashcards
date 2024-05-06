@@ -17,11 +17,11 @@ struct SignUpView: View {
 
     var body: some View {
         VStack{
-            // Image
-            Image(systemName: "clipboard.fill")
+            // Icon
+            Image(.iconRoundrect)
                 .resizable()
-                .scaledToFill()
-                .frame(width: 100, height: 100)
+                .scaledToFill() 
+                .frame(width: 150, height: 100)
                 .padding(.vertical, 32)
         }
         VStack(spacing: 24) {

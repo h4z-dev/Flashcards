@@ -28,10 +28,10 @@ struct LoginView: View {
                     .foregroundStyle(LinearGradient(colors: [.accentColor, .secondAccent], startPoint: .leading, endPoint: .trailing))
                 
                 // Icon
-                Image(systemName: "list.clipboard")
+                Image(.iconRoundrect)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 100, height: 100)
+                    .frame(width: 150)
                     .padding(.vertical, 32)
                 
                 // Form fields
