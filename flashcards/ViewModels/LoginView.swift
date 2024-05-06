@@ -92,11 +92,19 @@ struct LoginView: View {
                 
                 // Google sign in
                 Button {
-                    
+                    Task {
+                        do {
+                            try await authModel.googleOauth()
+                        } catch let e {
+                            print(e)
+                            err = e.localizedDescription
+                        }
+                    }
                 } label: {
                     Image("iosNeutralGoogleSignIn")
                         .resizable()
-                    Text("UMMMM DOES this work?? WTF")
+                        .padding(.top, 12)
+                        .padding(.horizontal)
 //                    Text("Sign in with Google")
                 }
                 
