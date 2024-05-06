@@ -17,7 +17,7 @@ struct Deck {
     func toString() -> String {
         var out: String = ""
         for i in 0...contents.count - 1 {
-            out += "\(contents[i][0]), \(contents[i][1])\n"
+            out += "Card \(i + 1): \(contents[i][0]), \(contents[i][1])\n"
         }
         return out
     }
