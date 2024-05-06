@@ -27,11 +27,10 @@ struct HomeView: View {
                 Spacer()
                 Button {
                     Task {
-                        do {
-                            try await authModel.signOut()
-                            // Go to ContentView() and close this view
-                        } catch {
-                        }
+                        authModel.signOut()
+                        // Go to ContentView() and close this view
+                        print("a")
+                        dismiss()
                     }
                 } label: {
                     Text("LOGOUT")
@@ -73,5 +72,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView().environmentObject(AuthenticationModel())
 }
