@@ -57,6 +57,7 @@ class AuthenticationModel: ObservableObject {
             let result = try await GIDSignIn.sharedInstance.signIn(
                 withPresenting: rootViewController
             )
+        
             let user = result.user
             guard let idToken = user.idToken?.tokenString else {
                 throw LoginErrors.GoogleAuthFail
@@ -66,7 +67,9 @@ class AuthenticationModel: ObservableObject {
             let credential = GoogleAuthProvider.credential(
                 withIDToken: idToken, accessToken: user.accessToken.tokenString
             )
-            try await Auth.auth().signIn(with: credential)
+        
+            await fetchUser()
+        
         }
         
         func logout() async throws {
@@ -85,11 +88,12 @@ class AuthenticationModel: ObservableObject {
             print("DEBUG: unable to login user with error: \(error.localizedDescription)")
         }
     }
+    
     func createUser(withEmail email: String, password: String, fullname: String) async throws{
         do{
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
-            let user = User(id: result.user.uid, fullname: fullname, email: email)
+            let user = User(id: result.user.uid, fullname: fullname, email: email, googleSignIn: false, emailSignIn: true)
             let encodedUser = try Firestore.Encoder().encode(user)
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
             await fetchUser()
@@ -108,6 +112,10 @@ class AuthenticationModel: ObservableObject {
         catch{
             print ("DEBUG: Failed to sign out with error \(error.localizedDescription)")
         }
+        print("user should be signed out:")
+        if( self.userSession != nil){
+            print("User is still signed in: \(String(describing: self.currrentUser ?? nil))")
+        }
     }
     
     func deleteAccount(){
@@ -116,8 +124,8 @@ class AuthenticationModel: ObservableObject {
     
     func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        guard let snapshot = try? await Firestore.firestore().collection("test_Authentication_users").document(uid).getDocument() else { return }
-       // guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
+//        guard let snapshot = try? await Firestore.firestore().collection("test_Authentication_users").document(uid).getDocument() else { return }
+       guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
         self.currrentUser = try? snapshot.data(as: User.self)
         print("DEBUG: CURRENT USER IS \(String(describing: self.currrentUser ?? nil))")
     }

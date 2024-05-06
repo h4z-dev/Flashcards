@@ -28,14 +28,18 @@ struct HomeView: View {
                 Button {
                     Task {
                         do {
-                            try await AuthenticationModel().logout()
+                            try await authModel.signOut()
                             // Go to ContentView() and close this view
                         } catch {
-                            
                         }
                     }
                 } label: {
                     Text("LOGOUT")
+                }
+                .task {
+                    if (!authModel.isAuthenticated()) {
+                        dismiss()
+                    }
                 }
             }
             .padding()
