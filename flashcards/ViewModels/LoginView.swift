@@ -6,16 +6,17 @@
 //
 
 import SwiftUI
+import GoogleSignInSwift //
+import GoogleSignIn
 
 struct LoginView: View {
     
     @State private var email = ""
     @State private var password = ""
     @State private var err = ""
-        
-//    @StateObject var viewModel: ContentViewModel
+    //    @StateObject var viewModel: ContentViewModel
     @EnvironmentObject var authModel: AuthenticationModel
-
+    
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -33,26 +34,7 @@ struct LoginView: View {
                     .scaledToFill()
                     .frame(width: 100, height: 100)
                     .padding(.vertical, 32)
-
-                // Google sign in
-                Button {
-                    Task {
-                        do {
-                            try await viewModel.authModel.googleOauth()
-                        } catch let e {
-                            print(e)
-                            err = e.localizedDescription
-                        }
-                    }
-                } label: {
-                    HStack {
-                        Image(systemName: "person.badge.key.fill")
-                        Text("Sign in with Google")
-                    } .padding(8)
-                } .buttonStyle(.borderedProminent)
                 
-                Text(err).foregroundColor(.red).font(.caption)
-
                 // Form fields
                 VStack(alignment: .leading) {
                     // Email input
@@ -76,6 +58,7 @@ struct LoginView: View {
                 }
                 .padding(.horizontal)
                 .padding(.top, 12)
+                
                 //TODO:
                 // Forgot passsword
                 
@@ -83,11 +66,11 @@ struct LoginView: View {
                 Button {
                     Task {
                         do {
-                            try await  viewModel.authModel.signIn(withEmail: email, password: password)
+                            try await  authModel.signIn(withEmail: email, password: password)
                         } catch {
                             
                         }
-                        if (viewModel.authModel.userSession != nil) {
+                        if (authModel.userSession != nil) {
                             dismiss()
                         }
                     }
@@ -106,6 +89,41 @@ struct LoginView: View {
                 .opacity(formIsValid ? 1.0 : 0.3)
                 .cornerRadius(10)
                 .padding(.top, 24)
+                
+                // Google sign in
+                Button {
+                    Task {
+                        do {
+                            try await authModel.googleOauth()
+                        } catch let e {
+                            print(e)
+                            err = e.localizedDescription
+                        }
+                    }
+                } label: {
+                    Image("iosNeutralGoogleSignIn")
+                        .resizable()
+                        .padding(.top, 12)
+                        .padding(.horizontal)
+//                    Text("Sign in with Google")
+                }
+                
+                GoogleSignInButton() {
+                    Task {
+                        do {
+                            try await authModel.googleOauth()
+                        } catch let e {
+                            print(e)
+                            err = e.localizedDescription
+                        }
+                    }
+                }
+                .padding(.horizontal)
+                .padding(.top, 12)
+                .clipShape(RoundedRectangle(cornerRadius: 200))
+                Text(err).foregroundColor(.red).font(.caption)
+                
+                //pushes signup to bottom of screen
                 Spacer()
                 
                 // Sign up button
@@ -136,5 +154,9 @@ extension LoginView: AuthenticationFormProtocol {
 }
 
 #Preview {
-    LoginView()
+    LoginView().onOpenURL { url in
+        // Handle Google Oauth URL
+        GIDSignIn.sharedInstance.handle(url)
+    }
+    .environmentObject(AuthenticationModel())
 }
