@@ -15,12 +15,12 @@ struct ContentView: View {
 
     var body: some View {
         Group {
-            if authModel.userSession != nil {
-                HomeView()
-            } else{
-                //loginScreen
-                LoginView().onOpenURL { url in
-                    //Handle Google Oauth URL
+            if viewModel.authModel.userSession != nil {
+                HomeView(authenticationModel: viewModel.authModel)
+            } else {
+                // loginScreen
+                LoginView(authenticationModel: viewModel.authModel).onOpenURL { url in
+                    // Handle Google Oauth URL
                     GIDSignIn.sharedInstance.handle(url)
                 }
             }
