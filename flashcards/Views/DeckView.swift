@@ -10,19 +10,15 @@ import SwiftUI
 struct DeckView: View {
     @StateObject var viewModel: DeckViewModel
     @Environment(\.dismiss) var dismiss
+    var deckName: String
     
     init(deckName: String) {
         _viewModel = StateObject(wrappedValue: DeckViewModel(deckName: deckName))
+        self.deckName = deckName
     }
     
     var body: some View {
         VStack {
-            Text("Flashcards")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundStyle(LinearGradient(colors: [.accentColor, .secondAccent], startPoint: .leading, endPoint: .trailing))
-            Spacer()
-            
             ScrollView {
                 ForEach(0..<viewModel.cards.contents.count, id: \.self) { index in
                     GroupBox(label: Text(viewModel.cards.contents[index][0])) {
@@ -51,7 +47,7 @@ struct DeckView: View {
                         .shadow(radius: 4, x: 0, y: 4)
                 }
             } .padding()
-        }
+        } .navigationTitle(deckName)
     }
 }
 
