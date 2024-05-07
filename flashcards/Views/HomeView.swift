@@ -45,8 +45,10 @@ struct HomeView: View {
             
             ScrollView {
                 ForEach(viewModel.deckNames, id: \.self) { deckName in
-                    GroupBox (label: Text(deckName)) {
-                        
+                    GroupBox(label: Text(deckName)) {
+                        NavigationLink(destination: DeckView(deckName: deckName)) {
+                            Text(deckName)
+                        }
                     }
                 }
             } .padding()
@@ -72,5 +74,7 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView().environmentObject(AuthenticationModel())
+    HomeView()
+        .environmentObject(AuthenticationModel())
+        .environmentObject(HomeViewModel())
 }
