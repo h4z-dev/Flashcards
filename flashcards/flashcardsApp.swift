@@ -35,7 +35,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct flashcardsApp: App {
-    //firebase setup
+    // Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var authModel = AuthenticationModel()
     var body: some Scene {
