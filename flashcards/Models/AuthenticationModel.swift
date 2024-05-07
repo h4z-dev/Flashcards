@@ -6,8 +6,6 @@
 //
 
 import Foundation
-
-import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
@@ -15,6 +13,7 @@ import FirebaseFirestoreSwift
 import GoogleSignIn
 import GoogleSignInSwift
 import FirebaseCore
+import SwiftUI
 
 protocol AuthenticationFormProtocol {
     var formIsValid: Bool {get}
@@ -22,12 +21,13 @@ protocol AuthenticationFormProtocol {
 
 @MainActor
 class AuthenticationModel: ObservableObject {
+    let userDefaults = UserDefaults.standard
     @Published var userSession: FirebaseAuth.User?
     @Published var currrentUser: User?
+    @AppStorage("userId") var userId: String = ""
     
     init() {
         self.userSession = Auth.auth().currentUser
-        
         Task{
             await fetchUser()
         }
@@ -118,12 +118,13 @@ class AuthenticationModel: ObservableObject {
         }
     }
     
-    func deleteAccount(){
+    func deleteAccount() {
         
     }
     
     func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }
+        userId = uid
 //        guard let snapshot = try? await Firestore.firestore().collection("test_Authentication_users").document(uid).getDocument() else { return }
        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
         self.currrentUser = try? snapshot.data(as: User.self)
@@ -131,6 +132,6 @@ class AuthenticationModel: ObservableObject {
     }
     
     func isAuthenticated() -> Bool {
-        return self.userSession != nil
+        return self.userSession != nil && self.userId != ""
     }
 }

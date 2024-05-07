@@ -9,9 +9,14 @@ import Foundation
 
 struct Deck {
     var contents: [[String]] = [[String]]()
+    var name: String = ""
     
     mutating func add(front: String, back: String) {
         contents.append([front, back])
+    }
+    
+    mutating func setName(name: String) {
+        self.name = name
     }
     
     func toString() -> String {
