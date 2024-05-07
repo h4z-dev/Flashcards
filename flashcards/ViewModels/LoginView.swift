@@ -16,7 +16,6 @@ struct LoginView: View {
     @State private var err = ""
     //    @StateObject var viewModel: ContentViewModel
     @EnvironmentObject var authModel: AuthenticationModel
-    
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -29,10 +28,10 @@ struct LoginView: View {
                     .foregroundStyle(LinearGradient(colors: [.accentColor, .secondAccent], startPoint: .leading, endPoint: .trailing))
                 
                 // Icon
-                Image(systemName: "list.clipboard")
+                Image(.iconRoundrect)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 100, height: 100)
+                    .frame(width: 150)
                     .padding(.vertical, 32)
                 
                 // Form fields
@@ -70,7 +69,7 @@ struct LoginView: View {
                         } catch {
                             
                         }
-                        if (authModel.userSession != nil) {
+                        if (authModel.isAuthenticated()) {
                             dismiss()
                         }
                     }
@@ -91,22 +90,22 @@ struct LoginView: View {
                 .padding(.top, 24)
                 
                 // Google sign in
-                Button {
-                    Task {
-                        do {
-                            try await authModel.googleOauth()
-                        } catch let e {
-                            print(e)
-                            err = e.localizedDescription
-                        }
-                    }
-                } label: {
-                    Image("iosNeutralGoogleSignIn")
-                        .resizable()
-                        .padding(.top, 12)
-                        .padding(.horizontal)
-//                    Text("Sign in with Google")
-                }
+//                Button {
+//                    Task {
+//                        do {
+//                            try await authModel.googleOauth()
+//                        } catch let e {
+//                            print(e)
+//                            err = e.localizedDescription
+//                        }
+//                    }
+//                } label: {
+//                    Image("iosNeutralGoogleSignIn")
+//                        .resizable()
+//                        .padding(.top, 12)
+//                        .padding(.horizontal)
+////                    Text("Sign in with Google")
+//                }
                 
                 GoogleSignInButton() {
                     Task {
@@ -115,6 +114,9 @@ struct LoginView: View {
                         } catch let e {
                             print(e)
                             err = e.localizedDescription
+                        }
+                        if (authModel.userSession != nil) {
+                            dismiss()
                         }
                     }
                 }

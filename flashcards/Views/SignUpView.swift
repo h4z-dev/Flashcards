@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @State private var email = ""
-    @State private var Name = ""
-    @State private var cpassword = ""
-    @State private var password = ""
+    @State private var email: String = ""
+    @State private var Name: String = ""
+    @State private var cpassword: String = ""
+    @State private var password: String = ""
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var authModel: AuthenticationModel
 
     var body: some View {
         VStack{
-            // Image
-            Image(systemName: "clipboard.fill")
+            // Icon
+            Image(.iconRoundrect)
                 .resizable()
-                .scaledToFill()
-                .frame(width: 100, height: 100)
+                .scaledToFill() 
+                .frame(width: 150, height: 100)
                 .padding(.vertical, 32)
         }
         VStack(spacing: 24) {
@@ -32,6 +32,7 @@ struct SignUpView: View {
                 .font(.footnote)
             TextField("John Smith", text: $Name)
                 .font(.system(size: 14))
+                .padding(.horizontal)
             
             // Email login
             Text("Email Address")
@@ -40,35 +41,41 @@ struct SignUpView: View {
                 .font(.footnote)
             TextField("name@example.com", text: $email)
                 .font(.system(size: 14))
+                .padding(.horizontal)
             
             // Password input
             Text("Password")
                 .foregroundStyle(Color(.darkGray))
                 .fontWeight(.semibold)
                 .font(.footnote)
-            TextField("Password", text: $password)
+            SecureField("Password", text: $password)
                 .font(.system(size: 14))
+                .padding(.horizontal)
             
             ZStack(alignment: .trailing) {
-                Text("Repeat Password")
-                    .foregroundStyle(Color(.darkGray))
-                    .fontWeight(.semibold)
-                    .font(.footnote)
-                TextField("Confirm Password", text: $cpassword)
-                    .font(.system(size: 14))
+                if cpassword.isEmpty || password.isEmpty {
+                    Text("Repeat Password")
+                        .foregroundStyle(Color(.darkGray))
+                        .fontWeight(.semibold)
+                        .font(.footnote)
+                }
+                
+            SecureField("Confirm Password", text: $cpassword)
+                .font(.system(size: 14))
+                .padding(.horizontal)
                 if !password.isEmpty && !cpassword.isEmpty {
                     if password == cpassword {
                         Image(systemName: "checkmark.circle.fill")
-                            .imageScale(.large)
+                            .imageScale(.medium)
                             .fontWeight(.bold)
                             .foregroundStyle(Color(.systemGreen))
                     } else {
                         Text("Password must match")
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .font(.system(size: 14))
-                            .padding(.horizontal, 32)
+                            .font(.footnote)
+                            .padding(.horizontal, 26)
                         Image(systemName: "xmark.circle.fill")
-                            .imageScale(.large)
+                            .imageScale(.medium)
                             .fontWeight(.bold)
                             .foregroundStyle(Color(.systemRed))
                     }
@@ -90,7 +97,7 @@ struct SignUpView: View {
             }
         } label: {
             HStack{
-                Text("Sign UP")
+                Text("Sign Up")
                     .fontWeight(.semibold)
                 Image(systemName: "arrow.right")
             }
