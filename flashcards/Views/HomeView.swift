@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  HomeView.swift
 //  flashcards
 //
 //  Created by Harris Vandenberg on 29/4/2024.
@@ -18,60 +18,65 @@ struct HomeView: View {
     }
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Flashcards")
-                    .font(.largeTitle)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .foregroundStyle(LinearGradient(colors: [.accentColor, .secondAccent], startPoint: .leading, endPoint: .trailing))
-                Spacer()
-                Button {
-                    Task {
-                        authModel.signOut()
-                        // Go to ContentView() and close this view
-                        print("a")
-                        dismiss()
+        NavigationView {
+            VStack {
+                HStack {
+                    Text("Flashcards")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundStyle(LinearGradient(colors: [.accentColor, .secondAccent], startPoint: .leading, endPoint: .trailing))
+                    Spacer()
+                    Button {
+                        Task {
+                            authModel.signOut()
+                            dismiss()
+                        }
+                    } label: {
+                        Text("LOGOUT")
                     }
-                } label: {
-                    Text("LOGOUT")
-                }
-                .task {
-                    if (!authModel.isAuthenticated()) {
-                        dismiss()
-                    }
-                }
-            }
-            .padding()
-            
-            ScrollView {
-                ForEach(viewModel.deckNames, id: \.self) { deckName in
-                    GroupBox(label: Text(deckName)) {
-                        NavigationLink(destination: DeckView(deckName: deckName)) {
-                            Text(deckName)
+                    .task {
+                        if (!authModel.isAuthenticated()) {
+                            dismiss()
                         }
                     }
                 }
-            } .padding()
-            
-            Spacer()
-            
-            HStack {
-                Spacer()
-                Button {
-                    viewModel.addButtonPressed()
-                } label: {
-                    Image(systemName: "plus")
-                        .font(.title.weight(.semibold))
-                        .padding()
-                        .background(.accent)
-                        .foregroundColor(.white)
-                        .clipShape(Circle())
-                        .shadow(radius: 4, x: 0, y: 4)
+                .padding()
+                
+                ScrollView {
+                    ForEach(viewModel.deckNames, id: \.self) { deckName in
+                        NavigationLink(destination: DeckView(deckName: deckName)) {
+                            GroupBox(label: Label(deckName, systemImage: "rectangle.on.rectangle")) {
+                                
+                            }
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
                 }
-            } .padding()
+                .padding()
+                
+                Spacer()
+                
+                HStack {
+                    Spacer()
+                    Button {
+                        viewModel.addButtonPressed()
+                    } label: {
+                        Image(systemName: "plus")
+                            .font(.title.weight(.semibold))
+                            .padding()
+                            .background(.accent)
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                            .shadow(radius: 4, x: 0, y: 4)
+                    }
+                }
+                .padding()
+            }
         }
     }
 }
+
+
 
 #Preview {
     HomeView()
