@@ -8,14 +8,15 @@
 import Foundation
 import FirebaseCore
 import FirebaseFirestore
+import SwiftUI
 
 class HomeViewModel: ObservableObject {
     let db = Firestore.firestore()
-    var flashcard = Deck()
+    var deck = Deck()
     @Published var deckNames: [String] = []
 //    var authModel: AuthenticationModel
     
-    let userId = "USER-ID-GOES-HERE"
+    @AppStorage("userId") var userId: String = ""
     
     init() {
 //        self.authModel = authModel
@@ -25,15 +26,13 @@ class HomeViewModel: ObservableObject {
 //        print(flashcard.toString())
         Task {
             await fetchDeckNames()
-//            await fireStoreExample()
-//            await addCards()
             await getCards(deckId: "0")
         }
     }
     
     func addCards() async {
         do {
-            try await db.collection("users").document(userId).collection("decks").document("0").setData(flashcard.toDict())
+            try await db.collection("users").document(userId).collection("decks").document("0").setData(deck.toDict())
         } catch {
             print("Error adding document: \(error)")
         }
@@ -45,6 +44,7 @@ class HomeViewModel: ObservableObject {
             let deckDocument = try await db.collection("users").document(userId).collection("decks").document(deckId).getDocument()
             if let data = deckDocument.data() {
                 var deck = Deck()
+                deck.setName(name: deckId)
                 // Iterate over each key-value pair in the document data and reconstruct it to the Deck format
                 for (front, back) in data {
                     if let back = back as? String {
@@ -113,4 +113,5 @@ class HomeViewModel: ObservableObject {
     func addButtonPressed() {
     
     }
+    
 }
