@@ -52,5 +52,5 @@ struct DeckView: View {
 }
 
 #Preview {
-    DeckView(deckName: "0").environmentObject(DeckViewModel(userId: "USER-ID-GOES-HERE", deckName: "0"))
+    DeckView(deckName: "0").environmentObject(DeckViewModel(userId: "i95mtNWHzgalaetnaMEbPX8n52I2", deckName: "0"))
 }
