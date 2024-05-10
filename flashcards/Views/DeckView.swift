@@ -20,12 +20,12 @@ struct DeckView: View {
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(0..<viewModel.cards.contents.count, id: \.self) { index in
-                    GroupBox(label: Text(viewModel.cards.contents[index][0])) {
+                ForEach(0..<viewModel.deck.cards.count, id: \.self) { index in
+                    GroupBox(label: Text(viewModel.deck.cards[index].front)) {
                         Button(action: {
                             viewModel.cardTapped(index: index)
                         }) {
-                            Text(viewModel.cards.contents[index][1])
+                            Text(viewModel.deck.cards[index].back)
                         }
                     }
                 }
