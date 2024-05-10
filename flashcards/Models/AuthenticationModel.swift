@@ -104,7 +104,7 @@ class AuthenticationModel: ObservableObject {
     
     func signOut() {
         do{
-            GIDSignIn.sharedInstance.signOut()
+//            try GIDSignIn.sharedInstance.signOut() //signs out google sign in
             try Auth.auth().signOut()   //signs out on firebase
             self.userSession = nil      //signs out and wipes user data
             self.currrentUser = nil     //wipes out current user data model
