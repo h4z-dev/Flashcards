@@ -30,10 +30,15 @@ struct Deck {
     func toDict() -> [String : String] {
         var dict: [String : String] = [:]
         for card in contents {
-            if card.count == 2 {
-                dict[card[0]] = card[1]
-            }
+            dict[card[0]] = card[1]
         }
         return dict
+    }
+    
+    /// Returns number of flashcards in the deck
+    /// Output:
+    ///     Total number of flashcards as `Int`
+    func count() -> Int {
+        return contents.count
     }
 }
