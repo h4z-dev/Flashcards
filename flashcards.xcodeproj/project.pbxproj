@@ -15,6 +15,7 @@
 		16F642AF2BEA502A00A064D0 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 16F642AE2BEA502A00A064D0 /* FirebaseAnalyticsSwift */; };
 		16F642B12BEA503400A064D0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 16F642B02BEA503400A064D0 /* FirebaseAuth */; };
 		634DFAAB2BE7A2CA00BE375C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 634DFAAA2BE7A2CA00BE375C /* GoogleService-Info.plist */; };
+		6352D6792BEF03F600EEBFB9 /* SFSymbolsPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 6352D6782BEF03F600EEBFB9 /* SFSymbolsPicker */; };
 		6353F2CD2BE721D2005B3573 /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353F2CC2BE721D2005B3573 /* AuthenticationModel.swift */; };
 		6353F2D02BE724C3005B3573 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6353F2CF2BE724C3005B3573 /* FirebaseFirestoreSwift */; };
 		6353F2D22BE7252A005B3573 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353F2D12BE7252A005B3573 /* User.swift */; };
@@ -71,6 +72,7 @@
 				6353F2D02BE724C3005B3573 /* FirebaseFirestoreSwift in Frameworks */,
 				16F642B12BEA503400A064D0 /* FirebaseAuth in Frameworks */,
 				6353F2DD2BE743E5005B3573 /* GoogleSignIn in Frameworks */,
+				6352D6792BEF03F600EEBFB9 /* SFSymbolsPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +194,7 @@
 				16F642AC2BEA502000A064D0 /* FirebaseAnalytics */,
 				16F642AE2BEA502A00A064D0 /* FirebaseAnalyticsSwift */,
 				16F642B02BEA503400A064D0 /* FirebaseAuth */,
+				6352D6782BEF03F600EEBFB9 /* SFSymbolsPicker */,
 			);
 			productName = flashcards;
 			productReference = 63E8F84A2BDF4B9B008A57C4 /* flashcards.app */;
@@ -224,6 +227,7 @@
 			packageReferences = (
 				63E8F85B2BDF4F24008A57C4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				6353F2DB2BE743E5005B3573 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				6352D6772BEF03F600EEBFB9 /* XCRemoteSwiftPackageReference "SFSymbolsPickerForSwiftUI" */,
 			);
 			productRefGroup = 63E8F84B2BDF4B9B008A57C4 /* Products */;
 			projectDirPath = "";
@@ -485,6 +489,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6352D6772BEF03F600EEBFB9 /* XCRemoteSwiftPackageReference "SFSymbolsPickerForSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alessiorubicini/SFSymbolsPickerForSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
+			};
+		};
 		6353F2DB2BE743E5005B3573 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -518,6 +530,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 63E8F85B2BDF4F24008A57C4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		6352D6782BEF03F600EEBFB9 /* SFSymbolsPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6352D6772BEF03F600EEBFB9 /* XCRemoteSwiftPackageReference "SFSymbolsPickerForSwiftUI" */;
+			productName = SFSymbolsPicker;
 		};
 		6353F2CF2BE724C3005B3573 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;

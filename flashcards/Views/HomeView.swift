@@ -70,6 +70,9 @@ struct HomeView: View {
                                 .clipShape(Circle())
                                 .shadow(radius: 4, x: 0, y: 4)
                         }
+                        .sheet(isPresented: $viewModel.isAddingCard, content: {
+                            CreateDeckView()
+                                        }).padding()
                     }
                     .padding()
                 }
