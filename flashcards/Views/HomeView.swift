@@ -46,8 +46,7 @@ struct HomeView: View {
                     ScrollView {
                         ForEach(viewModel.deckHeaders, id: \.self) { deckHeader in
                             NavigationLink(destination: DeckView(deckHeder: deckHeader)) {
-                                GroupBox()
-                                {
+                                GroupBox() {
                                 } label: {
                                     Text(deckHeader.name)
                                         .getContrastText(backgroundColor: deckHeader.color)
