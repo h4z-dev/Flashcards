@@ -16,7 +16,7 @@ class DeckViewModel: ObservableObject {
     
     // TODO INIT DECK NAME FROM PREVIOUS VIEW
     var deckHeader: DeckHeader
-    var cards: Deck = Deck()
+    var deck: Deck = Deck()
     
     init(userId: String = "", deckHeader: DeckHeader) {
         self.userId = userId
