@@ -48,7 +48,7 @@ struct HomeView: View {
                             NavigationLink(destination: DeckView(deckHeder: deckHeader)) {
                                 GroupBox() {
                                 } label: {
-                                    HStack{
+                                    HStack {
                                         Image(systemName: deckHeader.symbol)
                                             .getContrastText(backgroundColor: deckHeader.color)
                                         Text(deckHeader.name)
