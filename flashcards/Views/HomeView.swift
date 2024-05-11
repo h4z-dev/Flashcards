@@ -60,7 +60,7 @@ struct HomeView: View {
                             .buttonStyle(PlainButtonStyle())
                         }
                     }
-                    .padding()
+                    .padding(.horizontal)
                 }
                 VStack {
                     Spacer()
