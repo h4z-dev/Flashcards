@@ -74,8 +74,8 @@ class HomeViewModel: ObservableObject {
                             if let deckHeaderData = data["DECK_HEADER"] as? [String: Any],
                                let deckName = deckHeaderData["deckName"] as? String,
                                let deckLogo = deckHeaderData["deckLogo"] as? String,
-                               let deckColorString = deckHeaderData["deckColor"] as? String {
-                                deckHeaders.append(DeckHeader(name: deckName, symbol: deckLogo, color: Color(deckColorString)))
+                               let deckColorInt = deckHeaderData["deckColor"] as? Int {
+                                deckHeaders.append(DeckHeader(name: deckName, symbol: deckLogo, color: Color(ColorExtensions().returnColorValueFromRaw(input: deckColorInt))))
                             } else {
                                 deckHeaders.append(DeckHeader(name: name))
                                 print("OLD DECK DETECTED! \(name)")
@@ -110,7 +110,7 @@ class HomeViewModel: ObservableObject {
                 "DECK_HEADER" : [
                     "deckName" : deckName,
                     "deckLogo" : deckLogo,
-                    "deckColor" : deckColor.description
+                    "deckColor" : ColorExtensions().rawColorValue(color: deckColor)
                     ]
             ], merge: true)
         }
@@ -119,6 +119,10 @@ class HomeViewModel: ObservableObject {
             return
         }
         deckHeaders.append(DeckHeader(name: deckName, symbol: deckLogo, color: deckColor))
+    }
+    
+    func deleteDeck(){
+        
     }
     
     //    func fireStoreExample() async {

@@ -11,7 +11,7 @@ import SwiftUI
 struct DeckHeader : Hashable {
     var name: String = ""
     var symbol: String = "rectangle.on.rectangle"
-    var color: Color = .gray
+    var color: Color = .white
     
     mutating func changeName(name: String) {
         self.name = name
