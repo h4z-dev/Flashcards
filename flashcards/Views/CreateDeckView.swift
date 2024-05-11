@@ -36,7 +36,7 @@ struct CreateDeckView: View {
                 .font(.footnote)
                 .padding()
             
-            Button(){
+            Button() {
                 isPresented.toggle()
             } label: {
                 HStack{
@@ -53,9 +53,9 @@ struct CreateDeckView: View {
             }).padding()
             
             
-            Button(){
-                Task{
-                    do{
+            Button() {
+                Task {
+                    do {
                         try await homeViewModel.createNewDeck(deckName: viewModel.deckName, deckColor: viewModel.deckColor, deckLogo: viewModel.deckLogo)
                         dismiss()
                     }
