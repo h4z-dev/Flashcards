@@ -49,7 +49,10 @@ struct HomeView: View {
                                 GroupBox()
                                 {
                                 } label: {
-                                    Label(deckHeader.name, systemImage: deckHeader.symbol)
+                                    Text(deckHeader.name)
+                                        .getContrastText(backgroundColor: deckHeader.color)
+                                    Image(deckHeader.symbol)
+                                        
                                 }
                                 .backgroundStyle(Color(deckHeader.color))
                             }
