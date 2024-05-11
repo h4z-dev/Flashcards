@@ -174,8 +174,8 @@ class HomeViewModel: ObservableObject {
             // Delete the deck from Firestore
             try await db.collection("users").document(userId).collection("decks").document(deckName).delete()
             // Locally remove all decks that match that of the deleted one
-            deckNames.removeAll {
-                $0 == deckName
+            deckHeaders.removeAll {
+                $0.name == deckName
             }
         } catch {
             print("Error deleting deck: \(error)")
