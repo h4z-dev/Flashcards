@@ -16,6 +16,9 @@
 		16F642AF2BEA502A00A064D0 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 16F642AE2BEA502A00A064D0 /* FirebaseAnalyticsSwift */; };
 		16F642B12BEA503400A064D0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 16F642B02BEA503400A064D0 /* FirebaseAuth */; };
 		634DFAAB2BE7A2CA00BE375C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 634DFAAA2BE7A2CA00BE375C /* GoogleService-Info.plist */; };
+		6352D6792BEF03F600EEBFB9 /* SFSymbolsPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 6352D6782BEF03F600EEBFB9 /* SFSymbolsPicker */; };
+		6352D67B2BEF287700EEBFB9 /* DeckHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352D67A2BEF287700EEBFB9 /* DeckHeader.swift */; };
+		6352D67D2BEF4C7600EEBFB9 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6352D67C2BEF4C7600EEBFB9 /* ColorExtensions.swift */; };
 		6353F2CD2BE721D2005B3573 /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353F2CC2BE721D2005B3573 /* AuthenticationModel.swift */; };
 		6353F2D02BE724C3005B3573 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6353F2CF2BE724C3005B3573 /* FirebaseFirestoreSwift */; };
 		6353F2D22BE7252A005B3573 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353F2D12BE7252A005B3573 /* User.swift */; };
@@ -27,6 +30,8 @@
 		6353F2E72BE755EA005B3573 /* LoginErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353F2E62BE755EA005B3573 /* LoginErrors.swift */; };
 		6353F2EB2BE75E2D005B3573 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353F2EA2BE75E2C005B3573 /* ContentViewModel.swift */; };
 		6353F2ED2BE76003005B3573 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353F2EC2BE76003005B3573 /* LoginViewModel.swift */; };
+		6381E8E12BEDE420006DBBC9 /* CreateDeckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381E8E02BEDE420006DBBC9 /* CreateDeckViewModel.swift */; };
+		639B739C2BEDBA17004681AD /* CreateDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B739B2BEDBA17004681AD /* CreateDeckView.swift */; };
 		63E8F84E2BDF4B9B008A57C4 /* flashcardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */; };
 		63E8F8502BDF4B9B008A57C4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8F84F2BDF4B9B008A57C4 /* HomeView.swift */; };
 		63E8F8522BDF4B9C008A57C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E8F8512BDF4B9C008A57C4 /* Assets.xcassets */; };
@@ -41,6 +46,8 @@
 		16F642A82BE9B68300A064D0 /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
 		16F642AA2BE9B69300A064D0 /* DeckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckViewModel.swift; sourceTree = "<group>"; };
 		634DFAAA2BE7A2CA00BE375C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6352D67A2BEF287700EEBFB9 /* DeckHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckHeader.swift; sourceTree = "<group>"; };
+		6352D67C2BEF4C7600EEBFB9 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		6353F2CC2BE721D2005B3573 /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		6353F2D12BE7252A005B3573 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6353F2D52BE72741005B3573 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,6 +57,8 @@
 		6353F2E62BE755EA005B3573 /* LoginErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginErrors.swift; sourceTree = "<group>"; };
 		6353F2EA2BE75E2C005B3573 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		6353F2EC2BE76003005B3573 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		6381E8E02BEDE420006DBBC9 /* CreateDeckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDeckViewModel.swift; sourceTree = "<group>"; };
+		639B739B2BEDBA17004681AD /* CreateDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDeckView.swift; sourceTree = "<group>"; };
 		63E8F84A2BDF4B9B008A57C4 /* flashcards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flashcards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashcardsApp.swift; sourceTree = "<group>"; };
 		63E8F84F2BDF4B9B008A57C4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -69,6 +78,7 @@
 				6353F2D02BE724C3005B3573 /* FirebaseFirestoreSwift in Frameworks */,
 				16F642B12BEA503400A064D0 /* FirebaseAuth in Frameworks */,
 				6353F2DD2BE743E5005B3573 /* GoogleSignIn in Frameworks */,
+				6352D6792BEF03F600EEBFB9 /* SFSymbolsPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +93,7 @@
 				6353F2D52BE72741005B3573 /* ContentView.swift */,
 				6353F2D92BE72B8E005B3573 /* SignUpView.swift */,
 				16F642A82BE9B68300A064D0 /* DeckView.swift */,
+				639B739B2BEDBA17004681AD /* CreateDeckView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -94,6 +105,7 @@
 				6353F2EA2BE75E2C005B3573 /* ContentViewModel.swift */,
 				6353F2EC2BE76003005B3573 /* LoginViewModel.swift */,
 				16F642AA2BE9B69300A064D0 /* DeckViewModel.swift */,
+				6381E8E02BEDE420006DBBC9 /* CreateDeckViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -104,6 +116,8 @@
 				6353F2CC2BE721D2005B3573 /* AuthenticationModel.swift */,
 				6353F2D12BE7252A005B3573 /* User.swift */,
 				162BE1842BE74433009E31BD /* Deck.swift */,
+				6352D67A2BEF287700EEBFB9 /* DeckHeader.swift */,
+				6352D67C2BEF4C7600EEBFB9 /* ColorExtensions.swift */,
 				16D47F5A2BEDE1A40076AFF3 /* Card.swift */,
 			);
 			path = Models;
@@ -189,6 +203,7 @@
 				16F642AC2BEA502000A064D0 /* FirebaseAnalytics */,
 				16F642AE2BEA502A00A064D0 /* FirebaseAnalyticsSwift */,
 				16F642B02BEA503400A064D0 /* FirebaseAuth */,
+				6352D6782BEF03F600EEBFB9 /* SFSymbolsPicker */,
 			);
 			productName = flashcards;
 			productReference = 63E8F84A2BDF4B9B008A57C4 /* flashcards.app */;
@@ -221,6 +236,7 @@
 			packageReferences = (
 				63E8F85B2BDF4F24008A57C4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				6353F2DB2BE743E5005B3573 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				6352D6772BEF03F600EEBFB9 /* XCRemoteSwiftPackageReference "SFSymbolsPickerForSwiftUI" */,
 			);
 			productRefGroup = 63E8F84B2BDF4B9B008A57C4 /* Products */;
 			projectDirPath = "";
@@ -253,6 +269,8 @@
 				162BE1852BE74433009E31BD /* Deck.swift in Sources */,
 				6353F2D62BE72741005B3573 /* ContentView.swift in Sources */,
 				6353F2ED2BE76003005B3573 /* LoginViewModel.swift in Sources */,
+				639B739C2BEDBA17004681AD /* CreateDeckView.swift in Sources */,
+				6352D67D2BEF4C7600EEBFB9 /* ColorExtensions.swift in Sources */,
 				162BE1812BE72591009E31BD /* HomeViewModel.swift in Sources */,
 				16F642AB2BE9B69300A064D0 /* DeckViewModel.swift in Sources */,
 				63E8F84E2BDF4B9B008A57C4 /* flashcardsApp.swift in Sources */,
@@ -260,8 +278,10 @@
 				6353F2EB2BE75E2D005B3573 /* ContentViewModel.swift in Sources */,
 				6353F2DA2BE72B8E005B3573 /* SignUpView.swift in Sources */,
 				6353F2D22BE7252A005B3573 /* User.swift in Sources */,
+				6381E8E12BEDE420006DBBC9 /* CreateDeckViewModel.swift in Sources */,
 				6353F2D82BE72B31005B3573 /* LoginView.swift in Sources */,
 				6353F2E72BE755EA005B3573 /* LoginErrors.swift in Sources */,
+				6352D67B2BEF287700EEBFB9 /* DeckHeader.swift in Sources */,
 				6353F2CD2BE721D2005B3573 /* AuthenticationModel.swift in Sources */,
 				16F642A92BE9B68300A064D0 /* DeckView.swift in Sources */,
 			);
@@ -398,7 +418,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"flashcards/Preview Content\"";
-				DEVELOPMENT_TEAM = TX5RQDAQF5;
+				DEVELOPMENT_TEAM = SDQMXNT4CF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = flashcards/Info.plist;
@@ -414,7 +434,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ge.goodrid.flashcards;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -432,7 +452,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"flashcards/Preview Content\"";
-				DEVELOPMENT_TEAM = TX5RQDAQF5;
+				DEVELOPMENT_TEAM = SDQMXNT4CF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = flashcards/Info.plist;
@@ -448,7 +468,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ge.goodrid.flashcards;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -481,6 +501,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6352D6772BEF03F600EEBFB9 /* XCRemoteSwiftPackageReference "SFSymbolsPickerForSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alessiorubicini/SFSymbolsPickerForSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
+			};
+		};
 		6353F2DB2BE743E5005B3573 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -514,6 +542,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 63E8F85B2BDF4F24008A57C4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		6352D6782BEF03F600EEBFB9 /* SFSymbolsPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6352D6772BEF03F600EEBFB9 /* XCRemoteSwiftPackageReference "SFSymbolsPickerForSwiftUI" */;
+			productName = SFSymbolsPicker;
 		};
 		6353F2CF2BE724C3005B3573 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SignUpView: View {
+    
+    //TODO: Add to own viewModel
     @State private var email: String = ""
     @State private var Name: String = ""
     @State private var cpassword: String = ""
