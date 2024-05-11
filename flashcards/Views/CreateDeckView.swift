@@ -10,12 +10,14 @@ import SFSymbolsPicker
 
 struct CreateDeckView: View {
     @StateObject var viewModel: CreateDeckViewModel
-    @EnvironmentObject var authModel: AuthenticationModel
+    @StateObject var homeViewModel: HomeViewModel
+    @Environment(\.dismiss) var dismiss
     
     @State private var isPresented = false
     
-    init() {
+    init(homeViewModel: HomeViewModel) {
         _viewModel = StateObject(wrappedValue: CreateDeckViewModel())
+        _homeViewModel = StateObject(wrappedValue: homeViewModel)
     }
     
     var body: some View {
@@ -52,7 +54,15 @@ struct CreateDeckView: View {
             
             
             Button(){
-                
+                Task{
+                    do{
+                        try await homeViewModel.createNewDeck(deckName: viewModel.deckName, deckColor: viewModel.deckColor, deckLogo: viewModel.deckLogo)
+                        dismiss()
+                    }
+                    catch{
+                        print("Error creating new deck")
+                    }
+                }
             } label: {
                 HStack{
                     Text("Create New Deck")
@@ -72,9 +82,12 @@ struct CreateDeckView: View {
 extension CreateDeckView {
     var formIsValid: Bool {
         return !viewModel.deckName.isEmpty
+        && viewModel.deckName != "DECK_HEADER"
     }
 }
 
 #Preview {
-    CreateDeckView()
+    CreateDeckView(homeViewModel: HomeViewModel())
+        .environmentObject(AuthenticationModel())
+        .environmentObject(CreateDeckViewModel())
 }

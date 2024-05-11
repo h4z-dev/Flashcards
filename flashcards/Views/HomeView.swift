@@ -46,8 +46,9 @@ struct HomeView: View {
                     ScrollView {
                         ForEach(viewModel.deckHeaders, id: \.self) { deckHeader in
                             NavigationLink(destination: DeckView(deckHeder: deckHeader)) {
-                                GroupBox(label: Label(deckHeader.name, systemImage: deckHeader.symbol)) {
-                                }
+                                GroupBox(label: Label(deckHeader.name, systemImage: deckHeader.symbol))
+                                {}
+                                    .backgroundStyle(Color(deckHeader.color))
                             }
                             .buttonStyle(PlainButtonStyle())
                         }
@@ -70,7 +71,7 @@ struct HomeView: View {
                                 .shadow(radius: 4, x: 0, y: 4)
                         }
                         .sheet(isPresented: $viewModel.isAddingCard, content: {
-                            CreateDeckView()
+                            CreateDeckView(homeViewModel: viewModel)
                         }).padding()
                     }
                     .padding()
