@@ -12,65 +12,73 @@ struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
     @EnvironmentObject var authModel: AuthenticationModel
     @Environment(\.dismiss) var dismiss
-
+    
     init() {
         _viewModel = StateObject(wrappedValue: HomeViewModel())
     }
     
     var body: some View {
         NavigationView {
-            VStack {
-                HStack {
-                    Text("Flashcards")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundStyle(LinearGradient(colors: [.accentColor, .secondAccent], startPoint: .leading, endPoint: .trailing))
-                    Spacer()
-                    Button {
-                        Task {
-                            authModel.signOut()
-                            dismiss()
+            ZStack {
+                VStack {
+                    HStack {
+                        Text("Flashcards")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundStyle(LinearGradient(colors: [.accentColor, .secondAccent], startPoint: .leading, endPoint: .trailing))
+                        Spacer()
+                        Button {
+                            Task {
+                                authModel.signOut()
+                                dismiss()
+                            }
+                        } label: {
+                            Text("LOGOUT")
                         }
-                    } label: {
-                        Text("LOGOUT")
-                    }
-                    .task {
-                        if (!authModel.isAuthenticated()) {
-                            dismiss()
-                        }
-                    }
-                }
-                .padding()
-                
-                ScrollView {
-                    ForEach(viewModel.deckNames, id: \.self) { deckName in
-                        NavigationLink(destination: DeckView(deckName: deckName)) {
-                            GroupBox(label: Label(deckName, systemImage: "rectangle.on.rectangle")) {
-                                
+                        .task {
+                            if (!authModel.isAuthenticated()) {
+                                dismiss()
                             }
                         }
-                        .buttonStyle(PlainButtonStyle())
                     }
+                    .padding()
+                    
+                    ScrollView {
+                        ForEach(viewModel.deckHeaders, id: \.self) { deckHeader in
+                            NavigationLink(destination: DeckView(deckHeder: deckHeader)) {
+                                GroupBox()
+                                {
+                                } label: {
+                                    Label(deckHeader.name, systemImage: deckHeader.symbol)
+                                }
+                                .backgroundStyle(Color(deckHeader.color))
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
+                    .padding()
                 }
-                .padding()
-                
-                Spacer()
-                
-                HStack {
+                VStack {
                     Spacer()
-                    Button {
-                        viewModel.addButtonPressed()
-                    } label: {
-                        Image(systemName: "plus")
-                            .font(.title.weight(.semibold))
-                            .padding()
-                            .background(.accent)
-                            .foregroundColor(.white)
-                            .clipShape(Circle())
-                            .shadow(radius: 4, x: 0, y: 4)
+                    HStack {
+                        Spacer()
+                        Button {
+                            viewModel.addButtonPressed()
+                        } label: {
+                            Image(systemName: "plus")
+                                .font(.title.weight(.semibold))
+                                .padding()
+                                .background(.accent)
+                                .foregroundColor(.white)
+                                .clipShape(Circle())
+                                .shadow(radius: 4, x: 0, y: 4)
+                        }
+                        .sheet(isPresented: $viewModel.isAddingCard, content: {
+                            CreateDeckView(homeViewModel: viewModel)
+                        }).padding()
                     }
+                    .padding()
                 }
-                .padding()
             }
         }
     }

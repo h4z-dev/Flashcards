@@ -15,18 +15,18 @@ class DeckViewModel: ObservableObject {
     @AppStorage("userId") var userId: String = ""
     
     // TODO INIT DECK NAME FROM PREVIOUS VIEW
-    var deckName: String
-    var deck: Deck = Deck()
+    var deckHeader: DeckHeader
+    var cards: Deck = Deck()
     
-    init(userId: String = "", deckName: String) {
+    init(userId: String = "", deckHeader: DeckHeader) {
         self.userId = userId
-        self.deckName = deckName
+        self.deckHeader = deckHeader
         loadCards()
     }
     
     func loadCards() {
         Task {
-            await getCards(deckId: deckName)
+            await getCards(deckId: deckHeader.name)
         }
     }
     
