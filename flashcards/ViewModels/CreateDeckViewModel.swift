@@ -11,7 +11,11 @@ import SwiftUI
 
 class CreateDeckViewModel : ObservableObject {
     @Published var deckName: String = ""
-    @Published var deckColor: Color = .white
-    @Published var deckLogo: String = "star.fill"
+    @Published var deckColor: Color = .gray
+    @Published var deckLogo: String = "rectangle.on.rectangle"
     
+    func createNewDeck() {
+        var n
+        n = n+1
+    }
 }

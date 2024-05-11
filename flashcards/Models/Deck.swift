@@ -6,17 +6,18 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Deck {
     var contents: [[String]] = [[String]]()
-    var name: String = ""
+    var deckHeader: DeckHeader = DeckHeader()
     
     mutating func add(front: String, back: String) {
         contents.append([front, back])
     }
     
     mutating func setName(name: String) {
-        self.name = name
+        self.deckHeader.name = name
     }
     
     func toString() -> String {

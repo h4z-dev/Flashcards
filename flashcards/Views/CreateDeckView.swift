@@ -24,45 +24,54 @@ struct CreateDeckView: View {
                 .foregroundStyle(Color(.darkGray))
                 .fontWeight(.heavy)
                 .padding(.vertical)
-            HStack{
-                VStack{
-                    Text("Add deck Name")
-                        .foregroundStyle(Color(.darkGray))
-                        .fontWeight(.semibold)
-                        .font(.footnote)
-                    TextField("Name of Deck", text: $viewModel.deckName)
-                        .font(.system(size: 14))
-                        .padding(.horizontal)
-                }
-                
-                VStack{
-                    Text("Deck Colour")
-                        .foregroundStyle(Color(.darkGray))
-                        .fontWeight(.semibold)
-                        .font(.footnote)
-                    ColorPicker("", selection: $viewModel.deckColor, supportsOpacity: false)
-                }
-                Spacer()
-            }
-            .padding()
+            TextField("Name of Deck", text: $viewModel.deckName)
+                .font(.system(size: 14))
+                .padding(.horizontal)
+                .textFieldStyle(.roundedBorder)
+            ColorPicker("Deck Colour:", selection: $viewModel.deckColor, supportsOpacity: false)
+                .foregroundStyle(Color(.darkGray))
+                .fontWeight(.semibold)
+                .font(.footnote)
+                .padding()
+            
             Button(){
                 isPresented.toggle()
             } label: {
                 HStack{
-                    Text("Change Symbol")
+                    Text("Change Symbol:")
                     Image(systemName: viewModel.deckLogo)
                 }
                 .foregroundStyle(Color.white)
                 .frame(width: UIScreen.main.bounds.width - 32, height: 48)
             }
-            .cornerRadius(20)
-            .background(.accent)
+            .background(viewModel.deckColor)
+            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10)))
             .sheet(isPresented: $isPresented, content: {
                 SymbolsPicker(selection: $viewModel.deckLogo, title: "Pick a symbol", autoDismiss: true)
-                            }).padding()
-            Spacer()
+            }).padding()
             
+            
+            Button(){
+                
+            } label: {
+                HStack{
+                    Text("Create New Deck")
+                    Image(systemName: "arrow.forward.square.fill")
+                }
+                .frame(width: UIScreen.main.bounds.width - 32, height: 48)
+                .foregroundStyle(Color.white)
+                .background(Color.blue)
+            }
+            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10)))
+            .disabled(!formIsValid)
         }
+        Spacer()
+    }
+}
+
+extension CreateDeckView {
+    var formIsValid: Bool {
+        return !viewModel.deckName.isEmpty
     }
 }
 
