@@ -46,9 +46,12 @@ struct HomeView: View {
                     ScrollView {
                         ForEach(viewModel.deckHeaders, id: \.self) { deckHeader in
                             NavigationLink(destination: DeckView(deckHeder: deckHeader)) {
-                                GroupBox(label: Label(deckHeader.name, systemImage: deckHeader.symbol))
-                                {}
-                                    .backgroundStyle(Color(deckHeader.color))
+                                GroupBox()
+                                {
+                                } label: {
+                                    Label(deckHeader.name, systemImage: deckHeader.symbol)
+                                }
+                                .backgroundStyle(Color(deckHeader.color))
                             }
                             .buttonStyle(PlainButtonStyle())
                         }
