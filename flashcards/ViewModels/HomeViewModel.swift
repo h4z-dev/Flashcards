@@ -15,16 +15,16 @@ class HomeViewModel: ObservableObject {
     var deck = Deck()
     @Published var deckHeaders: [DeckHeader] = []
     @Published var isAddingCard: Bool = false
-//    var authModel: AuthenticationModel
+    //    var authModel: AuthenticationModel
     
     @AppStorage("userId") var userId: String = ""
     
     init() {
-//        self.authModel = authModel
-//        flashcard.add(front: "test1", back: "test2")
-//        flashcard.add(front: "aaa", back: "bbb")
-//        flashcard.add(front: "111", back: "222")
-//        print(flashcard.toString())
+        //        self.authModel = authModel
+        //        flashcard.add(front: "test1", back: "test2")
+        //        flashcard.add(front: "aaa", back: "bbb")
+        //        flashcard.add(front: "111", back: "222")
+        //        print(flashcard.toString())
         Task {
             await fetchDeckNames()
             await getCards(deckId: "0")
@@ -68,53 +68,97 @@ class HomeViewModel: ObservableObject {
             for deckDocument in decksSnapshot.documents {
                 names.append(deckDocument.documentID)
             }
-            for name in names {
-                deckHeaders.append(DeckHeader(name: name, symbol: "rectangle.on.rectangle"))
-            }
+            for (index, name) in names.enumerated() {
+                        do {
+                            let data = decksSnapshot.documents[index].data()
+                            if let deckHeaderData = data["DECK_HEADER"] as? [String: Any],
+                               let deckName = deckHeaderData["deckName"] as? String,
+                               let deckLogo = deckHeaderData["deckLogo"] as? String,
+                               let deckColorString = deckHeaderData["deckColor"] as? String {
+                                deckHeaders.append(DeckHeader(name: deckName, symbol: deckLogo, color: Color(deckColorString)))
+                            } else {
+                                deckHeaders.append(DeckHeader(name: name))
+                                print("OLD DECK DETECTED! \(name)")
+                            }
+                        } catch {
+                            print("OLD DECK DETECTED!")
+                        }
+                    }
         } catch {
             print("Error retrieving deck names: \(error)")
         }
     }
+    func createNewDeck(deckName: String, deckColor: Color, deckLogo: String) async throws {
+        do {
+            let decksSnapshot = try await db.collection("users").document(userId).collection("decks").getDocuments()
+            var names: [String] = []
+            for deckDocument in decksSnapshot.documents {
+                names.append(deckDocument.documentID)
+            }
+            for name in names {
+                if(name == deckName) {
+                    throw LoginErrors.deckALreadyExists
+                }
+            }
+        } catch {
+            print("Error retrieving deck names: \(error)")
+            return
+        }
+        do {
+//            let colorComponents = UIColor(deckColor).cgColor.components {
+            try await db.collection("users").document(userId).collection("decks").document(deckName).setData([
+                "DECK_HEADER" : [
+                    "deckName" : deckName,
+                    "deckLogo" : deckLogo,
+                    "deckColor" : deckColor.description
+                    ]
+            ], merge: true)
+        }
+        catch {
+            print("ERROR CREATING DECK: \(error)")
+            return
+        }
+        deckHeaders.append(DeckHeader(name: deckName, symbol: deckLogo, color: deckColor))
+    }
     
-//    func fireStoreExample() async {
-//        // Add a new document with a generated ID
-//        do {
-//            let ref = try await db.collection("users").addDocument(data: [
-//                "first": "Ada",
-//                "last": "Lovelace",
-//                "born": 1815
-//            ])
-//            print("Document added with ID: \(ref.documentID)")
-//        } catch {
-//            print("Error adding document: \(error)")
-//        }
-//        
-//        // Add a second document with a generated ID.
-//        do {
-//            let ref = try await db.collection("users").addDocument(data: [
-//                "first": "Alan",
-//                "middle": "Mathison",
-//                "last": "Turing",
-//                "born": 1912
-//            ])
-//            print("Document added with ID: \(ref.documentID)")
-//        } catch {
-//            print("Error adding document: \(error)")
-//        }
-//        
-//        do {
-//            let snapshot = try await db.collection("users").getDocuments()
-//            for document in snapshot.documents {
-//                print("\(document.documentID) => \(document.data())")
-//            }
-//        } catch {
-//            print("Error getting documents: \(error)")
-//        }
-//
-//    }
+    //    func fireStoreExample() async {
+    //        // Add a new document with a generated ID
+    //        do {
+    //            let ref = try await db.collection("users").addDocument(data: [
+    //                "first": "Ada",
+    //                "last": "Lovelace",
+    //                "born": 1815
+    //            ])
+    //            print("Document added with ID: \(ref.documentID)")
+    //        } catch {
+    //            print("Error adding document: \(error)")
+    //        }
+    //
+    //        // Add a second document with a generated ID.
+    //        do {
+    //            let ref = try await db.collection("users").addDocument(data: [
+    //                "first": "Alan",
+    //                "middle": "Mathison",
+    //                "last": "Turing",
+    //                "born": 1912
+    //            ])
+    //            print("Document added with ID: \(ref.documentID)")
+    //        } catch {
+    //            print("Error adding document: \(error)")
+    //        }
+    //
+    //        do {
+    //            let snapshot = try await db.collection("users").getDocuments()
+    //            for document in snapshot.documents {
+    //                print("\(document.documentID) => \(document.data())")
+    //            }
+    //        } catch {
+    //            print("Error getting documents: \(error)")
+    //        }
+    //
+    //    }
     
     func addButtonPressed() {
         isAddingCard.toggle()
     }
-    
 }

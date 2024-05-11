@@ -8,14 +8,11 @@
 import Foundation
 //for colour options
 import SwiftUI
+import FirebaseCore
+import FirebaseFirestore
 
 class CreateDeckViewModel : ObservableObject {
     @Published var deckName: String = ""
     @Published var deckColor: Color = .gray
     @Published var deckLogo: String = "rectangle.on.rectangle"
-    
-    func createNewDeck() {
-        var n
-        n = n+1
-    }
 }

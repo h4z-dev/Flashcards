@@ -7,6 +7,9 @@
 
 import Foundation
 
+//TODO: SPlit into multiple sections
+
 enum LoginErrors: Error {
-case GoogleAuthFail
+    case GoogleAuthFail
+    case deckALreadyExists
 }
