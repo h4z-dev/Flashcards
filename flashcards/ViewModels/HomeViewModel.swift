@@ -114,4 +114,20 @@ class HomeViewModel: ObservableObject {
     
     }
     
+    /// Deletes specified Deck and updates the content visible to the user.
+    /// - Inputs:
+    ///     `deckName`, name of the deck.    `String`
+    func deleteDeck(deckName: String) async {
+        do {
+            // Delete the deck from Firestore
+            try await db.collection("users").document(userId).collection("decks").document(deckName).delete()
+            // Locally remove all decks that match that of the deleted one
+            deckNames.removeAll {
+                $0 == deckName
+            }
+        } catch {
+            print("Error deleting deck: \(error)")
+        }
+    }
+    
 }
