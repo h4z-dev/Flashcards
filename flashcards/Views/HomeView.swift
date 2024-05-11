@@ -12,7 +12,7 @@ struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
     @EnvironmentObject var authModel: AuthenticationModel
     @Environment(\.dismiss) var dismiss
-
+    
     init() {
         _viewModel = StateObject(wrappedValue: HomeViewModel())
     }
@@ -44,10 +44,9 @@ struct HomeView: View {
                     .padding()
                     
                     ScrollView {
-                        ForEach(viewModel.deckNames, id: \.self) { deckName in
-                            NavigationLink(destination: DeckView(deckName: deckName)) {
-                                GroupBox(label: Label(deckName, systemImage: "rectangle.on.rectangle")) {
-                                    
+                        ForEach(viewModel.deckHeaders, id: \.self) { deckHeader in
+                            NavigationLink(destination: DeckView(deckHeder: deckHeader)) {
+                                GroupBox(label: Label(deckHeader.name, systemImage: deckHeader.symbol)) {
                                 }
                             }
                             .buttonStyle(PlainButtonStyle())
@@ -72,7 +71,7 @@ struct HomeView: View {
                         }
                         .sheet(isPresented: $viewModel.isAddingCard, content: {
                             CreateDeckView()
-                                        }).padding()
+                        }).padding()
                     }
                     .padding()
                 }

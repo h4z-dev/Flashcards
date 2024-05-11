@@ -13,7 +13,7 @@ import SwiftUI
 class HomeViewModel: ObservableObject {
     let db = Firestore.firestore()
     var deck = Deck()
-    @Published var deckNames: [String] = []
+    @Published var deckHeaders: [DeckHeader] = []
     @Published var isAddingCard: Bool = false
 //    var authModel: AuthenticationModel
     
@@ -68,7 +68,9 @@ class HomeViewModel: ObservableObject {
             for deckDocument in decksSnapshot.documents {
                 names.append(deckDocument.documentID)
             }
-            deckNames = names
+            for name in names {
+                deckHeaders.append(DeckHeader(name: name, symbol: "rectangle.on.rectangle"))
+            }
         } catch {
             print("Error retrieving deck names: \(error)")
         }
