@@ -14,6 +14,7 @@ class HomeViewModel: ObservableObject {
     let db = Firestore.firestore()
     var deck = Deck()
     @Published var deckNames: [String] = []
+    @Published var isAddingCard: Bool = false
 //    var authModel: AuthenticationModel
     
     @AppStorage("userId") var userId: String = ""
@@ -111,7 +112,7 @@ class HomeViewModel: ObservableObject {
 //    }
     
     func addButtonPressed() {
-    
+        isAddingCard.toggle()
     }
     
 }
