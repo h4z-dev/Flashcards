@@ -61,7 +61,7 @@ struct HomeView: View {
                             .highPriorityGesture(
                                 LongPressGesture().onEnded { _ in
                                     Task {
-                                        await viewModel.deleteDeck(deckName: deckHeader.name)
+                                        viewModel.confirmDelete(deckHeader.name)
                                     }
                                 }
                             )
@@ -92,6 +92,16 @@ struct HomeView: View {
                     .padding()
                 }
             }
+        }
+        .alert("Confirm Deletion", isPresented: $viewModel.showAlert, presenting: $viewModel.deleteDeck) { deckName in
+            Button("Delete", role: .destructive) {
+                Task {
+                    await viewModel.deleteDeck()
+                }
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: { deckName in
+            Text("Are you sure you want to delete deck \"\(deckName.wrappedValue)\"?")
         }
     }
 }
