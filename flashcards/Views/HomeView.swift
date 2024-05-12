@@ -18,7 +18,7 @@ struct HomeView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 VStack {
                     HStack {
@@ -97,7 +97,7 @@ struct HomeView: View {
                                 .clipShape(Circle())
                                 .shadow(radius: 4, x: 0, y: 4)
                         }
-                        .sheet(isPresented: $viewModel.isAddingCard, content: {
+                        .sheet(isPresented: $viewModel.isAddingDeck, content: {
                             CreateDeckView(homeViewModel: viewModel)
                         }).padding()
                     }

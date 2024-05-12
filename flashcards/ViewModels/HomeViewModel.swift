@@ -163,9 +163,9 @@ class HomeViewModel: ObservableObject {
     //    }
     
     func addButtonPressed() {
-        isAddingCard.toggle()
+        isAddingDeck.toggle()
     }
-    
+
     /// Deletes specified Deck and updates the content visible to the user.
     /// - Inputs:
     ///     `deckName`, name of the deck.    `String`
