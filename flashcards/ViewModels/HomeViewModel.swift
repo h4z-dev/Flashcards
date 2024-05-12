@@ -93,6 +93,7 @@ class HomeViewModel: ObservableObject {
     }
     
     func createNewDeck(deckName: String, deckColor: Color, deckLogo: String) async throws {
+        var deckHeaders = self.deckHeaders
         do {
             let decksSnapshot = try await db.collection("users").document(userId).collection("decks").getDocuments()
             var names: [String] = []
@@ -123,6 +124,9 @@ class HomeViewModel: ObservableObject {
             return
         }
         deckHeaders.append(DeckHeader(name: deckName, symbol: deckLogo, color: deckColor))
+        DispatchQueue.main.async{
+            self.deckHeaders = deckHeaders
+        }
     }
     
     //    func fireStoreExample() async {
@@ -170,6 +174,7 @@ class HomeViewModel: ObservableObject {
     /// - Inputs:
     ///     `deckName`, name of the deck.    `String`
     func deleteDeck(_ deckName: String) async {
+        var deckHeaders = self.deckHeaders
         do {
             // Delete the deck from Firestore
             try await db.collection("users").document(userId).collection("decks").document(deckName).delete()
@@ -179,6 +184,9 @@ class HomeViewModel: ObservableObject {
             }
         } catch {
             print("Error deleting deck: \(error)")
+        }
+        DispatchQueue.main.async{
+            self.deckHeaders = deckHeaders
         }
     }
     
