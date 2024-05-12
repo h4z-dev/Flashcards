@@ -17,7 +17,7 @@ class HomeViewModel: ObservableObject {
     @Published var isAddingDeck: Bool = false
     @Published var selectedDeck: DeckHeader?
     @Published var selectedDeckId: String?
-
+    
     
     @AppStorage("userId") var userId: String = ""
     
@@ -64,6 +64,7 @@ class HomeViewModel: ObservableObject {
     }
     
     func fetchDeckNames() async {
+        var deckHeaderStack: [DeckHeader] = []
         do {
             let decksSnapshot = try await db.collection("users").document(userId).collection("decks").getDocuments()
             var names: [String] = []
@@ -72,23 +73,22 @@ class HomeViewModel: ObservableObject {
             }
             
             for (index, name) in names.enumerated() {
-                do {
-                    let data = decksSnapshot.documents[index].data()
-                    if let deckHeaderData = data["DECK_HEADER"] as? [String: Any],
-                    let deckName = deckHeaderData["deckName"] as? String,
-                    let deckLogo = deckHeaderData["deckLogo"] as? String,
-                    let deckColorInt = deckHeaderData["deckColor"] as? Int {
-                        deckHeaders.append(DeckHeader(name: deckName, symbol: deckLogo, color: Color(ColorExtensions().returnColorValueFromRaw(input: deckColorInt))))
-                    } else {
-                        deckHeaders.append(DeckHeader(name: name))
-                        print("OLD DECK DETECTED! \(name)")
-                    }
-                } catch {
-                    print("OLD DECK DETECTED!")
+                let data = decksSnapshot.documents[index].data()
+                if let deckHeaderData = data["DECK_HEADER"] as? [String: Any],
+                   let deckName = deckHeaderData["deckName"] as? String,
+                   let deckLogo = deckHeaderData["deckLogo"] as? String,
+                   let deckColorInt = deckHeaderData["deckColor"] as? Int {
+                    deckHeaderStack.append(DeckHeader(name: deckName, symbol: deckLogo, color: Color(ColorExtensions().returnColorValueFromRaw(input: deckColorInt))))
+                } else {
+                    deckHeaderStack.append(DeckHeader(name: name))
+                    print("OLD DECK DETECTED! \(name)")
                 }
             }
         } catch {
             print("Error retrieving deck names: \(error)")
+        }
+        DispatchQueue.main.async{
+            self.deckHeaders = deckHeaderStack
         }
     }
     
@@ -109,13 +109,13 @@ class HomeViewModel: ObservableObject {
             return
         }
         do {
-//            let colorComponents = UIColor(deckColor).cgColor.components {
+            //            let colorComponents = UIColor(deckColor).cgColor.components {
             try await db.collection("users").document(userId).collection("decks").document(deckName).setData([
                 "DECK_HEADER" : [
                     "deckName" : deckName,
                     "deckLogo" : deckLogo,
                     "deckColor" : ColorExtensions().rawColorValue(color: deckColor)
-                    ]
+                ]
             ], merge: true)
         }
         catch {
@@ -165,7 +165,7 @@ class HomeViewModel: ObservableObject {
     func addButtonPressed() {
         isAddingDeck.toggle()
     }
-
+    
     /// Deletes specified Deck and updates the content visible to the user.
     /// - Inputs:
     ///     `deckName`, name of the deck.    `String`
@@ -185,15 +185,15 @@ class HomeViewModel: ObservableObject {
     ///
     /// - Inputs:
     ///     `deckName`, name of the deck.    `String`
-//    func confirmDelete(_ deckName: String) {
-//        deleteDeck = deckName
-//        showAlert.toggle()
-//    }
+    //    func confirmDelete(_ deckName: String) {
+    //        deleteDeck = deckName
+    //        showAlert.toggle()
+    //    }
     
     func selectDeck(_ deckHeader: DeckHeader) {
         selectedDeckId = deckHeader.name
     }
-
+    
     func isActiveDeck(_ deckId: String) -> Bool {
         selectedDeckId == deckId
     }
