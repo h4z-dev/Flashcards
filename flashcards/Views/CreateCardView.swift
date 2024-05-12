@@ -9,6 +9,12 @@ import SwiftUI
 
 struct CreateCardView: View {
     @State var temporaryTextHolder: String = ""
+    @StateObject var viewModel: CreateCardViewModel
+    
+    init() {
+        _viewModel = StateObject(wrappedValue: CreateCardViewModel())
+    }
+    
     var body: some View {
         VStack {
             Text("Create new Card")
