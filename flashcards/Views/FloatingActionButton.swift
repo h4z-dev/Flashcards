@@ -26,9 +26,12 @@ struct FloatingActionButton: View {
                 .padding()
                 .foregroundColor(.white)
                 .background(backgroundColor)
-                .clipShape(Circle())
-                .shadow(radius: 4, x: 0, y: 4)
+                .clipShape(RoundedRectangle(cornerRadius: 15))
+                .shadow(radius: 1.5, x: 0, y: 1)
         }
     }
 }
 
+#Preview {
+    FloatingActionButton(iconName: "plus") {}
+}
