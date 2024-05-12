@@ -15,7 +15,6 @@ class HomeViewModel: ObservableObject {
     var deck = Deck()
     @Published var deckHeaders: [DeckHeader] = []
     @Published var isAddingDeck: Bool = false
-    //    var authModel: AuthenticationModel
     
     @AppStorage("userId") var userId: String = ""
     

@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct CreateCardView: View {
-    @State var temporaryTextHolder: String = ""
     @StateObject var viewModel: CreateCardViewModel
-    
-    init() {
+    @StateObject var deckViewModel: DeckViewModel
+    @Environment(\.dismiss) var dismiss
+
+    init(deckModel : DeckViewModel) {
         _viewModel = StateObject(wrappedValue: CreateCardViewModel())
+        _deckViewModel = StateObject(wrappedValue: deckModel)
     }
     
     var body: some View {
@@ -23,19 +25,22 @@ struct CreateCardView: View {
                 .padding(.vertical)
                 .foregroundColor(.primary)
             
-            TextField("Front of card", text: $temporaryTextHolder)
+            TextField("Front of card", text: $viewModel.front)
                 .padding()
                 .background(Color(UIColor.secondarySystemBackground))
                 .cornerRadius(8)
                 .padding(.horizontal)
             
-            TextField("Back of card", text: $temporaryTextHolder)
+            TextField("Back of card", text: $viewModel.back)
                 .padding()
                 .background(Color(UIColor.secondarySystemBackground))
                 .cornerRadius(8)
                 .padding(.horizontal)
             Button {
-                
+                Task{
+                    await deckViewModel.createNewCard(front: viewModel.front, back: viewModel.back)
+                    dismiss()
+                }
             } label: {
                 Label("Add card", systemImage: "right.arrow")
                     .frame(maxWidth: .infinity, maxHeight: 48)
@@ -49,5 +54,5 @@ struct CreateCardView: View {
 }
 
 #Preview {
-    CreateCardView()
+    CreateCardView(deckModel: DeckViewModel(deckHeader: DeckHeader(name: "0")))
 }
