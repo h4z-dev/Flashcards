@@ -16,6 +16,8 @@ class HomeViewModel: ObservableObject {
     @Published var deckHeaders: [DeckHeader] = []
     @Published var isAddingCard: Bool = false
     //    var authModel: AuthenticationModel
+    @Published var showAlert: Bool = false
+    @Published var deleteDeck: String = ""
     
     @AppStorage("userId") var userId: String = ""
     
@@ -123,10 +125,6 @@ class HomeViewModel: ObservableObject {
         deckHeaders.append(DeckHeader(name: deckName, symbol: deckLogo, color: deckColor))
     }
     
-    func deleteDeck(){
-        
-    }
-    
     //    func fireStoreExample() async {
     //        // Add a new document with a generated ID
     //        do {
@@ -171,16 +169,24 @@ class HomeViewModel: ObservableObject {
     /// Deletes specified Deck and updates the content visible to the user.
     /// - Inputs:
     ///     `deckName`, name of the deck.    `String`
-    func deleteDeck(deckName: String) async {
+    func deleteDeck() async {
         do {
             // Delete the deck from Firestore
-            try await db.collection("users").document(userId).collection("decks").document(deckName).delete()
+            try await db.collection("users").document(userId).collection("decks").document(deleteDeck).delete()
             // Locally remove all decks that match that of the deleted one
             deckHeaders.removeAll {
-                $0.name == deckName
+                $0.name == deleteDeck
             }
         } catch {
             print("Error deleting deck: \(error)")
         }
+    }
+    
+    ///
+    /// - Inputs:
+    ///     `deckName`, name of the deck.    `String`
+    func confirmDelete(_ deckName: String) {
+        deleteDeck = deckName
+        showAlert.toggle()
     }
 }
