@@ -13,10 +13,12 @@ class DeckViewModel: ObservableObject {
     
     var deck: Deck = Deck()
     var loadingDeck: Bool = false
+    var placeInDeck: Int = 0
+
     
     @Published var flipped: Bool = false
-    @Published var placeInDeck: Int = 0
     @Published var editingDeck: Bool = true
+    @Published var currentCard: Card = Card("empty_DECK", "empty_DECK")
     
     init(deckHeader: DeckHeader) {
         self.deck = Deck(deckHeader: deckHeader)
@@ -82,28 +84,34 @@ class DeckViewModel: ObservableObject {
         return deck.cards.isEmpty
     }
     
-    func currentCard() -> Card{
-        debugPrint(deck.cards[placeInDeck])
-        return deck.cards[placeInDeck]
+    func getCurrentCard(){
+        DispatchQueue.main.async{
+            self.currentCard =          self.deck.cards[self.placeInDeck]
+
+        }
     }
     
     func next() {
-        if(!isEmpty() && deck.cards.count > 1) {
+        if(!isEmpty() && deck.cards.count < 1) {
             return
-        } else if (placeInDeck > deck.cards.count ) {
+        } else if (placeInDeck + 1 >= deck.cards.count ) {
             placeInDeck = 0
         } else {
             placeInDeck = placeInDeck + 1
         }
+        print("Next, Cards = \(deck.cards.count), place = \(placeInDeck)")
+        getCurrentCard()
     }
     func previous() {
-        if(!isEmpty() && deck.cards.count > 1) {
+        if(!isEmpty() && deck.cards.count < 1) {
             return
-        } else if (placeInDeck == 0) {
+        } else if (placeInDeck - 1 < 0) {
             placeInDeck = deck.cards.count - 1
         } else {
-            placeInDeck = placeInDeck + 1
+            placeInDeck = placeInDeck - 1
         }
+        print("Previous, Cards = \(deck.cards.count), place = \(placeInDeck)")
+        getCurrentCard()
     }
     
 }

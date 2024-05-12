@@ -23,19 +23,21 @@ struct DeckView: View {
                         ForEach(0..<viewModel.deck.cards.count, id: \.self) { index in
                             Text(viewModel.deck.cards[index].front)
                         }
+                        .listRowBackground(Color(.clear))
                     }.padding()
+                        .listStyle(PlainListStyle())
                 } else {
                     if(!viewModel.isEmpty()) {
                         VStack {
                             ZStack {
-                                CardDisplay(text: viewModel.currentCard().front, color: Color.orange)
+                                CardDisplay(text: viewModel.currentCard.front, color: Color.orange)
                                     .rotation3DEffect(
                                         Angle(degrees: viewModel.flipped ? 89.99 : 0),
                                         axis: /*@START_MENU_TOKEN@*/(x: 0.0, y: 1.0, z: 0.0)/*@END_MENU_TOKEN@*/
                                     )
                                     .opacity(viewModel.flipped ? 0 : 1)
                                     .animation(viewModel.flipped ? .linear(duration: 0.1) : .linear(duration:0.1).delay(0.1), value: viewModel.flipped)
-                                CardDisplay(text: viewModel.currentCard().back, color: Color.blue)
+                                CardDisplay(text: viewModel.currentCard.back, color: Color.blue)
                                     .rotation3DEffect(
                                         Angle(degrees: viewModel.flipped ? 0 : -89.99),
                                         axis: /*@START_MENU_TOKEN@*/(x: 0.0, y: 1.0, z: 0.0)/*@END_MENU_TOKEN@*/
@@ -60,6 +62,7 @@ struct DeckView: View {
                     HStack (spacing: 20) {
                         Button() {
                             viewModel.previous()
+                            viewModel.flipped = false
                         } label: {
                             Text("Previous")
                         }
@@ -69,6 +72,7 @@ struct DeckView: View {
                         
                         Button() {
                             viewModel.next()
+                            viewModel.flipped = false
                         } label: {
                             Text("Next")
                         }
