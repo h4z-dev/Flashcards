@@ -66,7 +66,8 @@ struct DeckView: View {
                         } label: {
                             Text("Previous")
                         }
-                        .frame(maxWidth: .infinity, maxHeight: 48)                        .background(.secondAccent)
+                        .frame(maxWidth: .infinity, maxHeight: 48)
+                        .background(.secondAccent)
                         .clipShape(RoundedRectangle(cornerRadius: 15.0))
                         .foregroundStyle(.white)
                         

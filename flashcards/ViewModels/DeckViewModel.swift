@@ -80,14 +80,16 @@ class DeckViewModel: ObservableObject {
         }
     }
     
-    func isEmpty() -> Bool{
+    func isEmpty() -> Bool {
         return deck.cards.isEmpty
     }
     
-    func getCurrentCard(){
-        DispatchQueue.main.async{
-            self.currentCard =          self.deck.cards[self.placeInDeck]
-
+    func getCurrentCard() {
+        if(isEmpty()){
+            return
+        }
+        DispatchQueue.main.async {
+            self.currentCard = self.deck.cards[self.placeInDeck]
         }
     }
     
@@ -102,6 +104,7 @@ class DeckViewModel: ObservableObject {
         print("Next, Cards = \(deck.cards.count), place = \(placeInDeck)")
         getCurrentCard()
     }
+    
     func previous() {
         if(!isEmpty() && deck.cards.count < 1) {
             return
