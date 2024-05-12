@@ -15,7 +15,6 @@ struct DeckView: View {
     init(deckHeder: DeckHeader) {
         _viewModel = StateObject(wrappedValue: DeckViewModel(deckHeader: deckHeder))
         self.deckName = deckHeder.name
-        viewModel.loadCards()
     }
     
     var body: some View {
@@ -49,9 +48,13 @@ struct DeckView: View {
                                 .shadow(radius: 4, x: 0, y: 4)
                         }
                         .sheet(isPresented: $viewModel.isAddingcard, content: {
-                            CreateCardView()
-                        }).padding()
+                          CreateCardView()
+                        })
                     } .padding()
+                }.onAppear(){
+                    Task{
+                        viewModel.loadCards()
+                    }
                 }
             }
         } .navigationTitle(deckName)
