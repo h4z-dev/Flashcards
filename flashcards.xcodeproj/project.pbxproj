@@ -97,6 +97,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1658EB702BF1884000AAFB00 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6352D67C2BEF4C7600EEBFB9 /* ColorExtensions.swift */,
+				6352D67E2BEFA1C700EEBFB9 /* TextExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		6353F2BE2BE7161D005B3573 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,9 +142,7 @@
 				6353F2D12BE7252A005B3573 /* User.swift */,
 				162BE1842BE74433009E31BD /* Deck.swift */,
 				6352D67A2BEF287700EEBFB9 /* DeckHeader.swift */,
-				6352D67C2BEF4C7600EEBFB9 /* ColorExtensions.swift */,
 				16D47F5A2BEDE1A40076AFF3 /* Card.swift */,
-				6352D67E2BEFA1C700EEBFB9 /* TextExtensions.swift */,
 				16198C922BF0B8A400E7269B /* CardDisplay.swift */,
 			);
 			path = Models;
@@ -178,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				6353F2E52BE755DF005B3573 /* Errors */,
+				1658EB702BF1884000AAFB00 /* Extensions */,
 				6353F2E02BE745D7005B3573 /* Info.plist */,
 				6353F2C12BE71645005B3573 /* Models */,
 				6353F2C02BE7163A005B3573 /* ViewModels */,
