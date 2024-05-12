@@ -14,7 +14,7 @@ class HomeViewModel: ObservableObject {
     let db = Firestore.firestore()
     var deck = Deck()
     @Published var deckHeaders: [DeckHeader] = []
-    @Published var isAddingCard: Bool = false
+    @Published var isAddingDeck: Bool = false
     @Published var selectedDeck: DeckHeader?
     @Published var selectedDeckId: String?
 

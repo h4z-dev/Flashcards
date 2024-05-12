@@ -54,5 +54,5 @@ struct CreateCardView: View {
 }
 
 #Preview {
-    CreateCardView(deckModel: DeckViewModel(userId: "i95mtNWHzgalaetnaMEbPX8n52I2", deckHeader: DeckHeader(name: "0")))
+    CreateCardView(deckModel: DeckViewModel(deckHeader: DeckHeader(name: "0")))
 }
