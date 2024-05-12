@@ -68,13 +68,9 @@ struct DeckView: View {
                         }
                         Spacer()
                         NavigationLink(destination: CreateCardView(deckModel: viewModel)) {
-                            Image(systemName: "plus")
-                                .font(.title.weight(.semibold))
-                                .padding()
-                                .background(Color.accentColor)
-                                .foregroundColor(.white)
-                                .clipShape(Circle())
-                                .shadow(radius: 4, x: 0, y: 4)
+                            FloatingActionButton(iconName: "plus") {
+                                
+                            }
                         }
                     } .padding()
                         .onAppear() {
