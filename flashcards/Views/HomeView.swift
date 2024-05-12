@@ -58,10 +58,18 @@ struct HomeView: View {
                                 .backgroundStyle(Color(deckHeader.color))
                             }
                             .buttonStyle(PlainButtonStyle())
+                            .highPriorityGesture(
+                                LongPressGesture().onEnded { _ in
+                                    Task {
+                                        viewModel.confirmDelete(deckHeader.name)
+                                    }
+                                }
+                            )
                         }
                     }
                     .padding(.horizontal)
                 }
+                
                 VStack {
                     Spacer()
                     HStack {
@@ -84,6 +92,16 @@ struct HomeView: View {
                     .padding()
                 }
             }
+        }
+        .alert("Confirm Deletion", isPresented: $viewModel.showAlert, presenting: $viewModel.deleteDeck) { deckName in
+            Button("Delete", role: .destructive) {
+                Task {
+                    await viewModel.deleteDeck()
+                }
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: { deckName in
+            Text("Are you sure you want to delete deck \"\(deckName.wrappedValue)\"?")
         }
     }
 }
