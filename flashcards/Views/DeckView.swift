@@ -34,14 +34,14 @@ struct DeckView: View {
                                 CardDisplay(text: viewModel.currentCard().front, color: Color.orange)
                                     .rotation3DEffect(
                                         Angle(degrees: viewModel.flipped ? 89.99 : 0),
-                                        axis: /*@START_MENU_TOKEN@*/(x: 0.0, y: 1.0, z: 0.0)/*@END_MENU_TOKEN@*/
+                                        axis: (x: 0.0, y: 1.0, z: 0.0)
                                     )
                                     .opacity(viewModel.flipped ? 0 : 1)
                                     .animation(viewModel.flipped ? .linear(duration: 0.1) : .linear(duration:0.1).delay(0.1), value: viewModel.flipped)
                                 CardDisplay(text: viewModel.currentCard().back, color: Color.blue)
                                     .rotation3DEffect(
                                         Angle(degrees: viewModel.flipped ? 0 : -89.99),
-                                        axis: /*@START_MENU_TOKEN@*/(x: 0.0, y: 1.0, z: 0.0)/*@END_MENU_TOKEN@*/
+                                        axis: (x: 0.0, y: 1.0, z: 0.0)
                                     )
                                     .opacity( viewModel.flipped ? 1 : 0)
                                     .animation(viewModel.flipped ? .linear(duration: 0.2).delay(0.1) : .linear(duration: 0.1), value: viewModel.flipped)
@@ -67,11 +67,7 @@ struct DeckView: View {
                             Text(viewModel.editingDeck ? "Use" : "Edit")
                         }
                         Spacer()
-                        NavigationLink(destination: CreateCardView(deckModel: viewModel)) {
-                            FloatingActionButton(iconName: "plus") {
-                                
-                            }
-                        }
+                        FloatingActionNavigationLink(iconName: "plus", destination: CreateCardView(deckModel: viewModel))
                     } .padding()
                         .onAppear() {
                             Task{
