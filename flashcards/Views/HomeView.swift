@@ -43,25 +43,45 @@ struct HomeView: View {
                     }
                     .padding()
                     
-                    ScrollView {
+                    List {
                         ForEach(viewModel.deckHeaders, id: \.self) { deckHeader in
-                            NavigationLink(destination: DeckView(deckHeder: deckHeader, userId: viewModel.userId)) {
-                                GroupBox() {
-                                } label: {
-                                    HStack {
-                                        Image(systemName: deckHeader.symbol)
-                                            .getContrastText(backgroundColor: deckHeader.color)
-                                        Text(deckHeader.name)
-                                            .getContrastText(backgroundColor: deckHeader.color)
-                                    }
+                            Button(action: {
+                                viewModel.selectDeck(deckHeader)
+                            }) {
+                                HStack {
+                                    Image(systemName: deckHeader.symbol)
+                                        .getContrastText(backgroundColor: deckHeader.color)
+                                    Text(deckHeader.name)
+                                        .getContrastText(backgroundColor: deckHeader.color)
+                                        .fontWeight(.semibold)
                                 }
-                                .backgroundStyle(Color(deckHeader.color))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding()
+                                .background(Color(deckHeader.color))
+                                .cornerRadius(10)
                             }
+                            .listRowSeparator(.hidden)
                             .buttonStyle(PlainButtonStyle())
+                            .listRowBackground(Color(.clear))
+                            .background(
+                                NavigationLink(
+                                    destination: DeckView(deckHeader: deckHeader),
+                                    isActive: .init(
+                                        get: { viewModel.isActiveDeck(deckHeader.name) },
+                                        set: { _ in }
+                                    )
+                                ) {
+                                    EmptyView()
+                                }
+                                    .hidden()
+                            )
                         }
+                        .onDelete(perform: deleteDeck)
                     }
-                    .padding(.horizontal)
                 }
+                .padding(.top, 0)
+                .listStyle(PlainListStyle())
+                
                 VStack {
                     Spacer()
                     HStack {
@@ -81,15 +101,20 @@ struct HomeView: View {
                             CreateDeckView(homeViewModel: viewModel)
                         }).padding()
                     }
-                    .padding()
                 }
             }
         }
     }
+    
+    private func deleteDeck(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let deckName = viewModel.deckHeaders[index].name
+            Task {
+                await viewModel.deleteDeck(deckName)
+            }
+        }
+    }
 }
-
-
-
 #Preview {
     HomeView()
         .environmentObject(AuthenticationModel())

@@ -14,7 +14,10 @@ class HomeViewModel: ObservableObject {
     let db = Firestore.firestore()
     var deck = Deck()
     @Published var deckHeaders: [DeckHeader] = []
-    @Published var isAddingDeck: Bool = false
+    @Published var isAddingCard: Bool = false
+    @Published var selectedDeck: DeckHeader?
+    @Published var selectedDeckId: String?
+
     
     @AppStorage("userId") var userId: String = ""
     
@@ -67,26 +70,28 @@ class HomeViewModel: ObservableObject {
             for deckDocument in decksSnapshot.documents {
                 names.append(deckDocument.documentID)
             }
+            
             for (index, name) in names.enumerated() {
-                        do {
-                            let data = decksSnapshot.documents[index].data()
-                            if let deckHeaderData = data["DECK_HEADER"] as? [String: Any],
-                               let deckName = deckHeaderData["deckName"] as? String,
-                               let deckLogo = deckHeaderData["deckLogo"] as? String,
-                               let deckColorInt = deckHeaderData["deckColor"] as? Int {
-                                deckHeaders.append(DeckHeader(name: deckName, symbol: deckLogo, color: Color(ColorExtensions().returnColorValueFromRaw(input: deckColorInt))))
-                            } else {
-                                deckHeaders.append(DeckHeader(name: name))
-                                print("OLD DECK DETECTED! \(name)")
-                            }
-                        } catch {
-                            print("OLD DECK DETECTED!")
-                        }
+                do {
+                    let data = decksSnapshot.documents[index].data()
+                    if let deckHeaderData = data["DECK_HEADER"] as? [String: Any],
+                    let deckName = deckHeaderData["deckName"] as? String,
+                    let deckLogo = deckHeaderData["deckLogo"] as? String,
+                    let deckColorInt = deckHeaderData["deckColor"] as? Int {
+                        deckHeaders.append(DeckHeader(name: deckName, symbol: deckLogo, color: Color(ColorExtensions().returnColorValueFromRaw(input: deckColorInt))))
+                    } else {
+                        deckHeaders.append(DeckHeader(name: name))
+                        print("OLD DECK DETECTED! \(name)")
                     }
+                } catch {
+                    print("OLD DECK DETECTED!")
+                }
+            }
         } catch {
             print("Error retrieving deck names: \(error)")
         }
     }
+    
     func createNewDeck(deckName: String, deckColor: Color, deckLogo: String) async throws {
         do {
             let decksSnapshot = try await db.collection("users").document(userId).collection("decks").getDocuments()
@@ -118,10 +123,6 @@ class HomeViewModel: ObservableObject {
             return
         }
         deckHeaders.append(DeckHeader(name: deckName, symbol: deckLogo, color: deckColor))
-    }
-    
-    func deleteDeck(){
-        
     }
     
     //    func fireStoreExample() async {
@@ -168,7 +169,7 @@ class HomeViewModel: ObservableObject {
     /// Deletes specified Deck and updates the content visible to the user.
     /// - Inputs:
     ///     `deckName`, name of the deck.    `String`
-    func deleteDeck(deckName: String) async {
+    func deleteDeck(_ deckName: String) async {
         do {
             // Delete the deck from Firestore
             try await db.collection("users").document(userId).collection("decks").document(deckName).delete()
@@ -179,5 +180,21 @@ class HomeViewModel: ObservableObject {
         } catch {
             print("Error deleting deck: \(error)")
         }
+    }
+    
+    ///
+    /// - Inputs:
+    ///     `deckName`, name of the deck.    `String`
+//    func confirmDelete(_ deckName: String) {
+//        deleteDeck = deckName
+//        showAlert.toggle()
+//    }
+    
+    func selectDeck(_ deckHeader: DeckHeader) {
+        selectedDeckId = deckHeader.name
+    }
+
+    func isActiveDeck(_ deckId: String) -> Bool {
+        selectedDeckId == deckId
     }
 }
