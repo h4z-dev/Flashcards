@@ -33,20 +33,22 @@ struct DeckView: View {
                                 CardDisplay(text: viewModel.currentCard().front, color: Color.orange)
                                     .rotation3DEffect(
                                         Angle(degrees: viewModel.flipped ? 89.99 : 0),
-                                                              axis: /*@START_MENU_TOKEN@*/(x: 0.0, y: 1.0, z: 0.0)/*@END_MENU_TOKEN@*/
+                                        axis: /*@START_MENU_TOKEN@*/(x: 0.0, y: 1.0, z: 0.0)/*@END_MENU_TOKEN@*/
                                     )
-                                    .animation(viewModel.flipped ? .linear.delay(0.35) : .linear, value: viewModel.flipped)
+                                    .opacity(viewModel.flipped ? 0 : 1)
+                                    .animation(viewModel.flipped ? .linear : .linear.delay(0.35), value: viewModel.flipped)
                                 CardDisplay(text: viewModel.currentCard().back, color: Color.blue)
                                     .rotation3DEffect(
                                         Angle(degrees: viewModel.flipped ? 0 : -89.99),
-                                                              axis: /*@START_MENU_TOKEN@*/(x: 0.0, y: 1.0, z: 0.0)/*@END_MENU_TOKEN@*/
+                                        axis: /*@START_MENU_TOKEN@*/(x: 0.0, y: 1.0, z: 0.0)/*@END_MENU_TOKEN@*/
                                     )
-                                    .animation(viewModel.flipped ? .linear : .linear.delay(0.35), value: viewModel.flipped)
+                                    .opacity(viewModel.flipped ? 1 : 0)
+                                    .animation(viewModel.flipped ? .linear.delay(0.35) : .linear, value: viewModel.flipped)
                             }
                             .frame(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height - 300)
                             .padding()
                             .onTapGesture {
-                                withAnimation(.easeInOut){
+                                withAnimation(.easeIn){
                                     viewModel.flipped.toggle()
                                 }
                             }
@@ -95,7 +97,7 @@ struct DeckView: View {
 }
 
 #Preview {
-    DeckView(deckHeder: DeckHeader(name: "0"), userId: "i95mtNWHzgalaetnaMEbPX8n52I2").environmentObject(DeckViewModel(userId: "i95mtNWHzgalaetnaMEbPX8n52I2", deckHeader: DeckHeader(name: "0")))
+    DeckView(deckHeder: DeckHeader(name: "0"), userId: "i95mtNWHzgalaetnaMEbPX8n52I2")
 }
 
 struct CardDisplay: View {
