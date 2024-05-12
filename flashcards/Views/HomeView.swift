@@ -86,25 +86,17 @@ struct HomeView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        Button {
+                        FloatingActionButton(iconName: "plus", action: {
                             viewModel.addButtonPressed()
-                        } label: {
-                            Image(systemName: "plus")
-                                .font(.title.weight(.semibold))
-                                .padding()
-                                .background(.accent)
-                                .foregroundColor(.white)
-                                .clipShape(Circle())
-                                .shadow(radius: 4, x: 0, y: 4)
-                        }
+                        })
                         .sheet(isPresented: $viewModel.isAddingDeck, content: {
                             CreateDeckView(homeViewModel: viewModel)
                         }).padding()
                     }
                 }
+                }
             }
         }
-    }
     
     private func deleteDeck(at offsets: IndexSet) {
         offsets.forEach { index in
@@ -115,6 +107,7 @@ struct HomeView: View {
         }
     }
 }
+
 #Preview {
     HomeView()
         .environmentObject(AuthenticationModel())

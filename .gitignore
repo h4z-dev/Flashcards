@@ -94,3 +94,5 @@ iOSInjectionProject/
 flashcards/.DS_Store
 flashcards/flashcards/GoogleService-Info.plist
 flashcards/flashcards.xcodeproj/project.pbxproj
+
+flashcards.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
