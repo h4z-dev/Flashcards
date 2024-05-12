@@ -36,14 +36,14 @@ struct DeckView: View {
                                         axis: /*@START_MENU_TOKEN@*/(x: 0.0, y: 1.0, z: 0.0)/*@END_MENU_TOKEN@*/
                                     )
                                     .opacity(viewModel.flipped ? 0 : 1)
-                                    .animation(viewModel.flipped ? .linear : .linear.delay(0.35), value: viewModel.flipped)
+                                    .animation(viewModel.flipped ? .linear(duration: 0.1) : .linear(duration:0.1).delay(0.1), value: viewModel.flipped)
                                 CardDisplay(text: viewModel.currentCard().back, color: Color.blue)
                                     .rotation3DEffect(
                                         Angle(degrees: viewModel.flipped ? 0 : -89.99),
                                         axis: /*@START_MENU_TOKEN@*/(x: 0.0, y: 1.0, z: 0.0)/*@END_MENU_TOKEN@*/
                                     )
-                                    .opacity(viewModel.flipped ? 1 : 0)
-                                    .animation(viewModel.flipped ? .linear.delay(0.35) : .linear, value: viewModel.flipped)
+                                    .opacity( viewModel.flipped ? 1 : 0)
+                                    .animation(viewModel.flipped ? .linear(duration: 0.2).delay(0.1) : .linear(duration: 0.1), value: viewModel.flipped)
                             }
                             .frame(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height - 300)
                             .padding()
