@@ -32,6 +32,27 @@ struct FloatingActionButton: View {
     }
 }
 
+/// Similar to FloatingActionButton but supports nsavigation between views.
+/// Changed variables:
+///  -  `destination`, the view to navigate to. `Destination`
+struct FloatingActionNavigationLink<Destination: View>: View {
+    var iconName: String
+    var backgroundColor: Color = .accentColor
+    var destination: Destination
+
+    var body: some View {
+        NavigationLink(destination: destination) {
+            Image(systemName: iconName)
+                .font(.title.weight(.semibold))
+                .padding()
+                .foregroundColor(.white)
+                .background(backgroundColor)
+                .clipShape(RoundedRectangle(cornerRadius: 15))
+                .shadow(radius: 1.5, x: 0, y: 1)
+        }
+    }
+}
+
 #Preview {
     FloatingActionButton(iconName: "plus") {}
 }

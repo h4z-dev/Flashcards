@@ -11,10 +11,8 @@ import SwiftUI
 // gathered from https://gist.github.com/vibrazy/b105e3138105f604ab1ee4cfcdb67075
 // https://medium.com/geekculture/using-appstorage-with-swiftui-colors-and-some-nskeyedarchiver-magic-a38038383c5e
 
-
 class ColorExtensions {
-    
-    func rawColorValue(color:Color) -> Int {
+    func rawColorValue(color: Color) -> Int {
         let preprocessedColor = CIColor(color: UIColor(color))
         let red = Int(preprocessedColor.red * 255 + 0.5)
         let green = Int(preprocessedColor.green * 255 + 0.5)
