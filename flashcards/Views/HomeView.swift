@@ -45,7 +45,7 @@ struct HomeView: View {
                     
                     ScrollView {
                         ForEach(viewModel.deckHeaders, id: \.self) { deckHeader in
-                            NavigationLink(destination: DeckView(deckHeder: deckHeader)) {
+                            NavigationLink(destination: DeckView(deckHeder: deckHeader, userId: viewModel.userId)) {
                                 GroupBox() {
                                 } label: {
                                     HStack {

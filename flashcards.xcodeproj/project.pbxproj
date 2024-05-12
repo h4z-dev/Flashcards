@@ -35,6 +35,7 @@
 		639B739C2BEDBA17004681AD /* CreateDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B739B2BEDBA17004681AD /* CreateDeckView.swift */; };
 		63E3DFB42BF0566400EE97BA /* CreateCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DFB32BF0566400EE97BA /* CreateCardView.swift */; };
 		63E3DFB92BF07D7D00EE97BA /* CreateCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DFB82BF07D7D00EE97BA /* CreateCardViewModel.swift */; };
+		63E3DFBB2BF09C5800EE97BA /* debugTestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DFBA2BF09C5800EE97BA /* debugTestingView.swift */; };
 		63E8F84E2BDF4B9B008A57C4 /* flashcardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */; };
 		63E8F8502BDF4B9B008A57C4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8F84F2BDF4B9B008A57C4 /* HomeView.swift */; };
 		63E8F8522BDF4B9C008A57C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E8F8512BDF4B9C008A57C4 /* Assets.xcassets */; };
@@ -65,6 +66,7 @@
 		639B739B2BEDBA17004681AD /* CreateDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDeckView.swift; sourceTree = "<group>"; };
 		63E3DFB32BF0566400EE97BA /* CreateCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCardView.swift; sourceTree = "<group>"; };
 		63E3DFB82BF07D7D00EE97BA /* CreateCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCardViewModel.swift; sourceTree = "<group>"; };
+		63E3DFBA2BF09C5800EE97BA /* debugTestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = debugTestingView.swift; sourceTree = "<group>"; };
 		63E8F84A2BDF4B9B008A57C4 /* flashcards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flashcards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashcardsApp.swift; sourceTree = "<group>"; };
 		63E8F84F2BDF4B9B008A57C4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				16F642A82BE9B68300A064D0 /* DeckView.swift */,
 				639B739B2BEDBA17004681AD /* CreateDeckView.swift */,
 				63E3DFB32BF0566400EE97BA /* CreateCardView.swift */,
+				63E3DFBA2BF09C5800EE97BA /* debugTestingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				6352D67B2BEF287700EEBFB9 /* DeckHeader.swift in Sources */,
 				6353F2CD2BE721D2005B3573 /* AuthenticationModel.swift in Sources */,
 				16F642A92BE9B68300A064D0 /* DeckView.swift in Sources */,
+				63E3DFBB2BF09C5800EE97BA /* debugTestingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,7 +450,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcard;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -480,7 +484,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcard;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
