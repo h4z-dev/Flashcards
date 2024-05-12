@@ -34,7 +34,7 @@ struct FloatingActionButton: View {
 
 /// Similar to FloatingActionButton but supports nsavigation between views.
 /// Changed variables:
-///  -  `destination`, the view to navigate to. `Destination`
+///  -  `destination`, the view to navigate to. `Destination` which is a generic `View`
 struct FloatingActionNavigationLink<Destination: View>: View {
     var iconName: String
     var backgroundColor: Color = .accentColor
