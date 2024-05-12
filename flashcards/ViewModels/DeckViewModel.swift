@@ -21,8 +21,7 @@ class DeckViewModel: ObservableObject {
     @Published var placeInDeck: Int = 0
     @Published var editingDeck: Bool = true
     
-    init(userId: String, deckHeader: DeckHeader) {
-        self.userId = userId
+    init(deckHeader: DeckHeader) {
         self.deck = Deck(deckHeader: deckHeader)
         Task{
             loadCards()

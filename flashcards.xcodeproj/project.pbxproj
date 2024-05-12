@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16198C932BF0B8A400E7269B /* CardDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16198C922BF0B8A400E7269B /* CardDisplay.swift */; };
 		162BE1812BE72591009E31BD /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162BE1802BE72591009E31BD /* HomeViewModel.swift */; };
 		162BE1852BE74433009E31BD /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162BE1842BE74433009E31BD /* Deck.swift */; };
 		16D47F5B2BEDE1A40076AFF3 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D47F5A2BEDE1A40076AFF3 /* Card.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16198C922BF0B8A400E7269B /* CardDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDisplay.swift; sourceTree = "<group>"; };
 		162BE1802BE72591009E31BD /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		162BE1842BE74433009E31BD /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		16D47F5A2BEDE1A40076AFF3 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				6352D67C2BEF4C7600EEBFB9 /* ColorExtensions.swift */,
 				16D47F5A2BEDE1A40076AFF3 /* Card.swift */,
 				6352D67E2BEFA1C700EEBFB9 /* TextExtensions.swift */,
+				16198C922BF0B8A400E7269B /* CardDisplay.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				162BE1852BE74433009E31BD /* Deck.swift in Sources */,
 				6353F2D62BE72741005B3573 /* ContentView.swift in Sources */,
 				6353F2ED2BE76003005B3573 /* LoginViewModel.swift in Sources */,
+				16198C932BF0B8A400E7269B /* CardDisplay.swift in Sources */,
 				6352D67F2BEFA1C700EEBFB9 /* TextExtensions.swift in Sources */,
 				63E3DFB42BF0566400EE97BA /* CreateCardView.swift in Sources */,
 				639B739C2BEDBA17004681AD /* CreateDeckView.swift in Sources */,
@@ -434,7 +438,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"flashcards/Preview Content\"";
-				DEVELOPMENT_TEAM = SDQMXNT4CF;
+				DEVELOPMENT_TEAM = TX5RQDAQF5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = flashcards/Info.plist;
@@ -450,7 +454,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards;
+				PRODUCT_BUNDLE_IDENTIFIER = ge.goodrid.flashcards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -468,7 +472,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"flashcards/Preview Content\"";
-				DEVELOPMENT_TEAM = SDQMXNT4CF;
+				DEVELOPMENT_TEAM = TX5RQDAQF5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = flashcards/Info.plist;
@@ -484,7 +488,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards;
+				PRODUCT_BUNDLE_IDENTIFIER = ge.goodrid.flashcards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
