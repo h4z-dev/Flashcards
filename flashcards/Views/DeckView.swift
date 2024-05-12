@@ -11,14 +11,15 @@ struct DeckView: View {
     @StateObject var viewModel: DeckViewModel
     @Environment(\.dismiss) var dismiss
     var deckName: String
+    @AppStorage("userId") var userId: String = ""
     
-    init(deckHeder: DeckHeader, userId: String) {
-        _viewModel = StateObject(wrappedValue: DeckViewModel(userId: userId, deckHeader: deckHeder))
-        self.deckName = deckHeder.name
+    init(deckHeader: DeckHeader) {
+        _viewModel = StateObject(wrappedValue: DeckViewModel(deckHeader: deckHeader))
+        self.deckName = deckHeader.name
     }
     
     var body: some View {
-        NavigationView{
+        NavigationView {
             ZStack {
                 if(viewModel.editingDeck){
                     List {
@@ -26,10 +27,10 @@ struct DeckView: View {
                             Text(viewModel.deck.cards[index].front)
                         }
                     }.padding()
-                } else{
-                    if(!viewModel.isEmpty()){
-                        VStack{
-                            ZStack{
+                } else {
+                    if(!viewModel.isEmpty()) {
+                        VStack {
+                            ZStack {
                                 CardDisplay(text: viewModel.currentCard().front, color: Color.orange)
                                     .rotation3DEffect(
                                         Angle(degrees: viewModel.flipped ? 89.99 : 0),
@@ -56,17 +57,17 @@ struct DeckView: View {
                         }
                     }
                 }
-                VStack{
+                VStack {
                     Spacer()
                     HStack {
-                        Button(){
+                        Button() {
                             viewModel.editingDeck.toggle()
                         } label: {
                             Image(systemName: viewModel.editingDeck ? "book.pages" : "hammer")
                             Text(viewModel.editingDeck ? "Use" : "Edit")
                         }
                         Spacer()
-                        NavigationLink(destination: CreateCardView(deckModel: viewModel)){
+                        NavigationLink(destination: CreateCardView(deckModel: viewModel)) {
                             Image(systemName: "plus")
                                 .font(.title.weight(.semibold))
                                 .padding()
@@ -76,11 +77,11 @@ struct DeckView: View {
                                 .shadow(radius: 4, x: 0, y: 4)
                         }
                     } .padding()
-                        .onAppear(){
+                        .onAppear() {
                             Task{
                                 viewModel.loadCards()
                                 viewModel.editingDeck.toggle()
-                                if(viewModel.isEmpty()){
+                                if (viewModel.isEmpty()) {
                                     viewModel.editingDeck.toggle()
                                 }
                             }
@@ -97,21 +98,5 @@ struct DeckView: View {
 }
 
 #Preview {
-    DeckView(deckHeder: DeckHeader(name: "0"), userId: "i95mtNWHzgalaetnaMEbPX8n52I2")
-}
-
-struct CardDisplay: View {
-    var text: String = ""
-    var color: Color = .white
-    
-    init(text: String, color: Color) {
-        self.text = text
-        self.color = color
-    }
-    
-    var body: some View {
-        RoundedRectangle(cornerRadius: 8)
-            .foregroundStyle(color)
-        Text(text)
-    }
+    DeckView(deckHeader: DeckHeader(name: "0"))
 }
