@@ -18,7 +18,7 @@ struct DeckView: View {
     }
     
     var body: some View {
-        NavigationStack{
+        NavigationView{
             ZStack {
                 ScrollView {
                     ForEach(0..<viewModel.deck.cards.count, id: \.self) { index in
@@ -30,15 +30,13 @@ struct DeckView: View {
                             }
                         }
                     }
+                    
                 }.padding()
-                
                 VStack{
                     Spacer()
                     HStack {
                         Spacer()
-                        Button {
-                            viewModel.addButtonPressed()
-                        } label: {
+                        NavigationLink(destination: CreateCardView(deckModel: viewModel)){
                             Image(systemName: "plus")
                                 .font(.title.weight(.semibold))
                                 .padding()
@@ -47,17 +45,20 @@ struct DeckView: View {
                                 .clipShape(Circle())
                                 .shadow(radius: 4, x: 0, y: 4)
                         }
-                        .sheet(isPresented: $viewModel.isAddingcard, content: {
-                          CreateCardView()
-                        })
                     } .padding()
-                }.onAppear(){
-                    Task{
-                        viewModel.loadCards()
-                    }
+                        .onAppear(){
+                            Task{
+                                viewModel.loadCards()
+                            }
+                        }
                 }
             }
         } .navigationTitle(deckName)
+            .onAppear(){
+                Task{
+                    viewModel.loadCards()
+                }
+            }
     }
 }
 

@@ -17,7 +17,6 @@ class DeckViewModel: ObservableObject {
     // TODO INIT DECK NAME FROM PREVIOUS VIEW
     var deckHeader: DeckHeader
     var deck: Deck = Deck()
-    var isAddingcard: Bool = false
     
     init(userId: String = "", deckHeader: DeckHeader) {
         self.userId = userId
@@ -54,13 +53,23 @@ class DeckViewModel: ObservableObject {
         return deck
     }
     
-    func addButtonPressed() {
-        isAddingcard.toggle()
+    func createNewCard(front : String, back : String) async {
+        do {
+        try await db.collection("users").document(userId).collection("decks").document(deckHeader.name).setData([
+            front : back
+        ], merge: true)
+        } catch{
+            print(error)
+        }
     }
     
     func cardTapped(index: Int) {
         withAnimation (.easeIn(duration: 10)) {
             deck.cards[index].isFlipped.toggle()
         }
+    }
+    func isEmpty() -> Bool{
+        loadCards()
+        return deck.cards.count > 0
     }
 }
