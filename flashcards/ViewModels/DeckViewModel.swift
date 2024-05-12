@@ -1,8 +1,5 @@
 //
 //  DeckViewModel.swift
-//  flashcards
-//
-//  Created by Jacob Goodridge on 7/5/2024.
 //
 
 import Foundation
@@ -86,9 +83,27 @@ class DeckViewModel: ObservableObject {
     }
     
     func currentCard() -> Card{
-        guard !isEmpty() else {
-            return Card("_____THIS_DECK_IS_Empty_____", "_____THIS_DECK_IS_Empty_____")
-        }
+        debugPrint(deck.cards[placeInDeck])
         return deck.cards[placeInDeck]
     }
+    
+    func next() {
+        if(!isEmpty() && deck.cards.count > 1) {
+            return
+        } else if (placeInDeck > deck.cards.count ) {
+            placeInDeck = 0
+        } else {
+            placeInDeck = placeInDeck + 1
+        }
+    }
+    func previous() {
+        if(!isEmpty() && deck.cards.count > 1) {
+            return
+        } else if (placeInDeck == 0) {
+            placeInDeck = deck.cards.count - 1
+        } else {
+            placeInDeck = placeInDeck + 1
+        }
+    }
+    
 }

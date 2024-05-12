@@ -1,8 +1,5 @@
 //
 //  DeckView.swift
-//  flashcards
-//
-//  Created by Jacob Goodridge on 7/5/2024.
 //
 
 import SwiftUI
@@ -57,8 +54,30 @@ struct DeckView: View {
                         }
                     }
                 }
+                
                 VStack {
                     Spacer()
+                    HStack (spacing: 20) {
+                        Button() {
+                            viewModel.previous()
+                        } label: {
+                            Text("Previous")
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: 48)                        .background(.secondAccent)
+                        .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                        .foregroundStyle(.white)
+                        
+                        Button() {
+                            viewModel.next()
+                        } label: {
+                            Text("Next")
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: 48)
+                        .background(.secondAccent)
+                        .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                        .foregroundStyle(.white)
+                    }
+                    .padding(.horizontal)
                     HStack {
                         Button() {
                             viewModel.editingDeck.toggle()
@@ -89,8 +108,8 @@ struct DeckView: View {
                 }
             }
         } .navigationTitle(deckName)
-            .onAppear(){
-                Task{
+            .onAppear() {
+                Task {
                     viewModel.loadCards()
                 }
             }
