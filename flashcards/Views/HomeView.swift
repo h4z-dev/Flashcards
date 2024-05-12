@@ -58,10 +58,18 @@ struct HomeView: View {
                                 .backgroundStyle(Color(deckHeader.color))
                             }
                             .buttonStyle(PlainButtonStyle())
+                            .highPriorityGesture(
+                                LongPressGesture().onEnded { _ in
+                                    Task {
+                                        await viewModel.deleteDeck(deckName: deckHeader.name)
+                                    }
+                                }
+                            )
                         }
                     }
                     .padding(.horizontal)
                 }
+                
                 VStack {
                     Spacer()
                     HStack {
