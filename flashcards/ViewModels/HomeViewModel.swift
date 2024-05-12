@@ -15,9 +15,9 @@ class HomeViewModel: ObservableObject {
     var deck = Deck()
     @Published var deckHeaders: [DeckHeader] = []
     @Published var isAddingCard: Bool = false
-    //    var authModel: AuthenticationModel
-    @Published var showAlert: Bool = false
-    @Published var deleteDeck: String = ""
+    @Published var selectedDeck: DeckHeader?
+    @Published var selectedDeckId: String?
+
     
     @AppStorage("userId") var userId: String = ""
     
@@ -169,13 +169,13 @@ class HomeViewModel: ObservableObject {
     /// Deletes specified Deck and updates the content visible to the user.
     /// - Inputs:
     ///     `deckName`, name of the deck.    `String`
-    func deleteDeck() async {
+    func deleteDeck(_ deckName: String) async {
         do {
             // Delete the deck from Firestore
-            try await db.collection("users").document(userId).collection("decks").document(deleteDeck).delete()
+            try await db.collection("users").document(userId).collection("decks").document(deckName).delete()
             // Locally remove all decks that match that of the deleted one
             deckHeaders.removeAll {
-                $0.name == deleteDeck
+                $0.name == deckName
             }
         } catch {
             print("Error deleting deck: \(error)")
@@ -185,8 +185,16 @@ class HomeViewModel: ObservableObject {
     ///
     /// - Inputs:
     ///     `deckName`, name of the deck.    `String`
-    func confirmDelete(_ deckName: String) {
-        deleteDeck = deckName
-        showAlert.toggle()
+//    func confirmDelete(_ deckName: String) {
+//        deleteDeck = deckName
+//        showAlert.toggle()
+//    }
+    
+    func selectDeck(_ deckHeader: DeckHeader) {
+        selectedDeckId = deckHeader.name
+    }
+
+    func isActiveDeck(_ deckId: String) -> Bool {
+        selectedDeckId == deckId
     }
 }

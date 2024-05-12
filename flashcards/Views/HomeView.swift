@@ -43,33 +43,44 @@ struct HomeView: View {
                     }
                     .padding()
                     
-                    ScrollView {
+                    List {
                         ForEach(viewModel.deckHeaders, id: \.self) { deckHeader in
-                            NavigationLink(destination: DeckView(deckHeader: deckHeader)) {
-                                GroupBox() {
-                                } label: {
-                                    HStack {
-                                        Image(systemName: deckHeader.symbol)
-                                            .getContrastText(backgroundColor: deckHeader.color)
-                                        Text(deckHeader.name)
-                                            .getContrastText(backgroundColor: deckHeader.color)
-                                    }
+                            Button(action: {
+                                viewModel.selectDeck(deckHeader)
+                            }) {
+                                HStack {
+                                    Image(systemName: deckHeader.symbol)
+                                        .getContrastText(backgroundColor: deckHeader.color)
+                                    Text(deckHeader.name)
+                                        .getContrastText(backgroundColor: deckHeader.color)
+                                        .fontWeight(.semibold)
                                 }
-                                .backgroundStyle(Color(deckHeader.color))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding()
+                                .background(Color(deckHeader.color))
+                                .cornerRadius(10)
                             }
+                            .listRowSeparator(.hidden)
                             .buttonStyle(PlainButtonStyle())
-                            .simultaneousGesture(
-                                LongPressGesture().onEnded { _ in
-                                    Task {
-                                        viewModel.confirmDelete(deckHeader.name)
-                                    }
+                            .listRowBackground(Color(.clear))
+                            .background(
+                                NavigationLink(
+                                    destination: DeckView(deckHeader: deckHeader),
+                                    isActive: .init(
+                                        get: { viewModel.isActiveDeck(deckHeader.name) },
+                                        set: { _ in }
+                                    )
+                                ) {
+                                    EmptyView()
                                 }
+                                    .hidden()
                             )
                         }
+                        .onDelete(perform: deleteDeck)
                     }
-                    .padding(.horizontal)
+
+                    .padding()
                 }
-                
                 VStack {
                     Spacer()
                     HStack {
@@ -89,25 +100,20 @@ struct HomeView: View {
                             CreateDeckView(homeViewModel: viewModel)
                         }).padding()
                     }
-                    .padding()
                 }
             }
         }
-        .alert("Confirm Deletion", isPresented: $viewModel.showAlert, presenting: $viewModel.deleteDeck) { deckName in
-            Button("Delete", role: .destructive) {
-                Task {
-                    await viewModel.deleteDeck()
-                }
+    }
+    
+    private func deleteDeck(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let deckName = viewModel.deckHeaders[index].name
+            Task {
+                await viewModel.deleteDeck(deckName)
             }
-            Button("Cancel", role: .cancel) { }
-        } message: { deckName in
-            Text("Are you sure you want to delete deck \"\(deckName.wrappedValue)\"?")
         }
     }
 }
-
-
-
 #Preview {
     HomeView()
         .environmentObject(AuthenticationModel())
