@@ -83,13 +83,17 @@ struct HomeView: View {
                 .listStyle(PlainListStyle())
                 
                 VStack {
-                    FloatingActionButton(iconName: "plus", action: {
-                        viewModel.addButtonPressed()
-                    })
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        FloatingActionButton(iconName: "plus", action: {
+                            viewModel.addButtonPressed()
+                        })
                         .sheet(isPresented: $viewModel.isAddingDeck, content: {
                             CreateDeckView(homeViewModel: viewModel)
                         }).padding()
                     }
+                }
                 }
             }
         }
