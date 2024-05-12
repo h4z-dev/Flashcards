@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16198C932BF0B8A400E7269B /* CardDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16198C922BF0B8A400E7269B /* CardDisplay.swift */; };
+		16198C972BF0FB3700E7269B /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16198C962BF0FB3700E7269B /* FloatingActionButton.swift */; };
 		162BE1812BE72591009E31BD /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162BE1802BE72591009E31BD /* HomeViewModel.swift */; };
 		162BE1852BE74433009E31BD /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162BE1842BE74433009E31BD /* Deck.swift */; };
 		16D47F5B2BEDE1A40076AFF3 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D47F5A2BEDE1A40076AFF3 /* Card.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		16198C922BF0B8A400E7269B /* CardDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDisplay.swift; sourceTree = "<group>"; };
+		16198C962BF0FB3700E7269B /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		162BE1802BE72591009E31BD /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		162BE1842BE74433009E31BD /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		16D47F5A2BEDE1A40076AFF3 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				639B739B2BEDBA17004681AD /* CreateDeckView.swift */,
 				63E3DFB32BF0566400EE97BA /* CreateCardView.swift */,
 				63E3DFBA2BF09C5800EE97BA /* debugTestingView.swift */,
+				16198C962BF0FB3700E7269B /* FloatingActionButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 			files = (
 				63E8F8502BDF4B9B008A57C4 /* HomeView.swift in Sources */,
 				162BE1852BE74433009E31BD /* Deck.swift in Sources */,
+				16198C972BF0FB3700E7269B /* FloatingActionButton.swift in Sources */,
 				6353F2D62BE72741005B3573 /* ContentView.swift in Sources */,
 				6353F2ED2BE76003005B3573 /* LoginViewModel.swift in Sources */,
 				16198C932BF0B8A400E7269B /* CardDisplay.swift in Sources */,
