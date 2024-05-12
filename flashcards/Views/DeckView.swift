@@ -12,9 +12,9 @@ struct DeckView: View {
     @Environment(\.dismiss) var dismiss
     var deckName: String
     
-    init(deckHeder: DeckHeader) {
-        _viewModel = StateObject(wrappedValue: DeckViewModel(deckHeader: deckHeder))
-        self.deckName = deckHeder.name
+    init(deckHeader: DeckHeader) {
+        _viewModel = StateObject(wrappedValue: DeckViewModel(deckHeader: deckHeader))
+        self.deckName = deckHeader.name
     }
     
     var body: some View {
@@ -52,5 +52,5 @@ struct DeckView: View {
 }
 
 #Preview {
-    DeckView(deckHeder: DeckHeader(name: "0")).environmentObject(DeckViewModel(userId: "i95mtNWHzgalaetnaMEbPX8n52I2", deckHeader: DeckHeader(name: "0")))
+    DeckView(deckHeader: DeckHeader(name: "0")).environmentObject(DeckViewModel(userId: "i95mtNWHzgalaetnaMEbPX8n52I2", deckHeader: DeckHeader(name: "0")))
 }

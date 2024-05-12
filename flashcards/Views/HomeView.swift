@@ -45,7 +45,7 @@ struct HomeView: View {
                     
                     ScrollView {
                         ForEach(viewModel.deckHeaders, id: \.self) { deckHeader in
-                            NavigationLink(destination: DeckView(deckHeder: deckHeader)) {
+                            NavigationLink(destination: DeckView(deckHeader: deckHeader)) {
                                 GroupBox() {
                                 } label: {
                                     HStack {
@@ -58,7 +58,7 @@ struct HomeView: View {
                                 .backgroundStyle(Color(deckHeader.color))
                             }
                             .buttonStyle(PlainButtonStyle())
-                            .highPriorityGesture(
+                            .simultaneousGesture(
                                 LongPressGesture().onEnded { _ in
                                     Task {
                                         viewModel.confirmDelete(deckHeader.name)
