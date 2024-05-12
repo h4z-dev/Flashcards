@@ -14,7 +14,7 @@ class HomeViewModel: ObservableObject {
     let db = Firestore.firestore()
     var deck = Deck()
     @Published var deckHeaders: [DeckHeader] = []
-    @Published var isAddingCard: Bool = false
+    @Published var isAddingDeck: Bool = false
     //    var authModel: AuthenticationModel
     
     @AppStorage("userId") var userId: String = ""
@@ -163,9 +163,9 @@ class HomeViewModel: ObservableObject {
     //    }
     
     func addButtonPressed() {
-        isAddingCard.toggle()
+        isAddingDeck.toggle()
     }
-    
+
     /// Deletes specified Deck and updates the content visible to the user.
     /// - Inputs:
     ///     `deckName`, name of the deck.    `String`

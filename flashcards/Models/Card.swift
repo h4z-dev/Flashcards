@@ -8,9 +8,10 @@
 import Foundation
 import SwiftUI
 
-struct Card {
+struct Card : Hashable {
     var front: String
     var back: String
+    var isFlipped: Bool = false
     var backgroundColor: Color = Color(.white)
     
     init(_ front: String, _ back: String) {
@@ -34,4 +35,5 @@ struct Card {
     func toString() -> String {
         return "\(self.front), \(self.back)"
     }
+    
 }
