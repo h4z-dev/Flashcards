@@ -78,9 +78,10 @@ struct HomeView: View {
                         }
                         .onDelete(perform: deleteDeck)
                     }
-
-                    .padding()
                 }
+                .padding(.top, 0)
+                .listStyle(PlainListStyle())
+                
                 VStack {
                     Spacer()
                     HStack {
