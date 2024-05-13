@@ -16,7 +16,7 @@ struct Card : Identifiable, Hashable {
     var isFlipped: Bool = false
     var backgroundColor: Color = Color(.white)
     
-    init(_ front: String, _ back: String, index: Int,_ id: UUID = UUID()) {
+    init(_ front: String, _ back: String, index: Int, _ id: UUID = UUID()) {
         self.front = front
         self.back = back
         self.index = index
