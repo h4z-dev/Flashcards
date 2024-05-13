@@ -20,11 +20,23 @@ struct DeckView: View {
             ZStack {
                 if(viewModel.editingDeck){
                     List {
-                        ForEach(0..<viewModel.deck.cards.count, id: \.self) { index in
-                            Text(viewModel.deck.cards[index].front)
+                        ForEach(viewModel.deck.cards, id: \.self) { card in
+                            Text(card.front)
+                        }
+                        .onDelete(perform: { indexSet in
+                            for index in indexSet{
+                                viewModel.deleteCard(index: index)
+                            }
+                        })
+                        .onMove(){ from, to in
+                            viewModel.deck.cards.move(fromOffsets: from, toOffset: to)
+
                         }
                         .listRowBackground(Color(.clear))
                     }.padding()
+                        .toolbar{
+                            EditButton()
+                        }
                         .listStyle(PlainListStyle())
                 } else {
                     if(!viewModel.isEmpty()) {
@@ -87,7 +99,7 @@ struct DeckView: View {
                     }
                     HStack {
                         Button() {
-                            viewModel.editingDeck.toggle()
+                            viewModel.editDeck()
                         } label: {
                             Image(systemName: viewModel.editingDeck ? "book.pages" : "hammer")
                             Text(viewModel.editingDeck ? "Use" : "Edit")

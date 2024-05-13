@@ -13,7 +13,22 @@ struct Deck {
     var deckHeader: DeckHeader = DeckHeader()
     
     mutating func add(front: String, back: String) {
-        cards.append(Card(front, back))
+        cards.append(Card(front, back, index: cards.count))
+    }
+    
+    mutating func add(front: String, back: String, index: Int) {
+        if (index == -1) {
+            add(front: front, back: back)
+        } else {
+            cards.append(Card(front, back, index: index))
+        }
+    }
+    mutating func add(front: String, back: String, index: Int, id: UUID) {
+        if (index == -1) {
+            add(front: front, back: back)
+        } else {
+            cards.append(Card(front, back, index: index, id))
+        }
     }
     
     mutating func setName(name: String) {
