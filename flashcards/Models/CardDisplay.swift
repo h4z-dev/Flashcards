@@ -31,10 +31,10 @@ struct CardDisplayFront: View {
             Text(text)
         }
         .rotation3DEffect(
-            Angle(degrees: flipped && index == deckModel.deck.cards.count-1 ? Double(89.99) : Double(0)),
+            Angle(degrees: flipped && index == deckModel.deck.cards.count-1 ? Double(90) : Double()),
             axis: (x: Double(0.0), y: Double(1.0), z: Double(0.0))
         )
-        .opacity(flipped && index == deckModel.deck.cards.count-1  ? 0 : 1)
+//        .opacity(flipped && index == deckModel.deck.cards.count-1  ? 0 : 1)
         .animation(flipped && index == deckModel.deck.cards.count-1  ? .linear(duration: 0.15) : .linear(duration:0.15).delay(0.15), value: flipped && index == deckModel.deck.cards.count-1 )
         .rotationEffect(Angle(degrees: Double(index) * 2 - 10))
         .offset(x: CGFloat(index * 5 - 20), y: CGFloat(index * -3))
@@ -69,10 +69,10 @@ struct CardDisplayBack: View {
             Text(text)
         }
         .rotation3DEffect(
-            Angle(degrees: flipped && index == deckModel.deck.cards.count-1  ? Double() : Double(89.99)),
+            Angle(degrees: flipped && index == deckModel.deck.cards.count-1  ? Double() : Double(90)),
             axis: (x: Double(0.0), y: Double(1.0), z: Double(0.0))
         )
-        .opacity( flipped && index == deckModel.deck.cards.count-1  ? 1 : 0)
+//        .opacity( flipped && index == deckModel.deck.cards.count-1  ? 1 : 0)
         .animation(flipped && index == deckModel.deck.cards.count-1  ? .linear(duration: 0.15).delay(0.15) : .linear(duration: 0.15), value: flipped && index == deckModel.deck.cards.count-1 )
         .rotationEffect(Angle(degrees: Double(index) * 2 - 10))
         .offset(x: CGFloat(index * 5 - 20), y: CGFloat(index * -3))
