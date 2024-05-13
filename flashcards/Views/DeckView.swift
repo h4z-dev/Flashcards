@@ -1,8 +1,5 @@
 //
 //  DeckView.swift
-//  flashcards
-//
-//  Created by Jacob Goodridge on 7/5/2024.
 //
 
 import SwiftUI
@@ -26,19 +23,21 @@ struct DeckView: View {
                         ForEach(0..<viewModel.deck.cards.count, id: \.self) { index in
                             Text(viewModel.deck.cards[index].front)
                         }
+                        .listRowBackground(Color(.clear))
                     }.padding()
+                        .listStyle(PlainListStyle())
                 } else {
                     if(!viewModel.isEmpty()) {
                         VStack {
                             ZStack {
-                                CardDisplay(text: viewModel.currentCard().front, color: Color.orange)
+                                CardDisplay(text: viewModel.currentCard.front, color: Color.orange)
                                     .rotation3DEffect(
                                         Angle(degrees: viewModel.flipped ? 89.99 : 0),
                                         axis: (x: 0.0, y: 1.0, z: 0.0)
                                     )
                                     .opacity(viewModel.flipped ? 0 : 1)
                                     .animation(viewModel.flipped ? .linear(duration: 0.1) : .linear(duration:0.1).delay(0.1), value: viewModel.flipped)
-                                CardDisplay(text: viewModel.currentCard().back, color: Color.blue)
+                                CardDisplay(text: viewModel.currentCard.back, color: Color.blue)
                                     .rotation3DEffect(
                                         Angle(degrees: viewModel.flipped ? 0 : -89.99),
                                         axis: (x: 0.0, y: 1.0, z: 0.0)
@@ -57,8 +56,35 @@ struct DeckView: View {
                         }
                     }
                 }
+                
                 VStack {
                     Spacer()
+                    if(!viewModel.editingDeck){
+                        HStack (spacing: 20) {
+                            Button() {
+                                viewModel.previous()
+                                viewModel.flipped = false
+                            } label: {
+                                Text("Previous")
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: 48)
+                            .background(.secondAccent)
+                            .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                            .foregroundStyle(.white)
+                            
+                            Button() {
+                                viewModel.next()
+                                viewModel.flipped = false
+                            } label: {
+                                Text("Next")
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: 48)
+                            .background(.secondAccent)
+                            .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                            .foregroundStyle(.white)
+                        }
+                        .padding(.horizontal)
+                    }
                     HStack {
                         Button() {
                             viewModel.editingDeck.toggle()
@@ -81,8 +107,8 @@ struct DeckView: View {
                 }
             }
         } .navigationTitle(deckName)
-            .onAppear(){
-                Task{
+            .onAppear() {
+                Task {
                     viewModel.loadCards()
                 }
             }

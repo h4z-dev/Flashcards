@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct Card : Hashable {
+struct Card : Identifiable, Hashable {
+    var id: UUID = UUID()
     var front: String
     var back: String
     var isFlipped: Bool = false
