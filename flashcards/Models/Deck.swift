@@ -59,9 +59,15 @@ struct Deck {
         return cards.count
     }
     
-    func sortDeck() {
-        cards.sorted { id1, id2 in
-            id1.index > id2.index
-        }
+//    mutating func swapIndexes (fromOffsets: IndexSet, toOffSet: Int) {
+//        fromOffsets.forEach { index in
+//            var tempIndex = cards[index].index
+//            cards[index].index = cards[toOffSet].index
+//            cards[toOffSet].index = tempIndex
+//        }
+//    }
+    
+    mutating func sortDeck() {
+        cards = cards.sorted { $0.index < $1.index }
     }
 }

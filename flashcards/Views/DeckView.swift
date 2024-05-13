@@ -30,7 +30,6 @@ struct DeckView: View {
                         })
                         .onMove() { from, to in
                             viewModel.deck.cards.move(fromOffsets: from, toOffset: to)
-
                         }
                         .listRowBackground(Color(.clear))
                     }.padding()
@@ -78,22 +77,22 @@ struct DeckView: View {
                                 viewModel.flipped = false
                             } label: {
                                 Text("Previous")
+                                    .frame(maxWidth: .infinity, maxHeight: 48)
+                                    .background(.secondAccent)
+                                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                    .foregroundStyle(.white)
                             }
-                            .frame(maxWidth: .infinity, maxHeight: 48)
-                            .background(.secondAccent)
-                            .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                            .foregroundStyle(.white)
-                            
+
                             Button() {
                                 viewModel.next()
                                 viewModel.flipped = false
                             } label: {
                                 Text("Next")
+                                    .frame(maxWidth: .infinity, maxHeight: 48)
+                                    .background(.secondAccent)
+                                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                    .foregroundStyle(.white)
                             }
-                            .frame(maxWidth: .infinity, maxHeight: 48)
-                            .background(.secondAccent)
-                            .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                            .foregroundStyle(.white)
                         }
                         .padding(.horizontal)
                     }
@@ -104,12 +103,20 @@ struct DeckView: View {
                             Image(systemName: viewModel.editingDeck ? "book.pages" : "hammer")
                             Text(viewModel.editingDeck ? "Use" : "Edit")
                         }
+                        .font(.title.weight(.semibold))
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(.accent)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                        .shadow(radius: 1.5, x: 0, y: 1)
+                        
+                        
                         Spacer()
+                    
                         FloatingActionNavigationLink(iconName: "plus", destination: CreateCardView(deckModel: viewModel))
                     } .padding()
                         .onAppear() {
                             Task{
-                                viewModel.loadCards()
                                 viewModel.editingDeck.toggle()
                                 if (viewModel.isEmpty()) {
                                     viewModel.editingDeck.toggle()
@@ -119,11 +126,6 @@ struct DeckView: View {
                 }
             }
         } .navigationTitle(deckName)
-            .onAppear() {
-                Task {
-                    viewModel.loadCards()
-                }
-            }
     }
 }
 
