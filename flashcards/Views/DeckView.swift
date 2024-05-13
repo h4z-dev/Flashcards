@@ -31,11 +31,15 @@ struct DeckView: View {
                         .onMove() { from, to in
                             viewModel.moveCard(from: from, to: to)
                         }
+                        .onTapGesture {
+                            
+                        }
                         .listRowBackground(Color(.clear))
                     }.padding()
-                        .toolbar{
-                            EditButton()
-                        }
+                    //Causing crashes
+//                        .toolbar{
+//                            EditButton()
+//                        }
                         .listStyle(PlainListStyle())
                 } else {
                     if(!viewModel.isEmpty()) {
@@ -113,6 +117,9 @@ struct DeckView: View {
                         Spacer()
                     
                         FloatingActionNavigationLink(iconName: "plus", destination: CreateCardView(deckModel: viewModel))
+                            .task {
+                                viewModel.updateCardIndex()
+                            }
                             
                     } .padding()
                         .onAppear() {
