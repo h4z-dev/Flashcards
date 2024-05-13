@@ -59,30 +59,32 @@ struct DeckView: View {
                 
                 VStack {
                     Spacer()
-                    HStack (spacing: 20) {
-                        Button() {
-                            viewModel.previous()
-                            viewModel.flipped = false
-                        } label: {
-                            Text("Previous")
+                    if(!viewModel.editingDeck){
+                        HStack (spacing: 20) {
+                            Button() {
+                                viewModel.previous()
+                                viewModel.flipped = false
+                            } label: {
+                                Text("Previous")
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: 48)
+                            .background(.secondAccent)
+                            .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                            .foregroundStyle(.white)
+                            
+                            Button() {
+                                viewModel.next()
+                                viewModel.flipped = false
+                            } label: {
+                                Text("Next")
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: 48)
+                            .background(.secondAccent)
+                            .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                            .foregroundStyle(.white)
                         }
-                        .frame(maxWidth: .infinity, maxHeight: 48)
-                        .background(.secondAccent)
-                        .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                        .foregroundStyle(.white)
-                        
-                        Button() {
-                            viewModel.next()
-                            viewModel.flipped = false
-                        } label: {
-                            Text("Next")
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: 48)
-                        .background(.secondAccent)
-                        .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                        .foregroundStyle(.white)
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal)
                     HStack {
                         Button() {
                             viewModel.editingDeck.toggle()
