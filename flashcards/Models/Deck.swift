@@ -23,6 +23,7 @@ struct Deck {
             cards.append(Card(front, back, index: index))
         }
     }
+    
     mutating func add(front: String, back: String, index: Int, id: UUID) {
         if (index == -1) {
             add(front: front, back: back)
@@ -56,5 +57,11 @@ struct Deck {
     ///     Total number of flashcards as `Int`
     func count() -> Int {
         return cards.count
+    }
+    
+    func sortDeck() {
+        cards.sorted { id1, id2 in
+            id1.index > id2.index
+        }
     }
 }

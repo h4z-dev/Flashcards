@@ -37,6 +37,7 @@ class DeckViewModel: ObservableObject {
             }
             loadingDeck.toggle()
             await deck = getCards(deckId: deck.deckHeader.name)
+            deck.sortDeck()
             getCurrentCard()
         }
     }
@@ -88,6 +89,7 @@ class DeckViewModel: ObservableObject {
             
         }
     }
+    
     func deleteCard(index: Int){
         Task{
             await deleteCardFromDB(_: index)
@@ -103,6 +105,7 @@ class DeckViewModel: ObservableObject {
                 print(error)
             }
         }
+    
     func cardTapped(index: Int) {
         withAnimation (.easeIn(duration: 10)) {
             deck.cards[index].isFlipped.toggle()
@@ -130,7 +133,6 @@ class DeckViewModel: ObservableObject {
         } else {
             placeInDeck = placeInDeck + 1
         }
-        print("Next, Cards = \(deck.cards.count), place = \(placeInDeck)")
         getCurrentCard()
     }
     
@@ -142,7 +144,6 @@ class DeckViewModel: ObservableObject {
         } else {
             placeInDeck = placeInDeck - 1
         }
-        print("Previous, Cards = \(deck.cards.count), place = \(placeInDeck)")
         getCurrentCard()
     }
     
