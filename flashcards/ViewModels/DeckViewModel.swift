@@ -109,8 +109,9 @@ class DeckViewModel: ObservableObject {
     
     private func deleteCardFromDB(_ index: Int) async {
         do {
+            let cardUUID = deck.cards[index].id.uuidString
             try await db.collection("users").document(userId).collection("decks").document(deck.deckHeader.name).updateData([
-                deck.cards[index].front : FieldValue.delete()
+                cardUUID : FieldValue.delete()
             ])
         } catch {
             print(error)
@@ -186,6 +187,10 @@ class DeckViewModel: ObservableObject {
     func moveCard(from source: IndexSet, to destination: Int) {
         guard let sourceIndex = source.first else { return }
 
+        if (sourceIndex > deck.cards.count-1 || destination > deck.cards.count-1) {
+            return
+        }
+        
         let movedCard = deck.cards.remove(at: sourceIndex)
         deck.cards.insert(movedCard, at: destination)
 
