@@ -121,7 +121,7 @@ class HomeViewModel: ObservableObject {
             return
         }
         deckHeaders.append(DeckHeader(name: deckName, symbol: deckLogo, color: deckColor))
-        DispatchQueue.main.async {
+        DispatchQueue.main.async{
             self.deckHeaders = deckHeaders
         }
     }

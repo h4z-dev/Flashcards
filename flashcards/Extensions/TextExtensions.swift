@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 //https://dallinjared.medium.com/swiftui-tutorial-contrasting-text-over-background-color-2e7af57c1b20
+
 extension Text {
     func getContrastText(backgroundColor: Color) -> some View {
         var r, g, b, a: CGFloat

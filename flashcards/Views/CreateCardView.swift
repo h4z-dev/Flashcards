@@ -42,7 +42,7 @@ struct CreateCardView: View {
                     dismiss()
                 }
             } label: {
-                Label("Add card", systemImage: "right.arrow")
+                Label("Add card", systemImage: "chevron.right")
                     .frame(maxWidth: .infinity, maxHeight: 48)
                     .foregroundStyle(Color(.white))
                     .background(Color(.blue))

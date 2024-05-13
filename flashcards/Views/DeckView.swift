@@ -18,13 +18,25 @@ struct DeckView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                if(viewModel.editingDeck){
+                if(viewModel.editingDeck) {
                     List {
-                        ForEach(0..<viewModel.deck.cards.count, id: \.self) { index in
-                            Text(viewModel.deck.cards[index].front)
+                        ForEach(viewModel.deck.cards, id: \.self) { card in
+                            Text(card.front)
+                        }
+                        .onDelete(perform: { indexSet in
+                            for index in indexSet{
+                                viewModel.deleteCard(index: index)
+                            }
+                        })
+                        .onMove() { from, to in
+                            viewModel.deck.cards.move(fromOffsets: from, toOffset: to)
+
                         }
                         .listRowBackground(Color(.clear))
                     }.padding()
+                        .toolbar{
+                            EditButton()
+                        }
                         .listStyle(PlainListStyle())
                 } else {
                     if(!viewModel.isEmpty()) {
@@ -48,7 +60,7 @@ struct DeckView: View {
                             .frame(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height - 300)
                             .padding()
                             .onTapGesture {
-                                withAnimation(.easeIn){
+                                withAnimation(.easeIn) {
                                     viewModel.flipped.toggle()
                                 }
                             }
@@ -59,7 +71,7 @@ struct DeckView: View {
                 
                 VStack {
                     Spacer()
-                    if(!viewModel.editingDeck){
+                    if(!viewModel.editingDeck) {
                         HStack (spacing: 20) {
                             Button() {
                                 viewModel.previous()
@@ -87,7 +99,7 @@ struct DeckView: View {
                     }
                     HStack {
                         Button() {
-                            viewModel.editingDeck.toggle()
+                            viewModel.editDeck()
                         } label: {
                             Image(systemName: viewModel.editingDeck ? "book.pages" : "hammer")
                             Text(viewModel.editingDeck ? "Use" : "Edit")
