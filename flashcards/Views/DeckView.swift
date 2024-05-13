@@ -18,46 +18,42 @@ struct DeckView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                if(viewModel.editingDeck) {
+                if (viewModel.editingDeck) {
                     List {
                         ForEach(viewModel.deck.cards, id: \.self) { card in
                             Text(card.front)
                         }
                         .onDelete(perform: { indexSet in
-                            for index in indexSet{
+                            for index in indexSet {
                                 viewModel.deleteCard(index: index)
                             }
                         })
                         .onMove() { from, to in
                             viewModel.moveCard(from: from, to: to)
                         }
+                        .onTapGesture {
+                            
+                        }
                         .listRowBackground(Color(.clear))
                     }.padding()
-                        .toolbar{
-                            EditButton()
-                        }
+                    //Causing crashes
+//                        .toolbar{
+//                            EditButton()
+//                        }
                         .listStyle(PlainListStyle())
                 } else {
-                    if(!viewModel.isEmpty()) {
+                    if (!viewModel.isEmpty()) {
                         VStack {
                             ZStack {
-                                CardDisplay(text: viewModel.currentCard.front, color: Color.orange)
-                                    .rotation3DEffect(
-                                        Angle(degrees: viewModel.flipped ? 89.99 : 0),
-                                        axis: (x: 0.0, y: 1.0, z: 0.0)
-                                    )
-                                    .opacity(viewModel.flipped ? 0 : 1)
-                                    .animation(viewModel.flipped ? .linear(duration: 0.15) : .linear(duration:0.15).delay(0.15), value: viewModel.flipped)
-                                
-                                CardDisplay(text: viewModel.currentCard.back, color: Color.blue)
-                                    .rotation3DEffect(
-                                        Angle(degrees: viewModel.flipped ? 0 : -89.99),
-                                        axis: (x: 0.0, y: 1.0, z: 0.0)
-                                    )
-                                    .opacity( viewModel.flipped ? 1 : 0)
-                                    .animation(viewModel.flipped ? .linear(duration: 0.15).delay(0.15) : .linear(duration: 0.15), value: viewModel.flipped)
-                                
+                                ForEach(viewModel.deck.cards.indices, id: \.self) { index in
+                                    CardDisplayFront(text: viewModel.currentCard.front, color: Color.orange, index: index)
+                                        .environmentObject(viewModel)
+                                        
+                                    CardDisplayBack(text: viewModel.currentCard.back, color: Color.blue, index: index)
+                                        .environmentObject(viewModel)
+                                }
                             }
+                            
                             .frame(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height - 300)
                             .padding()
                             .onTapGesture {
@@ -65,14 +61,16 @@ struct DeckView: View {
                                     viewModel.flipped.toggle()
                                 }
                             }
+                            
                             Spacer()
+                            
                         }
                     }
                 }
                 
                 VStack {
                     Spacer()
-                    if(!viewModel.editingDeck) {
+                    if (!viewModel.editingDeck) {
                         HStack (spacing: 20) {
                             Button() {
                                 viewModel.previous()
@@ -98,6 +96,7 @@ struct DeckView: View {
                         }
                         .padding(.horizontal)
                     }
+                    
                     HStack {
                         Button() {
                             viewModel.editDeck()
@@ -115,6 +114,9 @@ struct DeckView: View {
                         Spacer()
                     
                         FloatingActionNavigationLink(iconName: "plus", destination: CreateCardView(deckModel: viewModel))
+                            .task {
+                                viewModel.updateCardIndex()
+                            }
                             
                     } .padding()
                         .onAppear() {
