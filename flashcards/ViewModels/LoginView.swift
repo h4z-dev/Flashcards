@@ -106,24 +106,24 @@ struct LoginView: View {
 //                        .padding(.horizontal)
 ////                    Text("Sign in with Google")
 //                }
-                
-                GoogleSignInButton() {
-                    Task {
-                        do {
-                            try await authModel.googleOauth()
-                        } catch let e {
-                            print(e)
-                            err = e.localizedDescription
-                        }
-                        if (authModel.userSession != nil) {
-                            dismiss()
-                        }
-                    }
-                }
-                .padding(.horizontal)
-                .padding(.top, 12)
-                .clipShape(RoundedRectangle(cornerRadius: 200))
-                Text(err).foregroundColor(.red).font(.caption)
+//                
+//                GoogleSignInButton() {
+//                    Task {
+//                        do {
+//                            try await authModel.googleOauth()
+//                        } catch let e {
+//                            print(e)
+//                            err = e.localizedDescription
+//                        }
+//                        if (authModel.userSession != nil) {
+//                            dismiss()
+//                        }
+//                    }
+//                }
+//                .padding(.horizontal)
+//                .padding(.top, 12)
+//                .clipShape(RoundedRectangle(cornerRadius: 200))
+//                Text(err).foregroundColor(.red).font(.caption)
                 
                 //pushes signup to bottom of screen
                 Spacer()

@@ -1,8 +1,5 @@
 //
 //  DeckViewModel.swift
-//  flashcards
-//
-//  Created by Jacob Goodridge on 7/5/2024.
 //
 
 import Foundation
@@ -16,10 +13,12 @@ class DeckViewModel: ObservableObject {
     
     var deck: Deck = Deck()
     var loadingDeck: Bool = false
+    var placeInDeck: Int = 0
+
     
     @Published var flipped: Bool = false
-    @Published var placeInDeck: Int = 0
     @Published var editingDeck: Bool = true
+    @Published var currentCard: Card = Card("empty_DECK", "empty_DECK")
     
     init(deckHeader: DeckHeader) {
         self.deck = Deck(deckHeader: deckHeader)
@@ -81,14 +80,41 @@ class DeckViewModel: ObservableObject {
         }
     }
     
-    func isEmpty() -> Bool{
+    func isEmpty() -> Bool {
         return deck.cards.isEmpty
     }
     
-    func currentCard() -> Card{
-        guard !isEmpty() else {
-            return Card("_____THIS_DECK_IS_Empty_____", "_____THIS_DECK_IS_Empty_____")
+    func getCurrentCard() {
+        if(isEmpty()){
+            return
         }
-        return deck.cards[placeInDeck]
+        DispatchQueue.main.async {
+            self.currentCard = self.deck.cards[self.placeInDeck]
+        }
     }
+    
+    func next() {
+        if(!isEmpty() && deck.cards.count < 1) {
+            return
+        } else if (placeInDeck + 1 >= deck.cards.count ) {
+            placeInDeck = 0
+        } else {
+            placeInDeck = placeInDeck + 1
+        }
+        print("Next, Cards = \(deck.cards.count), place = \(placeInDeck)")
+        getCurrentCard()
+    }
+    
+    func previous() {
+        if(!isEmpty() && deck.cards.count < 1) {
+            return
+        } else if (placeInDeck - 1 < 0) {
+            placeInDeck = deck.cards.count - 1
+        } else {
+            placeInDeck = placeInDeck - 1
+        }
+        print("Previous, Cards = \(deck.cards.count), place = \(placeInDeck)")
+        getCurrentCard()
+    }
+    
 }
