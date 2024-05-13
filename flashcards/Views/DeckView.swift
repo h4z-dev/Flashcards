@@ -41,28 +41,12 @@ struct DeckView: View {
                     if (!viewModel.isEmpty()) {
                         VStack {
                             ZStack {
-                                ForEach(viewModel.deck.indices, id: \.self) { index in
-                                    CardDisplay(text: viewModel.currentCard.front, color: Color.orange)
-                                        .rotation3DEffect(
-                                            Angle(degrees: viewModel.flipped ? Double(89.99) : Double(0)),
-                                            axis: (x: Double(0.0), y: Double(1.0), z: Double(0.0))
-                                        )
-                                        .opacity(viewModel.flipped ? 0 : 1)
-                                        .animation(viewModel.flipped ? .linear(duration: 0.15) : .linear(duration:0.15).delay(0.15), value: viewModel.flipped)
-                                        .rotationEffect(Angle(degrees: Double(index) * 2 - 10))
-                                        .offset(x: CGFloat(index * 5 - 20), y: CGFloat(index * -3))
-                                        .shadow(color: .gray, radius: 2, x: 0, y: 2)
-                                    
-                                    CardDisplay(text: viewModel.currentCard.back, color: Color.blue)
-                                        .rotation3DEffect(
-                                            Angle(degrees: viewModel.flipped ? Double(89.99) : Double(0)),
-                                            axis: (x: Double(0.0), y: Double(1.0), z: Double(0.0))
-                                        )
-                                        .opacity( viewModel.flipped ? 1 : 0)
-                                        .animation(viewModel.flipped ? .linear(duration: 0.15).delay(0.15) : .linear(duration: 0.15), value: viewModel.flipped)
-                                        .rotationEffect(Angle(degrees: Double(index) * 2 - 10))
-                                        .offset(x: CGFloat(index * 5 - 20), y: CGFloat(index * -3))
-                                        .shadow(color: .gray, radius: 2, x: 0, y: 2)
+                                ForEach(viewModel.deck.cards.indices, id: \.self) { index in
+                                    CardDisplayFront(text: viewModel.currentCard.front, color: Color.orange, index: index)
+                                        .environmentObject(viewModel)
+                                        
+                                    CardDisplayBack(text: viewModel.currentCard.back, color: Color.blue, index: index)
+                                        .environmentObject(viewModel)
                                 }
                             }
                             
