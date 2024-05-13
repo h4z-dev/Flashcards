@@ -45,9 +45,7 @@ struct HomeView: View {
                     
                     List {
                         ForEach(viewModel.deckHeaders, id: \.self) { deckHeader in
-                            Button(action: {
-                                viewModel.selectDeck(deckHeader)
-                            }) {
+                            NavigationLink(destination: DeckView(deckHeader: deckHeader)) {
                                 HStack {
                                     Image(systemName: deckHeader.symbol)
                                         .getContrastText(backgroundColor: deckHeader.color)
@@ -58,29 +56,18 @@ struct HomeView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding()
                                 .background(Color(deckHeader.color))
-                                .cornerRadius(10)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                                .lineSpacing(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)
                             }
                             .listRowSeparator(.hidden)
-                            .buttonStyle(PlainButtonStyle())
-                            .listRowBackground(Color(.clear))
-                            .background(
-                                NavigationLink(
-                                    destination: DeckView(deckHeader: deckHeader),
-                                    isActive: .init(
-                                        get: { viewModel.isActiveDeck(deckHeader.name) },
-                                        set: { _ in }
-                                    )
-                                ) {
-                                    EmptyView()
-                                }
-                                    .hidden()
-                            )
+                            .buttonStyle(.plain)
+                            .listRowBackground(Color.clear)
                         }
                         .onDelete(perform: deleteDeck)
                     }
+                    .padding(.top, 0)
+                    .listStyle(PlainListStyle())
                 }
-                .padding(.top, 0)
-                .listStyle(PlainListStyle())
                 
                 VStack {
                     Spacer()
@@ -94,9 +81,9 @@ struct HomeView: View {
                         }).padding()
                     }
                 }
-                }
             }
         }
+    }
     
     private func deleteDeck(at offsets: IndexSet) {
         offsets.forEach { index in
