@@ -15,9 +15,6 @@ class HomeViewModel: ObservableObject {
     var deck = Deck()
     @Published var deckHeaders: [DeckHeader] = []
     @Published var isAddingDeck: Bool = false
-    @Published var selectedDeck: DeckHeader?
-    @Published var selectedDeckId: String?
-    
     
     @AppStorage("userId") var userId: String = ""
     
@@ -87,7 +84,7 @@ class HomeViewModel: ObservableObject {
         } catch {
             print("Error retrieving deck names: \(error)")
         }
-        DispatchQueue.main.async{
+        DispatchQueue.main.async {
             self.deckHeaders = deckHeaderStack
         }
     }
@@ -124,7 +121,7 @@ class HomeViewModel: ObservableObject {
             return
         }
         deckHeaders.append(DeckHeader(name: deckName, symbol: deckLogo, color: deckColor))
-        DispatchQueue.main.async{
+        DispatchQueue.main.async {
             self.deckHeaders = deckHeaders
         }
     }
@@ -197,12 +194,4 @@ class HomeViewModel: ObservableObject {
     //        deleteDeck = deckName
     //        showAlert.toggle()
     //    }
-    
-    func selectDeck(_ deckHeader: DeckHeader) {
-        selectedDeckId = deckHeader.name
-    }
-    
-    func isActiveDeck(_ deckId: String) -> Bool {
-        selectedDeckId == deckId
-    }
 }
