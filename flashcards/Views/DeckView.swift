@@ -29,7 +29,7 @@ struct DeckView: View {
                             }
                         })
                         .onMove() { from, to in
-                            viewModel.deck.cards.move(fromOffsets: from, toOffset: to)
+                            viewModel.moveCard(from: from, to: to)
                         }
                         .listRowBackground(Color(.clear))
                     }.padding()
@@ -103,17 +103,17 @@ struct DeckView: View {
                             Image(systemName: viewModel.editingDeck ? "book.pages" : "hammer")
                             Text(viewModel.editingDeck ? "Use" : "Edit")
                         }
-                        .font(.title.weight(.semibold))
+                        .font(.title3.weight(.semibold))
                         .padding()
-                        .foregroundColor(.white)
-                        .background(.accent)
+                        .foregroundColor(.black)
+                        .background(.accentColorLight)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                         .shadow(radius: 1.5, x: 0, y: 1)
-                        
                         
                         Spacer()
                     
                         FloatingActionNavigationLink(iconName: "plus", destination: CreateCardView(deckModel: viewModel))
+                            
                     } .padding()
                         .onAppear() {
                             Task{
