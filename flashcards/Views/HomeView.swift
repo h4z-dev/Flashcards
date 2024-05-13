@@ -85,7 +85,7 @@ struct HomeView: View {
         }
     }
     
-    func deleteDeck(at offsets: IndexSet) {
+    private func deleteDeck(at offsets: IndexSet) {
         offsets.forEach { index in
             let deckName = viewModel.deckHeaders[index].name
             Task {
