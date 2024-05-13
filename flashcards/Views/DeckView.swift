@@ -23,16 +23,20 @@ struct DeckView: View {
                         ForEach(viewModel.deck.cards, id: \.self) { card in
                             Text(card.front)
                         }
+                        .onMove() { from, to in
+                            viewModel.moveCard(from: from, to: to)
+                        }
                         .onDelete(perform: { indexSet in
                             for index in indexSet {
                                 viewModel.deleteCard(index: index)
                             }
                         })
-                        .onMove() { from, to in
-                            viewModel.moveCard(from: from, to: to)
-                        }
-                        .onTapGesture {
-                            
+                        .swipeActions(edge: .leading){
+                            Button(){
+                                
+                            } label:{
+                                Label("Edit", systemImage: "hammer.fill")
+                            }
                         }
                         .listRowBackground(Color(.clear))
                     }.padding()
