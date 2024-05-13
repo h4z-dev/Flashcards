@@ -51,7 +51,6 @@ class HomeViewModel: ObservableObject {
                         deck.add(front: front, back: back)
                     }
                 }
-                print(deck.toString())
             } else {
                 print("No data found in deck \(deckId)")
             }

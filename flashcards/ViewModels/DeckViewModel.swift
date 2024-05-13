@@ -14,7 +14,7 @@ class DeckViewModel: ObservableObject {
     var deck: Deck = Deck()
     var loadingDeck: Bool = false
     var placeInDeck: Int = 0
-
+    
     
     @Published var flipped: Bool = false
     @Published var editingDeck: Bool = true
@@ -24,20 +24,20 @@ class DeckViewModel: ObservableObject {
         self.deck = Deck(deckHeader: deckHeader)
         Task{
             loadCards()
+            deck.sortDeck()
         }
     }
     
     func loadCards() {
         Task {
-            guard !userId.isEmpty else{
+            guard !userId.isEmpty else {
                 return
             }
-            guard !loadingDeck else{
+            guard !loadingDeck else {
                 return
             }
             loadingDeck.toggle()
             await deck = getCards(deckId: deck.deckHeader.name)
-            deck.sortDeck()
             getCurrentCard()
         }
     }
@@ -45,66 +45,77 @@ class DeckViewModel: ObservableObject {
     func getCards(deckId: String) async -> Deck {
         var deck = Deck(deckHeader: deck.deckHeader)
         do {
-            // Attempt to fetch the whole deck first, so we can catch an error early if it occurs.
             let deckDocument = try await db.collection("users").document(userId).collection("decks").document(deckId).getDocument()
             if let data = deckDocument.data() {
-                // Iterate over each key-value pair in the document data and reconstruct it to the Deck format
-                for (identification, card) in data {
-                    if let back = card as? String {
-                        deck.add(front: identification, back: back)
-                    } else if identification != "DECK_HEADER",
-                    let id = identification as? String,
-                    let cardData = data[id] as? [String : Any],
-                    let cardFront = cardData["front"] as? String,
-                    let cardBack = cardData["back"] as? String,
-                    let cardIndex = cardData["index"] as? Int,
-                              let cardIdentification = UUID(uuidString: identification)
-                    {
-                        deck.add(front: cardFront, back: cardBack, index: cardIndex, id: cardIdentification)
+                var cards = [Card]()
+                for (identification, cardData) in data {
+                    if let cardData = cardData as? [String: Any],
+                       let cardFront = cardData["front"] as? String,
+                       let cardBack = cardData["back"] as? String,
+                       let cardIndex = cardData["index"] as? Int,
+                       let cardIdentification = UUID(uuidString: identification) {
+                        let card = Card(cardFront, cardBack, index: cardIndex, cardIdentification)
+                        cards.append(card)
                     }
                 }
-                loadingDeck.toggle()
-                return deck
-            } else {
-                print("No data found in deck \(deckId)")
+                // Sort cards by index before returning
+                cards.sort(by: { $0.index < $1.index })
+                deck.cards = cards
             }
         } catch {
             print("Error getting deck: \(error)")
         }
-        loadingDeck.toggle()
         return deck
     }
+
     
-    func createNewCard(front : String, back : String) async {
+    func createNewCard(front: String, back: String) async {
         do {
-            let cardIdString : String = UUID().uuidString
+            let cardIdString: String = UUID().uuidString
+            let newCard = Card(front, back, index: deck.cards.count, UUID(uuidString: cardIdString)!)
             try await db.collection("users").document(userId).collection("decks").document(deck.deckHeader.name).setData([
-                cardIdString : [
-                    "index" : -1,
-                    "front" : front,
-                    "back" : back
+                cardIdString: [
+                    "index": deck.cards.count,
+                    "front": front,
+                    "back": back
                 ]
             ], merge: true)
-        } catch {
             
+            // Have to run this on the main thread so SwiftUI goes OHHHH and updates the list rather than pretending nothing at all happened.
+            DispatchQueue.main.async { [weak self] in
+                self?.deck.cards.append(newCard)
+                self?.objectWillChange.send()
+            }
+        } catch {
+            print("Error creating new card: \(error)")
         }
     }
-    
-    func deleteCard(index: Int){
-        Task{
-            await deleteCardFromDB(_: index)
+
+    func deleteCard(index: Int) {
+        Task {
+            await deleteCardFromDB(index)
+            deck.cards.remove(at: index)
+            var updatedCards = [Card]()
+            for (newIndex, card) in deck.cards.enumerated() {
+                let updatedCard = Card(card.front, card.back, index: newIndex, card.id)
+                updatedCards.append(updatedCard)
+            }
+            deck.cards = updatedCards
+            updateCardIndex()
         }
     }
+
+
     
     private func deleteCardFromDB(_ index: Int) async {
-            do {
-                try await db.collection("users").document(userId).collection("decks").document(deck.deckHeader.name).updateData([
-                    deck.cards[index].front : FieldValue.delete()
-                ])
-            } catch {
-                print(error)
-            }
+        do {
+            try await db.collection("users").document(userId).collection("decks").document(deck.deckHeader.name).updateData([
+                deck.cards[index].front : FieldValue.delete()
+            ])
+        } catch {
+            print(error)
         }
+    }
     
     func cardTapped(index: Int) {
         withAnimation (.easeIn(duration: 10)) {
@@ -117,7 +128,7 @@ class DeckViewModel: ObservableObject {
     }
     
     func getCurrentCard() {
-        if(isEmpty()){
+        if(isEmpty()) {
             return
         }
         DispatchQueue.main.async {
@@ -148,25 +159,56 @@ class DeckViewModel: ObservableObject {
     }
     
     func editDeck() {
+        print("____SORT POINT______")
+        for card in deck.cards{
+            print("DEBUG: Card: \(card.front) index: \(card.index)")
+        }
+        print("\n")
         editingDeck.toggle()
+        updateCardIndex()
         loadCards()
         getCurrentCard()
     }
     
-    func updateCardIndex() async {
+    func updateCardIndex() {
         for card in deck.cards {
-            do {
-                let cardIdString : String = card.id.uuidString
-                try await db.collection("users").document(userId).collection("decks").document(deck.deckHeader.name).setData([
-                    cardIdString : [
-                        "index" : card.index,
-                        "front" : card.front,
-                        "back" : card.back
-                    ]
-                ], merge: true)
-            } catch {
-                
+            let cardIdString : String = card.id.uuidString
+            db.collection("users").document(userId).collection("decks").document(deck.deckHeader.name).setData([
+                cardIdString : [
+                    "index" : card.index,
+                    "front" : card.front,
+                    "back" : card.back
+                ]
+            ], merge: true)
+        }
+    }
+    
+    func moveCard(from source: IndexSet, to destination: Int) {
+        guard let sourceIndex = source.first else { return }
+
+        let movedCard = deck.cards.remove(at: sourceIndex)
+        deck.cards.insert(movedCard, at: destination)
+
+        for (index, _) in deck.cards.enumerated() {
+            deck.cards[index].index = index
+        }
+
+        updateCardIndicesInFirestore()
+    }
+
+    func updateCardIndicesInFirestore() {
+        for card in deck.cards {
+            let cardIdString: String = card.id.uuidString
+            db.collection("users").document(userId).collection("decks").document(deck.deckHeader.name).updateData([
+                "\(cardIdString).index": card.index
+            ]) { err in
+                if let err = err {
+                    print("Error updating index: \(err)")
+                } else {
+                    print("Index successfully updated")
+                }
             }
         }
     }
+
 }
