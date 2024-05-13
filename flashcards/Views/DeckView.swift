@@ -18,13 +18,13 @@ struct DeckView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                if(viewModel.editingDeck) {
+                if (viewModel.editingDeck) {
                     List {
                         ForEach(viewModel.deck.cards, id: \.self) { card in
                             Text(card.front)
                         }
                         .onDelete(perform: { indexSet in
-                            for index in indexSet{
+                            for index in indexSet {
                                 viewModel.deleteCard(index: index)
                             }
                         })
@@ -33,31 +33,39 @@ struct DeckView: View {
                         }
                         .listRowBackground(Color(.clear))
                     }.padding()
-                        .toolbar{
+                        .toolbar {
                             EditButton()
                         }
                         .listStyle(PlainListStyle())
                 } else {
-                    if(!viewModel.isEmpty()) {
+                    if (!viewModel.isEmpty()) {
                         VStack {
                             ZStack {
-                                CardDisplay(text: viewModel.currentCard.front, color: Color.orange)
-                                    .rotation3DEffect(
-                                        Angle(degrees: viewModel.flipped ? 89.99 : 0),
-                                        axis: (x: 0.0, y: 1.0, z: 0.0)
-                                    )
-                                    .opacity(viewModel.flipped ? 0 : 1)
-                                    .animation(viewModel.flipped ? .linear(duration: 0.15) : .linear(duration:0.15).delay(0.15), value: viewModel.flipped)
-                                
-                                CardDisplay(text: viewModel.currentCard.back, color: Color.blue)
-                                    .rotation3DEffect(
-                                        Angle(degrees: viewModel.flipped ? 0 : -89.99),
-                                        axis: (x: 0.0, y: 1.0, z: 0.0)
-                                    )
-                                    .opacity( viewModel.flipped ? 1 : 0)
-                                    .animation(viewModel.flipped ? .linear(duration: 0.15).delay(0.15) : .linear(duration: 0.15), value: viewModel.flipped)
-                                
+                                ForEach(viewModel.deck.indices, id: \.self) { index in
+                                    CardDisplay(text: viewModel.currentCard.front, color: Color.orange)
+                                        .rotation3DEffect(
+                                            Angle(degrees: viewModel.flipped ? Double(89.99) : Double(0)),
+                                            axis: (x: Double(0.0), y: Double(1.0), z: Double(0.0))
+                                        )
+                                        .opacity(viewModel.flipped ? 0 : 1)
+                                        .animation(viewModel.flipped ? .linear(duration: 0.15) : .linear(duration:0.15).delay(0.15), value: viewModel.flipped)
+                                        .rotationEffect(Angle(degrees: Double(index) * 2 - 10))
+                                        .offset(x: CGFloat(index * 5 - 20), y: CGFloat(index * -3))
+                                        .shadow(color: .gray, radius: 2, x: 0, y: 2)
+                                    
+                                    CardDisplay(text: viewModel.currentCard.back, color: Color.blue)
+                                        .rotation3DEffect(
+                                            Angle(degrees: viewModel.flipped ? Double(89.99) : Double(0)),
+                                            axis: (x: Double(0.0), y: Double(1.0), z: Double(0.0))
+                                        )
+                                        .opacity( viewModel.flipped ? 1 : 0)
+                                        .animation(viewModel.flipped ? .linear(duration: 0.15).delay(0.15) : .linear(duration: 0.15), value: viewModel.flipped)
+                                        .rotationEffect(Angle(degrees: Double(index) * 2 - 10))
+                                        .offset(x: CGFloat(index * 5 - 20), y: CGFloat(index * -3))
+                                        .shadow(color: .gray, radius: 2, x: 0, y: 2)
+                                }
                             }
+                            
                             .frame(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height - 300)
                             .padding()
                             .onTapGesture {
@@ -65,14 +73,16 @@ struct DeckView: View {
                                     viewModel.flipped.toggle()
                                 }
                             }
+                            
                             Spacer()
+                            
                         }
                     }
                 }
                 
                 VStack {
                     Spacer()
-                    if(!viewModel.editingDeck) {
+                    if (!viewModel.editingDeck) {
                         HStack (spacing: 20) {
                             Button() {
                                 viewModel.previous()
@@ -98,6 +108,7 @@ struct DeckView: View {
                         }
                         .padding(.horizontal)
                     }
+                    
                     HStack {
                         Button() {
                             viewModel.editDeck()
