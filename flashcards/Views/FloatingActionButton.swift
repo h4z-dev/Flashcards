@@ -18,13 +18,14 @@ struct FloatingActionButton: View {
     var iconName: String
     var backgroundColor: Color = .accentColor
     var action: () -> Void
+    var foregroundColor: Color = .white
 
     var body: some View {
         Button(action: action) {
             Image(systemName: iconName)
                 .font(.title.weight(.semibold))
                 .padding()
-                .foregroundColor(.white)
+                .foregroundColor(foregroundColor)
                 .background(backgroundColor)
                 .clipShape(RoundedRectangle(cornerRadius: 15))
                 .shadow(radius: 1.5, x: 0, y: 1)
@@ -39,13 +40,14 @@ struct FloatingActionNavigationLink<Destination: View>: View {
     var iconName: String
     var backgroundColor: Color = .accentColor
     var destination: Destination
+    var foregroundColor: Color = .white
 
     var body: some View {
         NavigationLink(destination: destination) {
             Image(systemName: iconName)
                 .font(.title.weight(.semibold))
                 .padding()
-                .foregroundColor(.white)
+                .foregroundColor(foregroundColor)
                 .background(backgroundColor)
                 .clipShape(RoundedRectangle(cornerRadius: 15))
                 .shadow(radius: 1.5, x: 0, y: 1)
