@@ -17,7 +17,7 @@ struct DeckView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
+            VStack {
                 if (viewModel.editingDeck) {
                     List {
                         ForEach(viewModel.deck.cards, id: \.self) { card in
@@ -54,16 +54,17 @@ struct DeckView: View {
                         VStack {
                             ZStack {
                                 ForEach(viewModel.deck.cards.indices, id: \.self) { index in
-                                    CardDisplayFront(text: viewModel.currentCard.front, color: Color.orange, index: index)
+                                    CardDisplayFront(text: viewModel.currentCard.front, color: Color.white, index: index)
                                         .environmentObject(viewModel)
                                         
-                                    CardDisplayBack(text: viewModel.currentCard.back, color: Color.blue, index: index)
+                                    CardDisplayBack(text: viewModel.currentCard.back, color: Color.gray, index: index)
                                         .environmentObject(viewModel)
                                 }
                             }
                             
-                            .frame(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height - 300)
-                            .padding()
+                            //BAD
+                            .frame(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height - 400)
+                            .padding(.top, 100.0)
                             .onTapGesture {
                                 withAnimation(.easeIn) {
                                     viewModel.flipped.toggle()
@@ -75,10 +76,9 @@ struct DeckView: View {
                         }
                     }
                 }
-                
-                VStack {
-                    Spacer()
-                    if (!viewModel.editingDeck) {
+                if (!viewModel.editingDeck) {
+                    VStack {
+                        Spacer()
                         HStack (spacing: 20) {
                             Button() {
                                 viewModel.previous()
@@ -90,7 +90,7 @@ struct DeckView: View {
                                     .clipShape(RoundedRectangle(cornerRadius: 15.0))
                                     .foregroundStyle(.white)
                             }
-
+                            
                             Button() {
                                 viewModel.next()
                                 viewModel.flipped = false
@@ -104,6 +104,7 @@ struct DeckView: View {
                         }
                         .padding(.horizontal)
                     }
+                }
                     
                     HStack {
                         Button() {
@@ -133,7 +134,7 @@ struct DeckView: View {
                                 viewModel.editingDeck.toggle()
                             }
                         }
-                }
+                
             }
         } .navigationTitle(deckName)
     }
