@@ -83,7 +83,6 @@ struct CreateDeckView: View {
             .disabled(!formIsValid)
         }
         .padding(.vertical)
-        Spacer()
     }
 }
 
