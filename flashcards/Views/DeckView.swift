@@ -24,7 +24,7 @@ struct DeckView: View {
                             Text(card.front)
                                 .swipeActions(edge: .leading){
                                     NavigationLink(destination: ModifyCardView(card: card).environmentObject(viewModel)) {
-                                        Image(systemName: "hammer.fill")
+                                        Text("Edit")
                                             .font(.title.weight(.semibold))
                                             .padding()
 //                                            .foregroundColor(foregroundColor)
