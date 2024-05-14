@@ -18,8 +18,9 @@ struct ModifyCardView: View {
     }
     
     var body: some View {
-        VStack {
-            Text("Edit Card")
+        VStack (spacing: 20) {
+            Spacer()
+            Text("Modify Card")
                 .font(.title2)
                 .fontWeight(.bold)
                 .padding(.vertical)
@@ -43,7 +44,7 @@ struct ModifyCardView: View {
                     dismiss()
                 }
             } label: {
-                Label("Add card", systemImage: "chevron.right")
+                Label("Modify card", systemImage: "square.and.pencil")
                     .frame(maxWidth: .infinity, maxHeight: 48)
                     .foregroundStyle(Color(.white))
                     .background(Color(.blue))
@@ -51,6 +52,7 @@ struct ModifyCardView: View {
                     .padding(.horizontal)
             }
         }
+        .padding(.bottom, 100)
     }
 }
 

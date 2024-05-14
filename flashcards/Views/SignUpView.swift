@@ -96,6 +96,8 @@ struct SignUpView: View {
                     password: password,
                     fullname: Name
                 )
+                dismiss()
+
             }
         } label: {
             HStack{

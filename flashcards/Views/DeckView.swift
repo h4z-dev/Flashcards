@@ -130,9 +130,7 @@ struct DeckView: View {
                         .onAppear() {
                             Task{
                                 viewModel.editingDeck.toggle()
-                                if (viewModel.isEmpty()) {
-                                    viewModel.editingDeck.toggle()
-                                }
+                                viewModel.editingDeck.toggle()
                             }
                         }
                 }
