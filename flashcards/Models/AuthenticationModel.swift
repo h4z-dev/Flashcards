@@ -92,11 +92,12 @@ class AuthenticationModel: ObservableObject {
     func createUser(withEmail email: String, password: String, fullname: String) async throws{
         do{
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
-            self.userSession = result.user
+//            self.userSession = result.user
             let user = User(id: result.user.uid, fullname: fullname, email: email, googleSignIn: false, emailSignIn: true)
             let encodedUser = try Firestore.Encoder().encode(user)
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
-            await fetchUser()
+//            userId = result.user.uid
+//            await fetchUser()
         } catch{
             print("DEBUG: ERROR TO create user with error \(error.localizedDescription)")
         }
