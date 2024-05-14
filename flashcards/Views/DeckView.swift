@@ -22,6 +22,17 @@ struct DeckView: View {
                     List {
                         ForEach(viewModel.deck.cards, id: \.self) { card in
                             Text(card.front)
+                                .swipeActions(edge: .leading){
+                                    NavigationLink(destination: ModifyCardView(card: card).environmentObject(viewModel)){
+                                        Image(systemName: "hammer.fill")
+                                            .font(.title.weight(.semibold))
+                                            .padding()
+//                                            .foregroundColor(foregroundColor)
+//                                            .background(backgroundColor)
+                                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                                            .shadow(radius: 1.5, x: 0, y: 1)
+                                    }
+                                }
                         }
                         .onMove() { from, to in
                             viewModel.moveCard(from: from, to: to)
@@ -31,13 +42,6 @@ struct DeckView: View {
                                 viewModel.deleteCard(index: index)
                             }
                         })
-                        .swipeActions(edge: .leading){
-                            Button(){
-                                
-                            } label:{
-                                Label("Edit", systemImage: "hammer.fill")
-                            }
-                        }
                         .listRowBackground(Color(.clear))
                     }.padding()
                     //Causing crashes
