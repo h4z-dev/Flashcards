@@ -215,5 +215,43 @@ class DeckViewModel: ObservableObject {
             }
         }
     }
-
+    
+    func updateCard(card: Card) {
+        Task {
+            await updateCardDB(card: card)
+        }
+    }
+    
+    private func updateCardDB(card: Card) async {
+        do {
+            let cardIdString: String = card.id.uuidString
+            try await db.collection("users").document(userId).collection("decks").document(deck.deckHeader.name).updateData([
+                cardIdString : FieldValue.delete()
+            ])
+        } catch {
+            print(error)
+        }
+        deck.cards.remove(at: card.index)
+        do {
+            let cardIdString: String = card.id.uuidString
+            let newCard = Card(card.front, card.back, index: card.index, UUID(uuidString: cardIdString)!)
+            try await db.collection("users").document(userId).collection("decks").document(deck.deckHeader.name).setData([
+                cardIdString: [
+                    "index": card.index,
+                    "front": card.front,
+                    "back": card.back
+                ]
+            ], merge: true)
+            
+            // Have to run this on the main thread so SwiftUI goes OHHHH and updates the list rather than pretending nothing at all happened.
+            DispatchQueue.main.async { [weak self] in
+                self?.deck.cards.append(newCard)
+                self?.deck.sortDeck()
+                self?.objectWillChange.send()
+            }
+        } catch {
+            print("Error creating new card: \(error)")
+        }
+    }
+    
 }
