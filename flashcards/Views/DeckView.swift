@@ -23,7 +23,7 @@ struct DeckView: View {
                         ForEach(viewModel.deck.cards, id: \.self) { card in
                             Text(card.front)
                                 .swipeActions(edge: .leading){
-                                    NavigationLink(destination: ModifyCardView(card: card).environmentObject(viewModel)){
+                                    NavigationLink(destination: ModifyCardView(card: card).environmentObject(viewModel)) {
                                         Image(systemName: "hammer.fill")
                                             .font(.title.weight(.semibold))
                                             .padding()
