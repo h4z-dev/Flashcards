@@ -22,9 +22,9 @@ struct DeckView: View {
                     List {
                         ForEach(viewModel.deck.cards, id: \.self) { card in
                             Text(card.front)
-                                .swipeActions(edge: .leading){
+                                .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                     NavigationLink(destination: ModifyCardView(card: card).environmentObject(viewModel)) {
-                                        Image(systemName: "hammer.fill")
+                                        Text("Edit")
                                             .font(.title.weight(.semibold))
                                             .padding()
 //                                            .foregroundColor(foregroundColor)
