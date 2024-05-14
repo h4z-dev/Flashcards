@@ -18,7 +18,7 @@ struct CreateCardView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack (spacing: 20) {
             Text("Create new Card")
                 .font(.title2)
                 .fontWeight(.bold)
@@ -50,6 +50,7 @@ struct CreateCardView: View {
                     .padding(.horizontal)
             }
         }
+        Spacer()
     }
 }
 

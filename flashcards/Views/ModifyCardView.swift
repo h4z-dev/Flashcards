@@ -19,7 +19,6 @@ struct ModifyCardView: View {
     
     var body: some View {
         VStack (spacing: 20) {
-            Spacer()
             Text("Modify Card")
                 .font(.title2)
                 .fontWeight(.bold)
@@ -53,6 +52,7 @@ struct ModifyCardView: View {
             }
         }
         .padding(.bottom, 100)
+        Spacer()
     }
 }
 
