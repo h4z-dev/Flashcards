@@ -1,8 +1,5 @@
 //
 //  DeckHeader.swift
-//  flashcards
-//
-//  Created by Harris Vandenberg on 11/5/2024.
 //
 
 import Foundation

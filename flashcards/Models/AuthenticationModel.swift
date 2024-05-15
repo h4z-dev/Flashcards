@@ -1,8 +1,5 @@
 //
 //  AuthenticationModel.swift
-//  flashcards
-//
-//  Created by Harris Vandenberg on 5/5/2024.
 //
 
 import Foundation
@@ -34,50 +31,50 @@ class AuthenticationModel: ObservableObject {
     }
     
     
-// MARK: - Google Sign In
+    // MARK: - Google Sign In
     
     func googleOauth() async throws {
-            // google sign in
-            guard let clientID = FirebaseApp.app()?.options.clientID else {
-                fatalError("no firbase clientID found")
-            }
-
-            // Create Google Sign In configuration object.
-            let config = GIDConfiguration(clientID: clientID)
-            GIDSignIn.sharedInstance.configuration = config
-            
-            //get rootView
-            let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-            guard let rootViewController = scene?.windows.first?.rootViewController
-            else {
-                fatalError("There is no root view controller!")
-            }
-            
-            //google sign in authentication response
-            let result = try await GIDSignIn.sharedInstance.signIn(
-                withPresenting: rootViewController
-            )
-        
-            let user = result.user
-            guard let idToken = user.idToken?.tokenString else {
-                throw LoginErrors.GoogleAuthFail
-            }
-            
-            // Firebase auth
-            let credential = GoogleAuthProvider.credential(
-                withIDToken: idToken, accessToken: user.accessToken.tokenString
-            )
-        
-            await fetchUser()
-        
+        // Google sign in
+        guard let clientID = FirebaseApp.app()?.options.clientID else {
+            fatalError("no firbase clientID found")
         }
         
-        func logout() async throws {
-            GIDSignIn.sharedInstance.signOut()
-            try Auth.auth().signOut()
+        // Create Google Sign In configuration object.
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+        
+        // Get rootView
+        let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        guard let rootViewController = scene?.windows.first?.rootViewController
+        else {
+            fatalError("There is no root view controller!")
         }
+        
+        // Google sign in authentication response
+        let result = try await GIDSignIn.sharedInstance.signIn(
+            withPresenting: rootViewController
+        )
+        
+        let user = result.user
+        guard let idToken = user.idToken?.tokenString else {
+            throw LoginErrors.GoogleAuthFail
+        }
+        
+        // Firebase auth
+        let credential = GoogleAuthProvider.credential(
+            withIDToken: idToken, accessToken: user.accessToken.tokenString
+        )
+        
+        await fetchUser()
+        
+    }
     
-// MARK: - Email Sign In
+    func logout() async throws {
+        GIDSignIn.sharedInstance.signOut()
+        try Auth.auth().signOut()
+    }
+    
+    // MARK: - Email Sign In
     
     func signIn(withEmail email: String, password: String) async throws {
         do {
@@ -92,12 +89,9 @@ class AuthenticationModel: ObservableObject {
     func createUser(withEmail email: String, password: String, fullname: String) async throws{
         do{
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
-//            self.userSession = result.user
             let user = User(id: result.user.uid, fullname: fullname, email: email, googleSignIn: false, emailSignIn: true)
             let encodedUser = try Firestore.Encoder().encode(user)
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
-//            userId = result.user.uid
-//            await fetchUser()
         } catch{
             print("DEBUG: ERROR TO create user with error \(error.localizedDescription)")
         }
@@ -105,10 +99,9 @@ class AuthenticationModel: ObservableObject {
     
     func signOut() {
         do{
-//            try GIDSignIn.sharedInstance.signOut() //signs out google sign in
-            try Auth.auth().signOut()   //signs out on firebase
-            self.userSession = nil      //signs out and wipes user data
-            self.currrentUser = nil     //wipes out current user data model
+            try Auth.auth().signOut()   // signs out on Firebase
+            self.userSession = nil      // signs out and wipes user data
+            self.currrentUser = nil     // wipes out current user data model
         }
         catch{
             print ("DEBUG: Failed to sign out with error \(error.localizedDescription)")
@@ -126,8 +119,7 @@ class AuthenticationModel: ObservableObject {
     func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         userId = uid
-//        guard let snapshot = try? await Firestore.firestore().collection("test_Authentication_users").document(uid).getDocument() else { return }
-       guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
+        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
         self.currrentUser = try? snapshot.data(as: User.self)
         print("DEBUG: CURRENT USER IS \(String(describing: self.currrentUser ?? nil))")
     }

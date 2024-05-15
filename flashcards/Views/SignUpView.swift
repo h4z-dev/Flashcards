@@ -1,8 +1,5 @@
 //
 //  SignUpView.swift
-//  flashcards
-//
-//  Created by Harris Vandenberg on 5/5/2024.
 //
 
 import SwiftUI
@@ -16,13 +13,13 @@ struct SignUpView: View {
     @State private var password: String = ""
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var authModel: AuthenticationModel
-
+    
     var body: some View {
         VStack{
             // Icon
             Image(.iconRoundrect)
                 .resizable()
-                .scaledToFill() 
+                .scaledToFill()
                 .frame(width: 150, height: 100)
                 .padding(.vertical, 32)
         }
@@ -62,9 +59,9 @@ struct SignUpView: View {
                         .font(.footnote)
                 }
                 
-            SecureField("Confirm Password", text: $cpassword)
-                .font(.system(size: 14))
-                .padding(.horizontal)
+                SecureField("Confirm Password", text: $cpassword)
+                    .font(.system(size: 14))
+                    .padding(.horizontal)
                 if !password.isEmpty && !cpassword.isEmpty {
                     if password == cpassword {
                         Image(systemName: "checkmark.circle.fill")
@@ -97,7 +94,7 @@ struct SignUpView: View {
                     fullname: Name
                 )
                 dismiss()
-
+                
             }
         } label: {
             HStack{
@@ -109,10 +106,10 @@ struct SignUpView: View {
             .frame(width: UIScreen.main.bounds.width - 32, height: 48)
         }
         .background(Color(.systemBlue))
-            .cornerRadius(10)
-            .disabled(!formIsValid)
-            .opacity(formIsValid ? 1.0 : 0.3)
-            .padding(.top, 24)
+        .cornerRadius(10)
+        .disabled(!formIsValid)
+        .opacity(formIsValid ? 1.0 : 0.3)
+        .padding(.top, 24)
         
         Spacer()
         

@@ -1,8 +1,5 @@
 //
 //  ModifyCardView.swift
-//  flashcards
-//
-//  Created by Harris Vandenberg on 13/5/2024.
 //
 
 import SwiftUI

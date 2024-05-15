@@ -1,8 +1,5 @@
 //
 //  Card.swift
-//  flashcards
-//
-//  Created by Jacob Goodridge on 10/5/2024.
 //
 
 import Foundation

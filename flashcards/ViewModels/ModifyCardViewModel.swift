@@ -1,6 +1,6 @@
 //
 //  ModifyCardViewModel.swift
-//  flashcards
+//
 
 
 import Foundation

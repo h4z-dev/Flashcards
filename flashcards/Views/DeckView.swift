@@ -27,8 +27,6 @@ struct DeckView: View {
                                         Text("Edit")
                                             .font(.title.weight(.semibold))
                                             .padding()
-//                                            .foregroundColor(foregroundColor)
-//                                            .background(backgroundColor)
                                             .clipShape(RoundedRectangle(cornerRadius: 15))
                                             .shadow(radius: 1.5, x: 0, y: 1)
                                     }
@@ -44,10 +42,6 @@ struct DeckView: View {
                         })
                         .listRowBackground(Color(.clear))
                     }.padding()
-                    //Causing crashes
-//                        .toolbar{
-//                            EditButton()
-//                        }
                         .listStyle(PlainListStyle())
                 } else {
                     if (!viewModel.isEmpty()) {
