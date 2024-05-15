@@ -1,8 +1,5 @@
 //
 //  HomeView.swift
-//  flashcards
-//
-//  Created by Harris Vandenberg on 29/4/2024.
 //
 
 import SwiftUI

@@ -1,8 +1,5 @@
 //
 //  Flashcard.swift
-//  flashcards
-//
-//  Created by Jacob Goodridge on 5/5/2024.
 //
 
 import Foundation
@@ -58,14 +55,6 @@ struct Deck {
     func count() -> Int {
         return cards.count
     }
-    
-//    mutating func swapIndexes (fromOffsets: IndexSet, toOffSet: Int) {
-//        fromOffsets.forEach { index in
-//            var tempIndex = cards[index].index
-//            cards[index].index = cards[toOffSet].index
-//            cards[toOffSet].index = tempIndex
-//        }
-//    }
     
     mutating func sortDeck() {
         cards = cards.sorted { $0.index < $1.index }

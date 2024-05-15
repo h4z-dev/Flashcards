@@ -1,8 +1,5 @@
 //
 //  HomeViewModel.swift
-//  flashcards
-//
-//  Created by Jacob Goodridge on 5/5/2024.
 //
 
 import Foundation
@@ -19,11 +16,6 @@ class HomeViewModel: ObservableObject {
     @AppStorage("userId") var userId: String = ""
     
     init() {
-        //        self.authModel = authModel
-        //        flashcard.add(front: "test1", back: "test2")
-        //        flashcard.add(front: "aaa", back: "bbb")
-        //        flashcard.add(front: "111", back: "222")
-        //        print(flashcard.toString())
         Task {
             await fetchDeckNames()
             await getCards(deckId: "0")
@@ -125,43 +117,6 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    //    func fireStoreExample() async {
-    //        // Add a new document with a generated ID
-    //        do {
-    //            let ref = try await db.collection("users").addDocument(data: [
-    //                "first": "Ada",
-    //                "last": "Lovelace",
-    //                "born": 1815
-    //            ])
-    //            print("Document added with ID: \(ref.documentID)")
-    //        } catch {
-    //            print("Error adding document: \(error)")
-    //        }
-    //
-    //        // Add a second document with a generated ID.
-    //        do {
-    //            let ref = try await db.collection("users").addDocument(data: [
-    //                "first": "Alan",
-    //                "middle": "Mathison",
-    //                "last": "Turing",
-    //                "born": 1912
-    //            ])
-    //            print("Document added with ID: \(ref.documentID)")
-    //        } catch {
-    //            print("Error adding document: \(error)")
-    //        }
-    //
-    //        do {
-    //            let snapshot = try await db.collection("users").getDocuments()
-    //            for document in snapshot.documents {
-    //                print("\(document.documentID) => \(document.data())")
-    //            }
-    //        } catch {
-    //            print("Error getting documents: \(error)")
-    //        }
-    //
-    //    }
-    
     func addButtonPressed() {
         isAddingDeck.toggle()
     }
@@ -185,12 +140,4 @@ class HomeViewModel: ObservableObject {
             self.deckHeaders = deckHeaders
         }
     }
-    
-    ///
-    /// - Inputs:
-    ///     `deckName`, name of the deck.    `String`
-    //    func confirmDelete(_ deckName: String) {
-    //        deleteDeck = deckName
-    //        showAlert.toggle()
-    //    }
 }
