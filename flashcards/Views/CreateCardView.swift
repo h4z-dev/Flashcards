@@ -33,7 +33,7 @@ struct CreateCardView: View {
                 .cornerRadius(8)
                 .padding(.horizontal)
             Button {
-                Task{
+                Task {
                     await deckViewModel.createNewCard(front: viewModel.front, back: viewModel.back)
                     dismiss()
                 }

@@ -25,7 +25,7 @@ class AuthenticationModel: ObservableObject {
     
     init() {
         self.userSession = Auth.auth().currentUser
-        Task{
+        Task {
             await fetchUser()
         }
     }
@@ -81,13 +81,13 @@ class AuthenticationModel: ObservableObject {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
             await fetchUser()
-        } catch{
+        } catch {
             print("DEBUG: unable to login user with error: \(error.localizedDescription)")
         }
     }
     
-    func createUser(withEmail email: String, password: String, fullname: String) async throws{
-        do{
+    func createUser(withEmail email: String, password: String, fullname: String) async throws {
+        do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             let user = User(id: result.user.uid, fullname: fullname, email: email, googleSignIn: false, emailSignIn: true)
             let encodedUser = try Firestore.Encoder().encode(user)
@@ -103,11 +103,11 @@ class AuthenticationModel: ObservableObject {
             self.userSession = nil      // signs out and wipes user data
             self.currrentUser = nil     // wipes out current user data model
         }
-        catch{
+        catch {
             print ("DEBUG: Failed to sign out with error \(error.localizedDescription)")
         }
         print("user should be signed out:")
-        if (self.userSession != nil){
+        if (self.userSession != nil) {
             print("User is still signed in: \(String(describing: self.currrentUser ?? nil))")
         }
     }
