@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct User: Identifiable, Codable{
+struct User: Identifiable, Codable {
     let id: String
     let fullname: String
     let email: String
@@ -14,7 +14,7 @@ struct User: Identifiable, Codable{
     
     var initals: String {
         let formatter = PersonNameComponentsFormatter()
-        if let components = formatter.personNameComponents(from: fullname){
+        if let components = formatter.personNameComponents(from: fullname) {
             formatter.style = .abbreviated
             return formatter.string(from: components)
         }
