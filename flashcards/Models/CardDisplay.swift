@@ -1,8 +1,5 @@
 //
 //  CardDisplay.swift
-//  flashcards
-//
-//  Created by Jacob Goodridge on 12/5/2024.
 //
 
 import Foundation
@@ -14,7 +11,7 @@ struct CardDisplayFront: View {
     var index: Int
     @State var currentIndex: Int = 0
     @State var flipped: Bool = false
-
+    
     @EnvironmentObject private var deckModel: DeckViewModel
     
     init(text: String, color: Color, index: Int) {
@@ -33,9 +30,7 @@ struct CardDisplayFront: View {
                         Angle(degrees: flipped && index == deckModel.deck.cards.count-1 ? Double(90) : Double()),
                         axis: (x: Double(0.0), y: Double(1.0), z: Double(0.0))
                     )
-            //        .opacity(flipped && index == deckModel.deck.cards.count-1  ? 0 : 1)
                     .animation(flipped && index == deckModel.deck.cards.count-1  ? .linear(duration: 0.15) : .linear(duration:0.15).delay(0.15), value: flipped && index == deckModel.deck.cards.count-1 )
-//                    .rotationEffect(Angle(degrees: Double(index) * 2 - 10))
                     .offset(x: CGFloat(abs((deckModel.deck.cards.count - 1) - index) * 5), y: CGFloat(index * -3))
                     .shadow(color: .gray, radius: 2, x: 0, y: 2)
                     .onReceive(deckModel.$flipped, perform: { flipped in
@@ -76,9 +71,7 @@ struct CardDisplayBack: View {
                         Angle(degrees: flipped && index == deckModel.deck.cards.count-1  ? Double() : Double(90)),
                         axis: (x: Double(0.0), y: Double(1.0), z: Double(0.0))
                     )
-            //        .opacity( flipped && index == deckModel.deck.cards.count-1  ? 1 : 0)
                     .animation(flipped && index == deckModel.deck.cards.count-1  ? .linear(duration: 0.15).delay(0.15) : .linear(duration: 0.15).delay(0.15), value: flipped && index == deckModel.deck.cards.count-1 )
-//                    .rotationEffect(Angle(degrees: Double(index) * 2 - 10))
                     .offset(x: CGFloat(abs((deckModel.deck.cards.count - 1) - index) * 5), y: CGFloat(index * -3))
                     .shadow(color: .gray, radius: 2, x: 0, y: 2)
                     .onReceive(deckModel.$flipped, perform: { flipped in

@@ -1,8 +1,5 @@
 //
 //  LoginView.swift
-//  flashcards
-//
-//  Created  on 5/5/2024.
 //
 
 import SwiftUI
@@ -14,7 +11,6 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var err = ""
-    //    @StateObject var viewModel: ContentViewModel
     @EnvironmentObject var authModel: AuthenticationModel
     @Environment(\.dismiss) var dismiss
     
@@ -88,42 +84,6 @@ struct LoginView: View {
                 .opacity(formIsValid ? 1.0 : 0.3)
                 .cornerRadius(10)
                 .padding(.top, 24)
-                
-                // Google sign in
-//                Button {
-//                    Task {
-//                        do {
-//                            try await authModel.googleOauth()
-//                        } catch let e {
-//                            print(e)
-//                            err = e.localizedDescription
-//                        }
-//                    }
-//                } label: {
-//                    Image("iosNeutralGoogleSignIn")
-//                        .resizable()
-//                        .padding(.top, 12)
-//                        .padding(.horizontal)
-////                    Text("Sign in with Google")
-//                }
-//                
-//                GoogleSignInButton() {
-//                    Task {
-//                        do {
-//                            try await authModel.googleOauth()
-//                        } catch let e {
-//                            print(e)
-//                            err = e.localizedDescription
-//                        }
-//                        if (authModel.userSession != nil) {
-//                            dismiss()
-//                        }
-//                    }
-//                }
-//                .padding(.horizontal)
-//                .padding(.top, 12)
-//                .clipShape(RoundedRectangle(cornerRadius: 200))
-//                Text(err).foregroundColor(.red).font(.caption)
                 
                 //pushes signup to bottom of screen
                 Spacer()

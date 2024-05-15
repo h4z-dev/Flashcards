@@ -1,17 +1,13 @@
 //
 //  CreateCardView.swift
-//  flashcards
 //
-//  Created  on 12/5/2024.
-//
-
 import SwiftUI
 
 struct CreateCardView: View {
     @StateObject var viewModel: CreateCardViewModel
     @StateObject var deckViewModel: DeckViewModel
     @Environment(\.dismiss) var dismiss
-
+    
     init(deckModel : DeckViewModel) {
         _viewModel = StateObject(wrappedValue: CreateCardViewModel())
         _deckViewModel = StateObject(wrappedValue: deckModel)

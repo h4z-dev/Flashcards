@@ -1,8 +1,5 @@
 //
 //  FloatingActionButton.swift
-//  flashcards
-//
-//  Created by Jacob Goodridge on 12/5/2024.
 //
 
 import Foundation
@@ -19,7 +16,7 @@ struct FloatingActionButton: View {
     var backgroundColor: Color = .accentColor
     var action: () -> Void
     var foregroundColor: Color = .white
-
+    
     var body: some View {
         Button(action: action) {
             Image(systemName: iconName)
@@ -41,7 +38,7 @@ struct FloatingActionNavigationLink<Destination: View>: View {
     var backgroundColor: Color = .accentColor
     var destination: Destination
     var foregroundColor: Color = .white
-
+    
     var body: some View {
         NavigationLink(destination: destination) {
             Image(systemName: iconName)

@@ -67,7 +67,7 @@ class DeckViewModel: ObservableObject {
         }
         return deck
     }
-
+    
     
     func createNewCard(front: String, back: String) async {
         do {
@@ -90,7 +90,7 @@ class DeckViewModel: ObservableObject {
             print("Error creating new card: \(error)")
         }
     }
-
+    
     func deleteCard(index: Int) {
         Task {
             await deleteCardFromDB(index)
@@ -104,8 +104,8 @@ class DeckViewModel: ObservableObject {
             updateCardIndex()
         }
     }
-
-
+    
+    
     
     private func deleteCardFromDB(_ index: Int) async {
         do {
@@ -186,21 +186,21 @@ class DeckViewModel: ObservableObject {
     
     func moveCard(from source: IndexSet, to destination: Int) {
         guard let sourceIndex = source.first else { return }
-
+        
         if (sourceIndex > deck.cards.count-1 || destination > deck.cards.count-1) {
             return
         }
         
         let movedCard = deck.cards.remove(at: sourceIndex)
         deck.cards.insert(movedCard, at: destination)
-
+        
         for (index, _) in deck.cards.enumerated() {
             deck.cards[index].index = index
         }
-
+        
         updateCardIndicesInFirestore()
     }
-
+    
     func updateCardIndicesInFirestore() {
         for card in deck.cards {
             let cardIdString: String = card.id.uuidString
