@@ -1,8 +1,5 @@
 //
 //  debugTestingView.swift
-//  flashcards
-//
-//  Created  on 12/5/2024.
 //
 
 import SwiftUI

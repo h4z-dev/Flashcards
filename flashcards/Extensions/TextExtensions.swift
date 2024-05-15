@@ -1,8 +1,5 @@
 //
 //  TextExtensions.swift
-//  flashcards
-//
-//  Created  on 11/5/2024.
 //
 
 import Foundation
