@@ -30,50 +30,6 @@ class AuthenticationModel: ObservableObject {
         }
     }
     
-    
-    // MARK: - Google Sign In
-    
-    func googleOauth() async throws {
-        // Google sign in
-        guard let clientID = FirebaseApp.app()?.options.clientID else {
-            fatalError("no firbase clientID found")
-        }
-        
-        // Create Google Sign In configuration object.
-        let config = GIDConfiguration(clientID: clientID)
-        GIDSignIn.sharedInstance.configuration = config
-        
-        // Get rootView
-        let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        guard let rootViewController = scene?.windows.first?.rootViewController
-        else {
-            fatalError("There is no root view controller!")
-        }
-        
-        // Google sign in authentication response
-        let result = try await GIDSignIn.sharedInstance.signIn(
-            withPresenting: rootViewController
-        )
-        
-        let user = result.user
-        guard let idToken = user.idToken?.tokenString else {
-            throw LoginErrors.GoogleAuthFail
-        }
-        
-        // Firebase auth
-        let credential = GoogleAuthProvider.credential(
-            withIDToken: idToken, accessToken: user.accessToken.tokenString
-        )
-        
-        await fetchUser()
-        
-    }
-    
-    func logout() async throws {
-        GIDSignIn.sharedInstance.signOut()
-        try Auth.auth().signOut()
-    }
-    
     // MARK: - Email Sign In
     
     func signIn(withEmail email: String, password: String) async throws {
@@ -121,7 +77,6 @@ class AuthenticationModel: ObservableObject {
         userId = uid
         guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
         self.currrentUser = try? snapshot.data(as: User.self)
-        print("DEBUG: CURRENT USER IS \(String(describing: self.currrentUser ?? nil))")
     }
     
     func isAuthenticated() -> Bool {

@@ -150,6 +150,10 @@ class DeckViewModel: ObservableObject {
     
     /// returns the current card at the top of the deck to be displayed
     func getCurrentCard() {
+        if ( placeInDeck > deck.cards.count - 1) {
+            placeInDeck = deck.cards.count - 1
+        }
+        
         if(isEmpty()) {
             return
         }
