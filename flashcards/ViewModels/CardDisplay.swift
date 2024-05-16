@@ -47,6 +47,7 @@ struct CardDisplayFront: View {
         }
     }
 }
+
 struct CardDisplayBack: View {
     var text: String = ""
     var color: Color = .white

@@ -111,16 +111,16 @@
 		6353F2BE2BE7161D005B3573 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6353F2D72BE72B31005B3573 /* LoginView.swift */,
-				63E8F84F2BDF4B9B008A57C4 /* HomeView.swift */,
 				6353F2D52BE72741005B3573 /* ContentView.swift */,
-				6353F2D92BE72B8E005B3573 /* SignUpView.swift */,
-				16F642A82BE9B68300A064D0 /* DeckView.swift */,
-				639B739B2BEDBA17004681AD /* CreateDeckView.swift */,
 				63E3DFB32BF0566400EE97BA /* CreateCardView.swift */,
+				639B739B2BEDBA17004681AD /* CreateDeckView.swift */,
 				63E3DFBA2BF09C5800EE97BA /* debugTestingView.swift */,
+				16F642A82BE9B68300A064D0 /* DeckView.swift */,
 				16198C962BF0FB3700E7269B /* FloatingActionButton.swift */,
+				63E8F84F2BDF4B9B008A57C4 /* HomeView.swift */,
+				6353F2D72BE72B31005B3573 /* LoginView.swift */,
 				6354C6602BF236EF0056B881 /* ModifyCardView.swift */,
+				6353F2D92BE72B8E005B3573 /* SignUpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -128,12 +128,13 @@
 		6353F2C02BE7163A005B3573 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				162BE1802BE72591009E31BD /* HomeViewModel.swift */,
+				16198C922BF0B8A400E7269B /* CardDisplay.swift */,
 				6353F2EA2BE75E2C005B3573 /* ContentViewModel.swift */,
-				6353F2EC2BE76003005B3573 /* LoginViewModel.swift */,
-				16F642AA2BE9B69300A064D0 /* DeckViewModel.swift */,
-				6381E8E02BEDE420006DBBC9 /* CreateDeckViewModel.swift */,
 				63E3DFB82BF07D7D00EE97BA /* CreateCardViewModel.swift */,
+				6381E8E02BEDE420006DBBC9 /* CreateDeckViewModel.swift */,
+				16F642AA2BE9B69300A064D0 /* DeckViewModel.swift */,
+				162BE1802BE72591009E31BD /* HomeViewModel.swift */,
+				6353F2EC2BE76003005B3573 /* LoginViewModel.swift */,
 				6362788C2BF2DCC90013FBC4 /* ModifyCardViewModel.swift */,
 			);
 			path = ViewModels;
@@ -143,11 +144,10 @@
 			isa = PBXGroup;
 			children = (
 				6353F2CC2BE721D2005B3573 /* AuthenticationModel.swift */,
-				6353F2D12BE7252A005B3573 /* User.swift */,
+				16D47F5A2BEDE1A40076AFF3 /* Card.swift */,
 				162BE1842BE74433009E31BD /* Deck.swift */,
 				6352D67A2BEF287700EEBFB9 /* DeckHeader.swift */,
-				16D47F5A2BEDE1A40076AFF3 /* Card.swift */,
-				16198C922BF0B8A400E7269B /* CardDisplay.swift */,
+				6353F2D12BE7252A005B3573 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -170,10 +170,10 @@
 		63E8F8412BDF4B9B008A57C4 = {
 			isa = PBXGroup;
 			children = (
-				634DFAAA2BE7A2CA00BE375C /* GoogleService-Info.plist */,
 				63E8F84C2BDF4B9B008A57C4 /* flashcards */,
-				63E8F84B2BDF4B9B008A57C4 /* Products */,
 				6353F2CE2BE724C3005B3573 /* Frameworks */,
+				634DFAAA2BE7A2CA00BE375C /* GoogleService-Info.plist */,
+				63E8F84B2BDF4B9B008A57C4 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -188,15 +188,15 @@
 		63E8F84C2BDF4B9B008A57C4 /* flashcards */ = {
 			isa = PBXGroup;
 			children = (
+				63E8F8512BDF4B9C008A57C4 /* Assets.xcassets */,
 				6353F2E52BE755DF005B3573 /* Errors */,
 				1658EB702BF1884000AAFB00 /* Extensions */,
+				63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */,
 				6353F2E02BE745D7005B3573 /* Info.plist */,
 				6353F2C12BE71645005B3573 /* Models */,
+				63E8F8532BDF4B9C008A57C4 /* Preview Content */,
 				6353F2C02BE7163A005B3573 /* ViewModels */,
 				6353F2BE2BE7161D005B3573 /* Views */,
-				63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */,
-				63E8F8512BDF4B9C008A57C4 /* Assets.xcassets */,
-				63E8F8532BDF4B9C008A57C4 /* Preview Content */,
 			);
 			path = flashcards;
 			sourceTree = "<group>";
