@@ -43,6 +43,9 @@ struct DeckView: View {
                         .listRowBackground(Color(.clear))
                     }.padding()
                         .listStyle(PlainListStyle())
+                        .refreshable {
+                            viewModel.loadCards()
+                        }
                 } else {
                     if (!viewModel.isEmpty()) {
                         VStack {

@@ -23,5 +23,5 @@ struct User: Identifiable, Codable {
 }
 
 extension User {
-    static var MOCK_USER = User(id: NSUUID().uuidString, fullname: "Harris Vandenberg", email: "testing123@gmail.com", googleSignIn: false, emailSignIn: true)
+    static var MOCK_USER = User(id: NSUUID().uuidString, fullname: "Harris Vandenberg", email: "JacobGoodridge@gmail.com", googleSignIn: false, emailSignIn: true)
 }
