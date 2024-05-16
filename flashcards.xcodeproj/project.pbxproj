@@ -111,6 +111,7 @@
 		6353F2BE2BE7161D005B3573 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				16198C922BF0B8A400E7269B /* CardDisplay.swift */,
 				6353F2D52BE72741005B3573 /* ContentView.swift */,
 				63E3DFB32BF0566400EE97BA /* CreateCardView.swift */,
 				639B739B2BEDBA17004681AD /* CreateDeckView.swift */,
@@ -121,6 +122,7 @@
 				6353F2D72BE72B31005B3573 /* LoginView.swift */,
 				6354C6602BF236EF0056B881 /* ModifyCardView.swift */,
 				6353F2D92BE72B8E005B3573 /* SignUpView.swift */,
+				63E8F8532BDF4B9C008A57C4 /* Preview Content */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -128,7 +130,6 @@
 		6353F2C02BE7163A005B3573 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				16198C922BF0B8A400E7269B /* CardDisplay.swift */,
 				6353F2EA2BE75E2C005B3573 /* ContentViewModel.swift */,
 				63E3DFB82BF07D7D00EE97BA /* CreateCardViewModel.swift */,
 				6381E8E02BEDE420006DBBC9 /* CreateDeckViewModel.swift */,
@@ -194,7 +195,6 @@
 				63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */,
 				6353F2E02BE745D7005B3573 /* Info.plist */,
 				6353F2C12BE71645005B3573 /* Models */,
-				63E8F8532BDF4B9C008A57C4 /* Preview Content */,
 				6353F2C02BE7163A005B3573 /* ViewModels */,
 				6353F2BE2BE7161D005B3573 /* Views */,
 			);
