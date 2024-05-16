@@ -28,7 +28,7 @@ struct CardDisplayFront: View {
                 RoundedRectangle(cornerRadius: 8)
                     .foregroundStyle(color)
                     .rotation3DEffect(
-                        Angle(degrees: flipped && index == deckModel.deck.cards.count-1 ? Double(90) : Double()),
+                        Angle(degrees: flipped && index == deckModel.deck.cards.count - 1 ? Double(90) : Double()),
                         axis: (x: Double(0.0), y: Double(1.0), z: Double(0.0))
                     )
                     .animation(flipped && index == deckModel.deck.cards.count - 1 ? .linear(duration: 0.15) : .linear(duration:0.15).delay(0.15), value: flipped && index == deckModel.deck.cards.count - 1)
@@ -38,7 +38,7 @@ struct CardDisplayFront: View {
                         self.flipped = flipped
                     })
                     .onReceive(deckModel.$currentCard, perform: { currentCard in
-                        withAnimation(.easeInOut){
+                        withAnimation(.easeInOut) {
                             self.currentIndex = currentCard.index
                         }
                     })
@@ -72,17 +72,17 @@ struct CardDisplayBack: View {
                 RoundedRectangle(cornerRadius: 8)
                     .foregroundStyle(color)
                     .rotation3DEffect(
-                        Angle(degrees: flipped && index == deckModel.deck.cards.count-1  ? Double() : Double(90)),
+                        Angle(degrees: flipped && index == deckModel.deck.cards.count-1 ? Double() : Double(90)),
                         axis: (x: Double(0.0), y: Double(1.0), z: Double(0.0))
                     )
-                    .animation(flipped && index == deckModel.deck.cards.count-1  ? .linear(duration: 0.15).delay(0.15) : .linear(duration: 0.15).delay(0.15), value: flipped && index == deckModel.deck.cards.count-1 )
+                    .animation(flipped && index == deckModel.deck.cards.count-1 ? .linear(duration: 0.15).delay(0.15) : .linear(duration: 0.15).delay(0.15), value: flipped && index == deckModel.deck.cards.count - 1)
                     .offset(x: CGFloat(abs((deckModel.deck.cards.count - 1) - index) * 5), y: CGFloat(index * -3))
                     .shadow(color: .gray, radius: 2, x: 0, y: 2)
                     .onReceive(deckModel.$flipped, perform: { flipped in
                         self.flipped = flipped
                     })
                     .onReceive(deckModel.$currentCard, perform: { currentCard in
-                        withAnimation(.easeInOut){
+                        withAnimation(.easeInOut) {
                             self.currentIndex = currentCard.index
                         }
                     })
