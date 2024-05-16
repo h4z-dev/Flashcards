@@ -5,8 +5,10 @@
 import Foundation
 import SwiftUI
 
-//https://dallinjared.medium.com/swiftui-tutorial-contrasting-text-over-background-color-2e7af57c1b20
+// https://dallinjared.medium.com/swiftui-tutorial-contrasting-text-over-background-color-2e7af57c1b20
 
+/// These colour extensions allow us to select an appropriate text colour with good contrast for the backround they are placed on. This ensures readability.
+/// This can be seen on elements that can change colour, like each deck listed when opening the app (`HomeView.swift`)
 extension Text {
     func getContrastText(backgroundColor: Color) -> some View {
         var r, g, b, a: CGFloat
