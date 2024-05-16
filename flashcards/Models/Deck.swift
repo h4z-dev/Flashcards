@@ -60,7 +60,7 @@ struct Deck {
     func toString() -> String {
         var out: String = ""
         for i in 0...cards.count - 1 {
-            out += "Card \(i + 1): \(cards[i].toString())\n"
+            out += "Card \(i + 1): \(cards[i].toString())"
         }
         return out
     }
