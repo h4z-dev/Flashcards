@@ -41,7 +41,8 @@ struct DeckView: View {
                             }
                         })
                         .listRowBackground(Color(.clear))
-                    }.padding()
+                    }
+                    .padding()
                         .listStyle(PlainListStyle())
                         .refreshable {
                             viewModel.loadCards()

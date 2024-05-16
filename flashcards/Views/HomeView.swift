@@ -63,7 +63,7 @@ struct HomeView: View {
                         .onDelete(perform: deleteDeck)
                     }
                     .refreshable {
-                        Task{
+                        Task {
                             await viewModel.fetchDeckNames()
                         }
                     }
