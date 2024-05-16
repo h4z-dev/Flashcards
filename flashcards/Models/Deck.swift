@@ -49,13 +49,6 @@ struct Deck {
         return dict
     }
     
-    /// Returns number of flashcards in the deck
-    /// Output:
-    ///     Total number of flashcards as `Int`
-    func count() -> Int {
-        return cards.count
-    }
-    
     mutating func sortDeck() {
         cards = cards.sorted { $0.index < $1.index }
     }
