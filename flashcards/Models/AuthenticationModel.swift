@@ -13,7 +13,9 @@ import FirebaseCore
 import SwiftUI
 
 protocol AuthenticationFormProtocol {
-    var formIsValid: Bool {get}
+    var formIsValid: Bool {
+        get
+    }
 }
 
 @MainActor
