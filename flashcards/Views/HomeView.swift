@@ -62,6 +62,11 @@ struct HomeView: View {
                         }
                         .onDelete(perform: deleteDeck)
                     }
+                    .refreshable {
+                        Task {
+                            await viewModel.fetchDeckNames()
+                        }
+                    }
                     .padding(.top, 0)
                     .listStyle(PlainListStyle())
                 }

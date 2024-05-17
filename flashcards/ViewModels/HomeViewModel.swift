@@ -69,13 +69,13 @@ class HomeViewModel: ObservableObject {
                     deckHeaderStack.append(DeckHeader(name: deckName, symbol: deckLogo, color: Color(ColorExtensions().returnColorValueFromRaw(input: deckColorInt))))
                 } else {
                     deckHeaderStack.append(DeckHeader(name: name))
-                    print("OLD DECK DETECTED! \(name)")
                 }
             }
         } catch {
             print("Error retrieving deck names: \(error)")
         }
         DispatchQueue.main.async {
+            [deckHeaderStack] in
             self.deckHeaders = deckHeaderStack
         }
     }
@@ -113,6 +113,7 @@ class HomeViewModel: ObservableObject {
         }
         deckHeaders.append(DeckHeader(name: deckName, symbol: deckLogo, color: deckColor))
         DispatchQueue.main.async{
+            [deckHeaders] in
             self.deckHeaders = deckHeaders
         }
     }
@@ -137,6 +138,7 @@ class HomeViewModel: ObservableObject {
             print("Error deleting deck: \(error)")
         }
         DispatchQueue.main.async{
+            [deckHeaders] in
             self.deckHeaders = deckHeaders
         }
     }
