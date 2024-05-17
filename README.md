@@ -1,2 +1,3 @@
 # Assignment 3
-https://github.com/harrisVandenbergUTS/assignment3
+
+iOS flashcard management app written in Swift and SwiftUI
