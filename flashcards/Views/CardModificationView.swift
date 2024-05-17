@@ -4,12 +4,15 @@
 
 import SwiftUI
 
-struct CardsModificationView: View {
+/// View for modifying a flashcard.
+struct CardModificationView: View {
     @StateObject var viewModel: CardsModificationViewModel
     @EnvironmentObject private var deckModel: DeckViewModel
     @Environment(\.dismiss) var dismiss
     var title: String
     
+    /// Initialises the view with some given title
+    /// - Parameter title: Title for the view, `String`
     init(title: String) {
         _viewModel = StateObject(wrappedValue: CardsModificationViewModel())
         self.title = title
@@ -52,6 +55,6 @@ struct CardsModificationView: View {
 }
 
 #Preview {
-    CardsModificationView(title: "Create New Card Dynamic!")
+    CardModificationView(title: "Create New Card Dynamic!")
         .environmentObject(DeckViewModel(deckHeader: DeckHeader(name: "0")))
 }

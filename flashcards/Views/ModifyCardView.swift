@@ -4,6 +4,7 @@
 
 import SwiftUI
 
+/// View where users can modify a flashcard.
 struct ModifyCardView: View {
     
     @StateObject var viewModel : ModifyCardViewModel

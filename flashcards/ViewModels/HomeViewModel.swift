@@ -7,6 +7,7 @@ import FirebaseCore
 import FirebaseFirestore
 import SwiftUI
 
+/// Handles the logic between HomeView, and decks of flashcards and their storage in firestore.
 class HomeViewModel: ObservableObject {
     let db = Firestore.firestore()
     var deck = Deck()
@@ -15,6 +16,7 @@ class HomeViewModel: ObservableObject {
     
     @AppStorage("userId") var userId: String = ""
     
+    /// Fetches deck names and cards.
     init() {
         Task {
             await fetchDeckNames()
@@ -22,6 +24,7 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    /// Adds the current decks and their flashcards to Fiirestore
     func addCards() async {
         do {
             try await db.collection("users").document(userId).collection("decks").document("0").setData(deck.toDict())
@@ -30,6 +33,8 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    /// Retrieves cards for some deck from Firestore and constructs a `Deck` on-device.
+    ///  - Parameter deckId: The ID of the deck to fetch, `String`
     func getCards(deckId: String) async {
         do {
             // Attempt to fetch the whole deck first, so we can catch an error early if it occurs.
@@ -51,6 +56,7 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    /// Fetches deck names from Firestore and updates `self.deckHeaders`, a property of this class.
     func fetchDeckNames() async {
         var deckHeaderStack: [DeckHeader] = []
         do {
@@ -80,6 +86,11 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    /// Creates a new deck in Firestore with the specified parameters.
+    /// - Parameters:
+    ///   - deckName: The name of the new deck. `String`
+    ///   - deckColor: The color of the new deck. `Color`
+    ///   - deckLogo: The logo of the new deck. `String`
     func createNewDeck(deckName: String, deckColor: Color, deckLogo: String) async throws {
         var deckHeaders = self.deckHeaders
         do {
@@ -90,7 +101,7 @@ class HomeViewModel: ObservableObject {
             }
             for name in names {
                 if(name == deckName) {
-                    throw LoginErrors.deckALreadyExists
+                    throw SystemErrors.deckALreadyExists
                 }
             }
         } catch {
@@ -98,7 +109,6 @@ class HomeViewModel: ObservableObject {
             return
         }
         do {
-            //            let colorComponents = UIColor(deckColor).cgColor.components {
             try await db.collection("users").document(userId).collection("decks").document(deckName).setData([
                 "DECK_HEADER" : [
                     "deckName" : deckName,
@@ -118,13 +128,13 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    /// Toggle the flag that determines if the add button is pressed.
     func addButtonPressed() {
         isAddingDeck.toggle()
     }
     
     /// Deletes specified Deck and updates the content visible to the user.
-    /// - Inputs:
-    ///     `deckName`, name of the deck.    `String`
+    /// - Parameter deckName: Name of the deck to delete.  `String`
     func deleteDeck(_ deckName: String) async {
         var deckHeaders = self.deckHeaders
         do {

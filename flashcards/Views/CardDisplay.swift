@@ -15,11 +15,15 @@ struct CardDisplayFront: View {
     
     @EnvironmentObject private var deckModel: DeckViewModel
     
+    /// Initialises the front view of the card
+    /// - Parameters:
+    ///   - text: Text to be displayed on the front of the card, `String`
+    ///   - color: Colour of the card, `Color`
+    ///   - index: Position of the card in the deck, `Int`
     init(text: String, color: Color, index: Int) {
         self.text = text
         self.color = color
         self.index = index
-        
     }
     
     var body: some View {
@@ -60,6 +64,11 @@ struct CardDisplayBack: View {
     
     @EnvironmentObject private var deckModel: DeckViewModel
     
+    /// Initialises the back view of the card
+    /// - Parameters:
+    ///   - text: Text to be displayed on the front of the card, `String`
+    ///   - color: Colour of the card, `Color`
+    ///   - index: Position of the card in the deck, `Int`
     init(text: String, color: Color, index: Int) {
         self.text = text
         self.color = color

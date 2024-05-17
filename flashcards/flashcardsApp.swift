@@ -42,13 +42,3 @@ struct flashcardsApp: App {
         }
     }
 }
-
-//TODO:
-//@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-//@StateObject var viewModel = AuthenticationModel()
-
-//var body: some Scene {
-//WindowGroup {
-//  NavigationView {
-//    ContentView()
-//          .environmentObject(viewModel)

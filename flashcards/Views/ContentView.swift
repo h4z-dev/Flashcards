@@ -5,6 +5,7 @@
 import SwiftUI
 import GoogleSignIn
 
+/// Primary content view of the app, switching the user between the login screen and home view depending on the authentication state of the user managed by `AuthenticationModel`.
 struct ContentView: View {
     
     @EnvironmentObject var authModel: AuthenticationModel
@@ -13,9 +14,9 @@ struct ContentView: View {
         if authModel.isAuthenticated() {
             HomeView()
         } else {
-            // loginScreen
+            /// Display the login screeen
             LoginView().onOpenURL { url in
-                // Handle Google Oauth URL
+                /// Handle Google OAuth URL
                 GIDSignIn.sharedInstance.handle(url)
             }
         }

@@ -11,23 +11,20 @@ struct DeckHeader : Hashable {
     var symbol: String = "rectangle.on.rectangle"   /// Default icon for deck
     var color: Color = .white                       /// Default colour for deck
     
-    /// Set a new name
-    /// Inputs:
-    ///     - `name`, name of the deck, `String`
+    /// Sets a new name for the deck
+    /// - Parameter name: Name of the deck, `String`
     mutating func changeName(name: String) {
         self.name = name
     }
     
-    /// Set a new symbol
-    /// Inputs:
-    ///     - `symbol`, symbol of the deck, `String`
+    /// Sets a new symbol for the deck
+    /// - Parameter symbol: Symbol of the deck, `String`
     mutating func changeSymbol(symbol: String) {
         self.symbol = symbol
     }
     
-    /// Set a new colour
-    /// Inputs:
-    ///     - `color`, colour of the deck, `Color`
+    /// Sets a new colour for the deck
+    /// - Parameter color: Colour of the deck, `Color`
     mutating func changeColor(color: Color) {
         self.color = color
     }
