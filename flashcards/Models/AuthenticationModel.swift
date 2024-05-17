@@ -70,10 +70,6 @@ class AuthenticationModel: ObservableObject {
         }
     }
     
-    func deleteAccount() {
-        
-    }
-    
     func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         userId = uid
