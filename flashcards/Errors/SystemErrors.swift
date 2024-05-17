@@ -1,12 +1,11 @@
 //
-//  LoginErrors.swift
+//  SystemErrors.swift
 //
 
 import Foundation
 
 /// `enum` containing types of errors that can be returned.
-enum LoginErrors: Error {
-    case GoogleAuthFail
+enum SystemErrors: Error {
     case deckALreadyExists
     case cardDoesntExist
 }
