@@ -1,5 +1,5 @@
-# Assignment 3
+# Flashcards
 
 iOS flashcard management app written in Swift and SwiftUI
 
-github repository: https://github.com/harrisVandenbergUTS/Flashcards
+GitHub Repository: https://github.com/harrisVandenbergUTS/Flashcards
