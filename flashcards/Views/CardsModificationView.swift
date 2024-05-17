@@ -1,21 +1,23 @@
 //
 //  CreateCardView.swift
 //
+
 import SwiftUI
 
-struct CreateCardView: View {
-    @StateObject var viewModel: CreateCardViewModel
-    @StateObject var deckViewModel: DeckViewModel
+struct CardsModificationView: View {
+    @StateObject var viewModel: CardsModificationViewModel
+    @EnvironmentObject private var deckModel: DeckViewModel
     @Environment(\.dismiss) var dismiss
+    var title: String
     
-    init(deckModel : DeckViewModel) {
-        _viewModel = StateObject(wrappedValue: CreateCardViewModel())
-        _deckViewModel = StateObject(wrappedValue: deckModel)
+    init(title: String) {
+        _viewModel = StateObject(wrappedValue: CardsModificationViewModel())
+        self.title = title
     }
     
     var body: some View {
         VStack (spacing: 20) {
-            Text("Create new Card")
+            Text(title)
                 .font(.title2)
                 .fontWeight(.bold)
                 .padding(.vertical)
@@ -34,7 +36,7 @@ struct CreateCardView: View {
                 .padding(.horizontal)
             Button {
                 Task {
-                    await deckViewModel.createNewCard(front: viewModel.front, back: viewModel.back)
+                    await deckModel.createNewCard(front: viewModel.front, back: viewModel.back)
                     dismiss()
                 }
             } label: {
@@ -46,10 +48,10 @@ struct CreateCardView: View {
                     .padding(.horizontal)
             }
         }
-        Spacer()
     }
 }
 
 #Preview {
-    CreateCardView(deckModel: DeckViewModel(deckHeader: DeckHeader(name: "0")))
+    CardsModificationView(title: "Create New Card Dynamic!")
+        .environmentObject(DeckViewModel(deckHeader: DeckHeader(name: "0")))
 }
