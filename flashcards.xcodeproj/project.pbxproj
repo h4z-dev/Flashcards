@@ -37,9 +37,8 @@
 		6362788D2BF2DCC90013FBC4 /* ModifyCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6362788C2BF2DCC90013FBC4 /* ModifyCardViewModel.swift */; };
 		6381E8E12BEDE420006DBBC9 /* CreateDeckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6381E8E02BEDE420006DBBC9 /* CreateDeckViewModel.swift */; };
 		639B739C2BEDBA17004681AD /* CreateDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639B739B2BEDBA17004681AD /* CreateDeckView.swift */; };
-		63E3DFB42BF0566400EE97BA /* CreateCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DFB32BF0566400EE97BA /* CreateCardView.swift */; };
-		63E3DFB92BF07D7D00EE97BA /* CreateCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DFB82BF07D7D00EE97BA /* CreateCardViewModel.swift */; };
-		63E3DFBB2BF09C5800EE97BA /* debugTestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DFBA2BF09C5800EE97BA /* debugTestingView.swift */; };
+		63E3DFB42BF0566400EE97BA /* CardsModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DFB32BF0566400EE97BA /* CardsModificationView.swift */; };
+		63E3DFB92BF07D7D00EE97BA /* CardsModificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DFB82BF07D7D00EE97BA /* CardsModificationViewModel.swift */; };
 		63E8F84E2BDF4B9B008A57C4 /* flashcardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */; };
 		63E8F8502BDF4B9B008A57C4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8F84F2BDF4B9B008A57C4 /* HomeView.swift */; };
 		63E8F8522BDF4B9C008A57C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E8F8512BDF4B9C008A57C4 /* Assets.xcassets */; };
@@ -71,9 +70,8 @@
 		6362788C2BF2DCC90013FBC4 /* ModifyCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyCardViewModel.swift; sourceTree = "<group>"; };
 		6381E8E02BEDE420006DBBC9 /* CreateDeckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDeckViewModel.swift; sourceTree = "<group>"; };
 		639B739B2BEDBA17004681AD /* CreateDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDeckView.swift; sourceTree = "<group>"; };
-		63E3DFB32BF0566400EE97BA /* CreateCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCardView.swift; sourceTree = "<group>"; };
-		63E3DFB82BF07D7D00EE97BA /* CreateCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCardViewModel.swift; sourceTree = "<group>"; };
-		63E3DFBA2BF09C5800EE97BA /* debugTestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = debugTestingView.swift; sourceTree = "<group>"; };
+		63E3DFB32BF0566400EE97BA /* CardsModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsModificationView.swift; sourceTree = "<group>"; };
+		63E3DFB82BF07D7D00EE97BA /* CardsModificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsModificationViewModel.swift; sourceTree = "<group>"; };
 		63E8F84A2BDF4B9B008A57C4 /* flashcards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flashcards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E8F84D2BDF4B9B008A57C4 /* flashcardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashcardsApp.swift; sourceTree = "<group>"; };
 		63E8F84F2BDF4B9B008A57C4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -113,9 +111,8 @@
 			children = (
 				16198C922BF0B8A400E7269B /* CardDisplay.swift */,
 				6353F2D52BE72741005B3573 /* ContentView.swift */,
-				63E3DFB32BF0566400EE97BA /* CreateCardView.swift */,
+				63E3DFB32BF0566400EE97BA /* CardsModificationView.swift */,
 				639B739B2BEDBA17004681AD /* CreateDeckView.swift */,
-				63E3DFBA2BF09C5800EE97BA /* debugTestingView.swift */,
 				16F642A82BE9B68300A064D0 /* DeckView.swift */,
 				16198C962BF0FB3700E7269B /* FloatingActionButton.swift */,
 				63E8F84F2BDF4B9B008A57C4 /* HomeView.swift */,
@@ -131,7 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				6353F2EA2BE75E2C005B3573 /* ContentViewModel.swift */,
-				63E3DFB82BF07D7D00EE97BA /* CreateCardViewModel.swift */,
+				63E3DFB82BF07D7D00EE97BA /* CardsModificationViewModel.swift */,
 				6381E8E02BEDE420006DBBC9 /* CreateDeckViewModel.swift */,
 				16F642AA2BE9B69300A064D0 /* DeckViewModel.swift */,
 				162BE1802BE72591009E31BD /* HomeViewModel.swift */,
@@ -302,7 +299,7 @@
 				16198C932BF0B8A400E7269B /* CardDisplay.swift in Sources */,
 				6352D67F2BEFA1C700EEBFB9 /* TextExtensions.swift in Sources */,
 				6362788D2BF2DCC90013FBC4 /* ModifyCardViewModel.swift in Sources */,
-				63E3DFB42BF0566400EE97BA /* CreateCardView.swift in Sources */,
+				63E3DFB42BF0566400EE97BA /* CardsModificationView.swift in Sources */,
 				639B739C2BEDBA17004681AD /* CreateDeckView.swift in Sources */,
 				6352D67D2BEF4C7600EEBFB9 /* ColorExtensions.swift in Sources */,
 				6354C6612BF236EF0056B881 /* ModifyCardView.swift in Sources */,
@@ -312,7 +309,7 @@
 				16D47F5B2BEDE1A40076AFF3 /* Card.swift in Sources */,
 				6353F2EB2BE75E2D005B3573 /* ContentViewModel.swift in Sources */,
 				6353F2DA2BE72B8E005B3573 /* SignUpView.swift in Sources */,
-				63E3DFB92BF07D7D00EE97BA /* CreateCardViewModel.swift in Sources */,
+				63E3DFB92BF07D7D00EE97BA /* CardsModificationViewModel.swift in Sources */,
 				6353F2D22BE7252A005B3573 /* User.swift in Sources */,
 				6381E8E12BEDE420006DBBC9 /* CreateDeckViewModel.swift in Sources */,
 				6353F2D82BE72B31005B3573 /* LoginView.swift in Sources */,
@@ -320,7 +317,6 @@
 				6352D67B2BEF287700EEBFB9 /* DeckHeader.swift in Sources */,
 				6353F2CD2BE721D2005B3573 /* AuthenticationModel.swift in Sources */,
 				16F642A92BE9B68300A064D0 /* DeckView.swift in Sources */,
-				63E3DFBB2BF09C5800EE97BA /* debugTestingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,8 +450,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"flashcards/Preview Content\"";
-				DEVELOPMENT_TEAM = TX5RQDAQF5;
+				DEVELOPMENT_TEAM = SDQMXNT4CF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = flashcards/Info.plist;
@@ -471,7 +466,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ge.goodrid.flashcards;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -488,8 +483,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"flashcards/Preview Content\"";
-				DEVELOPMENT_TEAM = TX5RQDAQF5;
+				DEVELOPMENT_TEAM = SDQMXNT4CF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = flashcards/Info.plist;
@@ -505,7 +499,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ge.goodrid.flashcards;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.h4z.flashcards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -4,7 +4,7 @@
 
 import Foundation
 
-class CreateCardViewModel : ObservableObject {
+class CardsModificationViewModel : ObservableObject {
     @Published var front: String = ""
     @Published var back: String = ""
 }
