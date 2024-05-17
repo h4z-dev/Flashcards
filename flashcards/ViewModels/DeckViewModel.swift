@@ -157,6 +157,10 @@ class DeckViewModel: ObservableObject {
         if(isEmpty()) {
             return
         }
+        if ( placeInDeck < 0) {
+            placeInDeck = 0
+        }
+        
         DispatchQueue.main.async {
             self.currentCard = self.deck.cards[self.placeInDeck]
         }
