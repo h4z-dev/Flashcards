@@ -8,25 +8,25 @@ import FirebaseFirestore
 import SwiftUI
 
 
-/// Responisble for storing the data and managing communications to the server
+/// Responsible for storing the data and managing communications to the server
 class DeckViewModel: ObservableObject {
     
-    ///db variables
+    /// Database variables
     let db = Firestore.firestore()
     @AppStorage("userId") var userId: String = ""
     
-    ///local variables
+    /// Local variables
     var deck: Deck = Deck()
     var loadingDeck: Bool = false
     var placeInDeck: Int = 0
     
-    ///published variables
+    /// Published variables
     @Published var flipped: Bool = false
     @Published var editingDeck: Bool = true
     @Published var currentCard: Card = Card("empty_DECK", "empty_DECK", index: -2)
     
     /// Initialises the deckview and sets up which deck it is showing, loads cards and then sorts them into the correct index
-    /// - Parameter deckHeader: the header for the deck that
+    /// - Parameter deckHeader: the header for the deck of type `DeckHeader`
     init(deckHeader: DeckHeader) {
         self.deck = Deck(deckHeader: deckHeader)
         Task{
@@ -35,7 +35,7 @@ class DeckViewModel: ObservableObject {
         }
     }
     
-    /// initialises the loading of cards, checks for errors and manages the asynchronous tasks
+    /// Initialises the loading of cards, checks for errors and manages the asynchronous tasks
     func loadCards() {
         Task {
             guard !userId.isEmpty else {
@@ -50,8 +50,8 @@ class DeckViewModel: ObservableObject {
         }
     }
     
-    /// gets cards from FireStore, parses the data back into the card and
-    /// - Parameter deckId: The String of the ID for the current deck that is being used
+    /// Gets cards from Firestore, parses the data back into the card and deck
+    /// - Parameter deckId: The `String` of the ID for the current deck that is being used
     /// - Returns: Returns the deck of cards (ensures we update on the main thread)
     func getCards(deckId: String) async -> Deck {
         var deck = Deck(deckHeader: deck.deckHeader)
@@ -79,10 +79,10 @@ class DeckViewModel: ObservableObject {
         return deck
     }
     
-    /// Creates a new card and updates the DB. takes in front and back data and generates UUID and index adding it to the back of the queue
+    /// Creates a new card and updates the database. takes in front and back data and generates a UUID and index adding it to the back of the queue
     /// - Parameters:
-    ///   - front: Front of card data as a String
-    ///   - back: Back of card data as a String
+    ///   - front: Front of card data as a `String`
+    ///   - back: Back of card data as a `String`
     func createNewCard(front: String, back: String) async {
         do {
             let cardIdString: String = UUID().uuidString
@@ -105,8 +105,8 @@ class DeckViewModel: ObservableObject {
         }
     }
     
-    /// Deletes a card by removing it form the deck and then calls the DB to delete it from the internet
-    /// - Parameter index: the index of the card that should be deleted
+    /// Deletes a card by removing it from the deck and then calls the database to delete it from online storage (Firestore)
+    /// - Parameter index: the index of the card that should be deleted, `Int`
     func deleteCard(index: Int) {
         Task {
             await deleteCardFromDB(index)
@@ -186,7 +186,7 @@ class DeckViewModel: ObservableObject {
         getCurrentCard()
     }
     
-    /// Edit deck swaps between the editing view and using going through the deck of cards
+    /// Swaps between the editing view and using the deck of flashcards
     func editDeck() {
         editingDeck.toggle()
         updateCardIndex()
@@ -194,7 +194,7 @@ class DeckViewModel: ObservableObject {
         getCurrentCard()
     }
     
-    /// updates the indexes for all of the cards within the deck. Looping through the deck and then modifying the 
+    /// Updates the indexes for all of the cards within the deck. Looping through the deck and then modifying the index in Firestore.
     func updateCardIndex() {
         for card in deck.cards {
             let cardIdString : String = card.id.uuidString
@@ -210,12 +210,12 @@ class DeckViewModel: ObservableObject {
     
     /// Moves a card between positions given it's original position and it's destination position
     /// - Parameters:
-    ///   - source: Original position of the card as it's index
-    ///   - destination: destination to move the card to as it's index
+    ///   - source: Original position of the card as it's index `IndexSet`
+    ///   - destination: destination to move the card to as its index `Int`
     func moveCard(from source: IndexSet, to destination: Int) {
         guard let sourceIndex = source.first else { return }
         
-        if (sourceIndex > deck.cards.count-1 || destination > deck.cards.count-1) {
+        if (sourceIndex > deck.count() - 1 || destination > deck.count() - 1) {
             return
         }
         
@@ -229,7 +229,7 @@ class DeckViewModel: ObservableObject {
         updateCardIndicesInFirestore()
     }
     
-    /// Brings in all cards and indexes them from within the DB, used after reordering cards
+    /// Updates all cards and indexes them from the database, used after reordering cards
     func updateCardIndicesInFirestore() {
         for card in deck.cards {
             let cardIdString: String = card.id.uuidString
@@ -245,16 +245,16 @@ class DeckViewModel: ObservableObject {
         }
     }
     
-    /// Manages the Asyncronous management of of updating a card from within the deck
-    /// - Parameter card: Card that will be modified after updating
+    /// Manages the asyncronous management of of updating a card from within the deck
+    /// - Parameter card: Card that will be modified after updating, `Card`
     func updateCard(card: Card) {
         Task {
             await updateCardDB(card: card)
         }
     }
     
-    /// Update card form DB, deletes the current card before recreating it from scratch
-    /// - Parameter card: Takes in the modified card to be updated by the database
+    /// Update card form database, deletes the current card before recreating it from scratch
+    /// - Parameter card: Takes in the modified card to be updated by the database, `Card`
     private func updateCardDB(card: Card) async {
         do {
             let cardIdString: String = card.id.uuidString
