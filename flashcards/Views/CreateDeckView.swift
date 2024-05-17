@@ -5,6 +5,7 @@
 import SwiftUI
 import SFSymbolsPicker
 
+/// View for creating a new deck
 struct CreateDeckView: View {
     @StateObject var viewModel: CreateDeckViewModel
     @StateObject var homeViewModel: HomeViewModel
@@ -12,6 +13,8 @@ struct CreateDeckView: View {
     
     @State private var isPresented = false
     
+    /// Initialises the viewModel and homeViewModel
+    /// - Parameter homeViewModel: The home view model to be used, `HomeViewModel`
     init(homeViewModel: HomeViewModel) {
         _viewModel = StateObject(wrappedValue: CreateDeckViewModel())
         _homeViewModel = StateObject(wrappedValue: homeViewModel)

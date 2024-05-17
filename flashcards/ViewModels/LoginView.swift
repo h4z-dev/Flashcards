@@ -6,6 +6,7 @@ import SwiftUI
 import GoogleSignInSwift //
 import GoogleSignIn
 
+/// Provides email/password login.
 struct LoginView: View {
     
     @State private var email = ""
@@ -54,9 +55,6 @@ struct LoginView: View {
                 .padding(.horizontal)
                 .padding(.top, 12)
                 
-                //TODO:
-                // Forgot passsword
-                
                 // Sign in buttons
                 Button {
                     Task {
@@ -85,7 +83,7 @@ struct LoginView: View {
                 .cornerRadius(10)
                 .padding(.top, 24)
                 
-                //pushes signup to bottom of screen
+                // Pushes signup to bottom of screen
                 Spacer()
                 
                 // Sign up button
@@ -117,7 +115,7 @@ extension LoginView: AuthenticationFormProtocol {
 
 #Preview {
     LoginView().onOpenURL { url in
-        // Handle Google Oauth URL
+        // Handle Google OAuth URL
         GIDSignIn.sharedInstance.handle(url)
     }
     .environmentObject(AuthenticationModel())

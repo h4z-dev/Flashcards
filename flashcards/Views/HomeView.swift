@@ -4,6 +4,7 @@
 
 import SwiftUI
 
+/// Main view of the app. Displays decks of cards as a list.
 struct HomeView: View {
     
     @StateObject var viewModel: HomeViewModel
@@ -87,6 +88,8 @@ struct HomeView: View {
         }
     }
     
+    /// Deletes a deck at the specified index
+    /// - Parameter offsets: `IndexSet` of deck(s) to be deleted
     private func deleteDeck(at offsets: IndexSet) {
         offsets.forEach { index in
             let deckName = viewModel.deckHeaders[index].name

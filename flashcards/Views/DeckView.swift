@@ -4,12 +4,15 @@
 
 import SwiftUI
 
+/// Displays a single deck of flashcards.
 struct DeckView: View {
     @StateObject var viewModel: DeckViewModel
     @Environment(\.dismiss) var dismiss
     var deckName: String
     @AppStorage("userId") var userId: String = ""
     
+    /// Initialises the view with a given deck header
+    /// - Parameter deckHeader: Header  for the deck, `DeckHeader`
     init(deckHeader: DeckHeader) {
         _viewModel = StateObject(wrappedValue: DeckViewModel(deckHeader: deckHeader))
         self.deckName = deckHeader.name
@@ -96,70 +99,4 @@ struct DeckView: View {
 
 #Preview {
     DeckView(deckHeader: DeckHeader(name: "0"))
-}
-
-//The list view for viewing cards
-struct ListCardView: View {
-    
-    @EnvironmentObject private var deckModel: DeckViewModel
-    
-    var body: some View {
-        List {
-            ForEach(deckModel.deck.cards, id: \.self) { card in
-                Text(card.front)
-                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                        NavigationLink(destination: ModifyCardView(card: card).environmentObject(deckModel)) {
-                            Text("Edit")
-                                .font(.title.weight(.semibold))
-                                .padding()
-                                .clipShape(RoundedRectangle(cornerRadius: 15))
-                                .shadow(radius: 1.5, x: 0, y: 1)
-                        }
-                    }
-            }
-            .onMove() { from, to in
-                deckModel.moveCard(from: from, to: to)
-            }
-            .onDelete(perform: { indexSet in
-                for index in indexSet {
-                    deckModel.deleteCard(index: index)
-                }
-            })
-            .listRowBackground(Color(.clear))
-        }
-        .padding()
-        .listStyle(PlainListStyle())
-        .refreshable {
-            deckModel.loadCards()
-        }
-    }
-}
-
-struct DisplayFlashCards: View {
-    @EnvironmentObject private var deckModel: DeckViewModel
-    
-    var body: some View {
-        VStack {
-            ZStack {
-                ForEach(deckModel.deck.cards.indices, id: \.self) { index in
-                    CardDisplayFront(text: deckModel.currentCard.front, color: Color.white, index: index)
-                        .environmentObject(deckModel)
-                    
-                    CardDisplayBack(text: deckModel.currentCard.back, color: Color.gray, index: index)
-                        .environmentObject(deckModel)
-                }
-            }
-            
-            .frame(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height - 400)
-            .padding(.top, 100.0)
-            .onTapGesture {
-                withAnimation(.easeIn) {
-                    deckModel.flipped.toggle()
-                }
-            }
-            
-            Spacer()
-            
-        }
-    }
 }
