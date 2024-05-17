@@ -2,7 +2,7 @@
 //  GoogleIDSignIn.swift
 //  flashcards
 //
-//  Created  on 5/5/2024.
+//  Created on 5/5/2024.
 //
 
 import Foundation
