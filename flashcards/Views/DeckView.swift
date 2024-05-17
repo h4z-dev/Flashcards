@@ -76,7 +76,7 @@ struct DeckView: View {
                     
                     Spacer()
                     
-                    FloatingActionNavigationLink(iconName: "plus", destination: CardsModificationView(title: "Create new card")
+                    FloatingActionNavigationLink(iconName: "plus", destination: CardModificationView(title: "Create new card")
                         .environmentObject(viewModel))
                     .task {
                         viewModel.updateCardIndex()
