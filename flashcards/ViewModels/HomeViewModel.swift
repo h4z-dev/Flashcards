@@ -90,7 +90,7 @@ class HomeViewModel: ObservableObject {
             }
             for name in names {
                 if(name == deckName) {
-                    throw LoginErrors.deckALreadyExists
+                    throw SystemErrors.deckALreadyExists
                 }
             }
         } catch {
