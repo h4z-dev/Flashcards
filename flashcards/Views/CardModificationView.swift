@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-struct CardsModificationView: View {
+struct CardModificationView: View {
     @StateObject var viewModel: CardsModificationViewModel
     @EnvironmentObject private var deckModel: DeckViewModel
     @Environment(\.dismiss) var dismiss
@@ -52,6 +52,6 @@ struct CardsModificationView: View {
 }
 
 #Preview {
-    CardsModificationView(title: "Create New Card Dynamic!")
+    CardModificationView(title: "Create New Card Dynamic!")
         .environmentObject(DeckViewModel(deckHeader: DeckHeader(name: "0")))
 }
